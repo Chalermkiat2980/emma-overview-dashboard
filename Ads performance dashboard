@@ -1,0 +1,3286 @@
+---
+- dashboard: emma_online_performance_dashboard
+  title: Emma online performance dashboard
+  crossfilter_enabled: true
+  description: ''
+  preferred_slug: d5TbBALcmj4fm6LMvt7FCI
+  theme_name: ''
+  layout: newspaper
+  tabs:
+  - name: ''
+    label: ''
+  elements:
+  - name: ''
+    type: text
+    title_text: ''
+    body_text: '[{"children":[{"text":"Facebook Performance Overview","bold":true}],"type":"h1","align":"center"}]'
+    rich_content_json: '{"format":"slate"}'
+    row: 23
+    col: 0
+    width: 24
+    height: 2
+    tab_name: ''
+  - name: " (Copy 7)"
+    type: text
+    title_text: " (Copy 7)"
+    body_text: '[{"children":[{"text":"LINE Performance Overview","bold":true}],"type":"h1","align":"center"}]'
+    rich_content_json: '{"format":"slate"}'
+    row: 97
+    col: 0
+    width: 24
+    height: 2
+    tab_name: ''
+  - name: " (2)"
+    type: text
+    title_text: ''
+    body_text: |-
+      <p style="color:#007BFF; font-size:20px; font-weight:bold; margin-bottom:4px;">
+      Performance Overview
+      </p>
+      <hr style="border: 2px solid #007BFF; width: 100%; margin-top: 0;">
+    row: 31
+    col: 0
+    width: 24
+    height: 2
+    tab_name: ''
+  - title: Total Lead
+    name: Total Lead
+    model: c360_client_9234725065
+    explore: user
+    type: single_value
+    fields: [event.total_unique_users]
+    filters:
+      event.source: facebook
+      event.event_name: '"contact_info_submitted"'
+    limit: 500
+    column_limit: 50
+    dynamic_fields:
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: offline_transaction__course.total_price
+      expression: ''
+      label: Sum of Total Price
+      measure: sum_of_total_price
+      type: sum
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    single_value_title: Total Leads
+    smart_single_value_size: true
+    defaults_version: 1
+    hidden_pivots: {}
+    listen: {}
+    row: 33
+    col: 4
+    width: 4
+    height: 4
+    tab_name: ''
+  - title: Total Revenue
+    name: Total Revenue
+    model: c360_client_9234725065
+    explore: user
+    type: single_value
+    fields: [course_total_by_receipt.total_price, receipt_source_attribution.source]
+    filters:
+      receipt_source_attribution.source: facebook
+    sorts: [course_total_by_receipt.total_price desc 0]
+    limit: 500
+    column_limit: 50
+    dynamic_fields:
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: offline_transaction__course.total_price
+      expression: ''
+      label: Sum of Total Price
+      measure: sum_of_total_price
+      type: sum
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    single_value_title: Total Revenue (฿)
+    smart_single_value_size: true
+    defaults_version: 1
+    hidden_pivots: {}
+    listen: {}
+    row: 33
+    col: 0
+    width: 4
+    height: 4
+    tab_name: ''
+  - title: Average order per user
+    name: Average order per user
+    model: c360_client_9234725065
+    explore: user
+    type: single_value
+    fields: [count_of_receipt_no, drop_lead]
+    filters:
+      event.source: facebook
+    sorts: [drop_lead desc]
+    limit: 500
+    column_limit: 50
+    dynamic_fields:
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: offline_transaction__course.total_price
+      expression: ''
+      label: Sum of Total Price
+      measure: sum_of_total_price
+      type: sum
+    - category: measure
+      expression: ''
+      label: Count of Receipt No
+      based_on: receipt_source_attribution.receipt_no
+      _kind_hint: measure
+      measure: count_of_receipt_no
+      type: count_distinct
+      _type_hint: number
+      filters:
+        receipt_source_attribution.source: facebook
+    - category: measure
+      expression:
+      label: Drop lead
+      value_format:
+      value_format_name:
+      based_on: event.user_pseudo_id
+      _kind_hint: measure
+      measure: drop_lead
+      type: count_distinct
+      _type_hint: number
+      filters:
+        event.event_name: '"contact_info_submitted"'
+    - category: table_calculation
+      expression: "${count_of_receipt_no} / ${drop_lead}"
+      label: Average Orders per User (AOPU)
+      value_format:
+      value_format_name: decimal_1
+      _kind_hint: measure
+      table_calculation: average_orders_per_user_aopu
+      _type_hint: number
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    single_value_title: Average order per user
+    smart_single_value_size: true
+    defaults_version: 1
+    hidden_fields: [count_of_receipt_no, drop_lead]
+    hidden_pivots: {}
+    listen: {}
+    row: 33
+    col: 12
+    width: 4
+    height: 4
+    tab_name: ''
+  - title: Total Orders
+    name: Total Orders
+    model: c360_client_9234725065
+    explore: user
+    type: single_value
+    fields: [count_of_receipt_no]
+    filters:
+      receipt_source_attribution.source: facebook
+    limit: 500
+    column_limit: 50
+    dynamic_fields:
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: offline_transaction__course.total_price
+      expression: ''
+      label: Sum of Total Price
+      measure: sum_of_total_price
+      type: sum
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: offline_transaction.receipt_no
+      expression: ''
+      label: Count of Receipt No
+      measure: count_of_receipt_no
+      type: count_distinct
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: offline_transaction__course.receipt_no
+      expression: ''
+      label: Count of Receipt No
+      measure: count_of_receipt_no_2
+      type: count_distinct
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: receipt_source_attribution.receipt_no
+      expression: ''
+      label: Count of Receipt No
+      measure: count_of_receipt_no_3
+      type: count_distinct
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    single_value_title: Total Orders
+    smart_single_value_size: true
+    defaults_version: 1
+    hidden_pivots: {}
+    listen: {}
+    row: 33
+    col: 8
+    width: 4
+    height: 4
+    tab_name: ''
+  - title: Average revenue per orders
+    name: Average revenue per orders
+    model: c360_client_9234725065
+    explore: user
+    type: single_value
+    fields: [count_of_receipt_no, sum_of_total_price_2]
+    limit: 500
+    column_limit: 50
+    dynamic_fields:
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: offline_transaction.receipt_no
+      expression: ''
+      label: Count of Receipt No
+      measure: count_of_receipt_no
+      type: count_distinct
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: offline_transaction__course.total_price
+      expression: ''
+      label: Sum of Total Price
+      measure: sum_of_total_price_2
+      type: sum
+    - category: table_calculation
+      expression: "${sum_of_total_price_2} / ${count_of_receipt_no}"
+      label: ARPO FB
+      value_format:
+      value_format_name: decimal_1
+      _kind_hint: measure
+      table_calculation: arpo_fb
+      _type_hint: number
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    single_value_title: Average revenue per orders
+    smart_single_value_size: true
+    defaults_version: 1
+    hidden_pivots: {}
+    hidden_fields: [sum_of_total_price_2, count_of_receipt_no]
+    listen: {}
+    row: 33
+    col: 16
+    width: 4
+    height: 4
+    tab_name: ''
+  - title: Total Revenue per user (฿)
+    name: Total Revenue per user (฿)
+    model: c360_client_9234725065
+    explore: user
+    type: single_value
+    fields: [count_of_user_pseudo_id, sum_of_total_price_2]
+    filters:
+      event.source: ''
+    limit: 500
+    column_limit: 50
+    dynamic_fields:
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: offline_transaction__course.user_pseudo_id
+      expression: ''
+      label: Count of User Pseudo ID
+      measure: count_of_user_pseudo_id
+      type: count_distinct
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: offline_transaction__course.total_price
+      expression: ''
+      label: Sum of Total Price
+      measure: sum_of_total_price_2
+      type: sum
+    - category: table_calculation
+      expression: "${sum_of_total_price_2} / ${count_of_user_pseudo_id}"
+      label: ARPU FB
+      value_format:
+      value_format_name: decimal_2
+      _kind_hint: measure
+      table_calculation: arpu_fb
+      _type_hint: number
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    single_value_title: Total Revenue per user (฿)
+    smart_single_value_size: true
+    defaults_version: 1
+    hidden_pivots: {}
+    hidden_fields: [count_of_user_pseudo_id, sum_of_total_price_2]
+    listen: {}
+    row: 33
+    col: 20
+    width: 4
+    height: 4
+    tab_name: ''
+  - name: " (3)"
+    type: text
+    title_text: ''
+    body_text: |-
+      <p style="color:#007BFF; font-size:20px; font-weight:bold; margin-bottom:4px;">
+      Campaign Performance
+      </p>
+      <hr style="border: 2px solid #007BFF; width: 100%; margin-top: 0;">
+    row: 37
+    col: 0
+    width: 24
+    height: 2
+    tab_name: ''
+  - title: ROAS FB
+    name: ROAS FB
+    model: c360_client_9234725065
+    explore: user
+    type: single_value
+    fields: [sum_of_cost, fb_revenue]
+    limit: 500
+    column_limit: 50
+    dynamic_fields:
+    - category: table_calculation
+      expression: "${fb_revenue} / ${sum_of_cost}"
+      label: ROAS FB
+      value_format:
+      value_format_name: decimal_1
+      _kind_hint: measure
+      table_calculation: roas_fb
+      _type_hint: number
+    - category: measure
+      expression: ''
+      label: Sum of Cost
+      based_on: media_single_data.cost
+      _kind_hint: measure
+      measure: sum_of_cost
+      type: sum
+      _type_hint: number
+    - category: measure
+      expression:
+      label: FB revenue
+      value_format:
+      value_format_name:
+      based_on: course_total_by_receipt.total_price
+      _kind_hint: measure
+      measure: fb_revenue
+      type: sum_distinct
+      _type_hint: number
+      filters:
+        event.source: facebook
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    single_value_title: ROAS FB
+    smart_single_value_size: true
+    defaults_version: 1
+    hidden_fields: [sum_of_cost_2, fb_revenue, sum_of_cost]
+    hidden_pivots: {}
+    listen: {}
+    row: 39
+    col: 8
+    width: 7
+    height: 4
+    tab_name: ''
+  - title: Untitled
+    name: Untitled
+    model: c360_client_9234725065
+    explore: user
+    type: single_value
+    fields: [sum_of_cost]
+    limit: 500
+    column_limit: 50
+    dynamic_fields:
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: media_single_data.cost
+      expression: ''
+      label: Sum of Cost
+      measure: sum_of_cost
+      type: sum
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    single_value_title: Total ad spending FB
+    smart_single_value_size: true
+    defaults_version: 1
+    listen: {}
+    row: 39
+    col: 0
+    width: 8
+    height: 4
+    tab_name: ''
+  - name: " (Copy)"
+    type: text
+    title_text: " (Copy)"
+    body_text: '[{"children":[{"text":"2 Channel Comparison","bold":true}],"type":"h1","align":"center"}]'
+    rich_content_json: '{"format":"slate"}'
+    row: 0
+    col: 0
+    width: 24
+    height: 2
+    tab_name: ''
+  - title: Revenue Movement
+    name: Revenue Movement
+    model: c360_client_9234725065
+    explore: user
+    type: looker_column
+    fields: [course_total_by_receipt.total_price, receipt_source_attribution.source,
+      offline_transaction.receipt_date_date]
+    pivots: [receipt_source_attribution.source]
+    fill_fields: [offline_transaction.receipt_date_date]
+    filters:
+      receipt_source_attribution.source: "-NULL"
+    sorts: [receipt_source_attribution.source, offline_transaction.receipt_date_date
+        desc]
+    limit: 500
+    column_limit: 50
+    dynamic_fields:
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: offline_transaction__course.total_price
+      expression: ''
+      label: Sum of Total Price
+      measure: sum_of_total_price
+      type: sum
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: offline_transaction__course.total_price
+      expression: ''
+      label: Sum of Total Price
+      measure: sum_of_total_price_2
+      type: sum
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: false
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: normal
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: circle
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    y_axes: [{label: '', orientation: left, series: [{axisId: facebook - sum_of_total_price_2,
+            id: facebook - sum_of_total_price_2, name: facebook}, {axisId: line -
+              sum_of_total_price_2, id: line - sum_of_total_price_2, name: line}],
+        showLabels: false, showValues: true, unpinAxis: false, tickDensity: default,
+        tickDensityCustom: 5, type: linear}]
+    x_axis_zoom: true
+    y_axis_zoom: true
+    hide_legend: false
+    series_colors:
+      line - sum_of_total_price_2: "#21cc18"
+      line - course_total_by_receipt.total_price: "#00B900"
+    series_labels:
+      facebook - sum_of_total_price_2: Facebook
+      line - sum_of_total_price_2: LINE
+      facebook - course_total_by_receipt.total_price: Facebook
+      line - course_total_by_receipt.total_price: LINE
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    defaults_version: 1
+    hidden_pivots: {}
+    listen: {}
+    row: 2
+    col: 0
+    width: 24
+    height: 9
+    tab_name: ''
+  - title: Total Lead
+    name: Total Lead (2)
+    model: c360_client_9234725065
+    explore: user
+    type: looker_pie
+    fields: [event.source, event.total_user]
+    filters:
+      event.source: "-NULL"
+      event.event_name: '"contact_info_submitted"'
+    sorts: [event.source]
+    limit: 500
+    column_limit: 50
+    dynamic_fields:
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: offline_transaction__course.total_price
+      expression: ''
+      label: Sum of Total Price
+      measure: sum_of_total_price
+      type: sum
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: offline_transaction__course.total_price
+      expression: ''
+      label: Sum of Total Price
+      measure: sum_of_total_price_2
+      type: sum
+    value_labels: legend
+    label_type: labPer
+    inner_radius: 55
+    series_colors:
+      line - sum_of_total_price_2: "#21cc18"
+      line: "#00B900"
+    series_labels:
+      line: LINE
+      facebook: Facebook
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    y_axes: [{label: '', orientation: left, series: [{axisId: facebook - sum_of_total_price_2,
+            id: facebook - sum_of_total_price_2, name: facebook}, {axisId: line -
+              sum_of_total_price_2, id: line - sum_of_total_price_2, name: line}],
+        showLabels: false, showValues: true, unpinAxis: false, tickDensity: default,
+        tickDensityCustom: 5, type: linear}]
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: false
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    x_axis_zoom: true
+    y_axis_zoom: true
+    trellis: ''
+    stacking: normal
+    limit_displayed_rows: false
+    hide_legend: false
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    defaults_version: 1
+    hidden_pivots: {}
+    listen: {}
+    row: 11
+    col: 0
+    width: 8
+    height: 6
+    tab_name: ''
+  - title: New User Drop Lead
+    name: New User Drop Lead
+    model: c360_client_9234725065
+    explore: user
+    type: looker_pie
+    fields: [event.new_users, event.source]
+    filters:
+      event.event_name: '"contact_info_submitted"'
+    sorts: [event.new_users desc 0]
+    limit: 500
+    column_limit: 50
+    value_labels: legend
+    label_type: labPer
+    inner_radius: 55
+    series_colors:
+      line: "#00B900"
+      facebook: "#1A73E8"
+    series_labels:
+      line: LINE
+      facebook: Facebook
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    x_axis_zoom: true
+    y_axis_zoom: true
+    trellis: ''
+    stacking: normal
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    defaults_version: 1
+    hidden_pivots: {}
+    listen: {}
+    row: 11
+    col: 8
+    width: 8
+    height: 6
+    tab_name: ''
+  - title: Revenue per lead
+    name: Revenue per lead
+    model: c360_client_9234725065
+    explore: user
+    type: looker_pie
+    fields: [course_total_by_receipt.total_price, receipt_source_attribution.source,
+      user.total_user]
+    filters:
+      event.event_name: '"contact_info_submitted"'
+      receipt_source_attribution.source: "-NULL"
+    sorts: [course_total_by_receipt.total_price desc 0]
+    limit: 500
+    column_limit: 50
+    dynamic_fields:
+    - category: table_calculation
+      expression: "${course_total_by_receipt.total_price} / ${user.total_user} "
+      label: RPL
+      value_format:
+      value_format_name: decimal_1
+      _kind_hint: measure
+      table_calculation: rpl
+      _type_hint: number
+    value_labels: legend
+    label_type: labPer
+    inner_radius: 55
+    series_colors:
+      line: "#00B900"
+      facebook: "#1A73E8"
+    series_labels:
+      line: LINE
+      facebook: Facebook
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    defaults_version: 1
+    hidden_fields: [course_total_by_receipt.total_price, user.total_user]
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: 12
+    rows_font_size: 12
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    listen: {}
+    row: 11
+    col: 16
+    width: 8
+    height: 6
+    tab_name: ''
+  - name: " (4)"
+    type: text
+    title_text: ''
+    body_text: '[{"type":"h1","children":[{"text":"Summary","bold":true}],"align":"center"},{"type":"p","children":[{"text":""}],"id":"pt9xb"},{"type":"h2","id":"rm4ym","children":[{"text":"Revenue","bold":true},{"text":"
+      ช่องทาง LINE มากกว่าช่องทาง Facebook 💰"}]},{"type":"p","children":[{"text":""}],"id":"czun2"},{"type":"h2","id":"uwr55","children":[{"text":"Lead
+      มาจากช่องทาง LINE มากกว่า 📝"}]},{"type":"p","children":[{"text":""}],"id":"soqtf"},{"type":"h2","id":"zwfzn","children":[{"text":"LINE
+      สามารถดึง user ใหม่ๆ เข้ามาได้มากกว่า 📥"}]},{"type":"p","children":[{"text":""}],"id":"bury6"},{"type":"h2","id":"347p1","children":[{"text":"แต่
+      Lead จากช่องทาง Facebook จะสร้าง Revenue ได้มากกว่า 📊"}]},{"type":"p","children":[{"text":""}],"id":"xj9qp"}]'
+    rich_content_json: '{"format":"slate"}'
+    row: 17
+    col: 0
+    width: 24
+    height: 6
+    tab_name: ''
+  - title: Top Spending & Revenue by Campaign
+    name: Top Spending & Revenue by Campaign
+    model: c360_client_9234725065
+    explore: user
+    type: looker_grid
+    fields: [sum_of_cost, user_activity_rollup.total_paid_online_and_purchase, ad_click_submit_funnel_by_ad.campaign_name]
+    sorts: [sum_of_cost desc 0]
+    limit: 1
+    column_limit: 50
+    dynamic_fields:
+    - category: dimension
+      expression: |-
+        case(
+          when(is_null(${ad_click_submit_funnel_by_ad.campaign_name}), "Organic"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "จ่ายจบ"), "จ่ายจบ"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "dr."), "doctor"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "พามั่น"), "Emma พามั่น"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "branch"), "สาขา"),
+          "อื่นๆ"
+        )
+      label: AD Group
+      value_format:
+      value_format_name: ''
+      dimension: ad_group
+      _kind_hint: dimension
+      _type_hint: string
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: media_single_data.cost
+      expression: ''
+      label: Sum of Cost
+      measure: sum_of_cost
+      type: sum
+    show_view_names: false
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    limit_displayed_rows: false
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: '12'
+    rows_font_size: '12'
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    show_sql_query_menu_options: false
+    show_totals: true
+    show_row_totals: true
+    truncate_header: false
+    minimum_column_width: 75
+    series_labels:
+      sum_of_cost: Total Spending
+      user_activity_rollup.total_paid_online_and_purchase: Total Revenue
+    series_cell_visualizations:
+      sum_of_cost:
+        is_active: true
+    hidden_fields: []
+    hidden_points_if_no: []
+    font_size_main: ''
+    orientation: vertical
+    show_title_ad_click_submit_funnel_by_ad.campaign_name: true
+    value_format_ad_click_submit_funnel_by_ad.campaign_name: ''
+    show_title_sum_of_cost: true
+    title_override_sum_of_cost: Cost
+    value_format_sum_of_cost: ''
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    defaults_version: 1
+    value_labels: legend
+    label_type: labPer
+    show_null_points: true
+    interpolation: linear
+    listen: {}
+    row: 39
+    col: 15
+    width: 9
+    height: 4
+    tab_name: ''
+  - name: " (5)"
+    type: text
+    title_text: ''
+    body_text: |-
+      <p style="color:#007BFF; font-size:20px; font-weight:bold; margin-bottom:4px;">
+      Conversations Inquiries Interests
+      </p>
+      <hr style="border: 2px solid #007BFF; width: 100%; margin-top: 0;">
+    row: 65
+    col: 0
+    width: 24
+    height: 2
+    tab_name: ''
+  - title: Untitled (Copy 4)
+    name: Untitled (Copy 4)
+    model: c360_client_9234725065
+    explore: user
+    type: single_value
+    fields: [ad_click_submit_funnel_by_ad.users_messaged_after_click]
+    limit: 500
+    column_limit: 50
+    dynamic_fields:
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: media_single_data.reach
+      expression: ''
+      label: Sum of Reach
+      measure: sum_of_reach
+      type: sum
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    single_value_title: Total unique user message after click ad
+    smart_single_value_size: true
+    defaults_version: 1
+    hidden_pivots: {}
+    listen: {}
+    row: 69
+    col: 6
+    width: 6
+    height: 6
+    tab_name: ''
+  - title: Untitled
+    name: Untitled (2)
+    model: c360_client_9234725065
+    explore: user
+    type: single_value
+    fields: [ad_click_submit_funnel_by_ad.users_clicked]
+    sorts: [ad_click_submit_funnel_by_ad.users_clicked desc 0]
+    limit: 500
+    column_limit: 50
+    dynamic_fields:
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: media_single_data.reach
+      expression: ''
+      label: Sum of Reach
+      measure: sum_of_reach
+      type: sum
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    single_value_title: Total unique user click ad
+    smart_single_value_size: true
+    defaults_version: 1
+    hidden_pivots: {}
+    listen: {}
+    row: 69
+    col: 0
+    width: 6
+    height: 6
+    tab_name: ''
+  - title: Untitled (Copy 5)
+    name: Untitled (Copy 5)
+    model: c360_client_9234725065
+    explore: user
+    type: single_value
+    fields: [ad_click_submit_funnel_by_ad.users_submitted_after_click]
+    limit: 500
+    column_limit: 50
+    dynamic_fields:
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: media_single_data.reach
+      expression: ''
+      label: Sum of Reach
+      measure: sum_of_reach
+      type: sum
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: media_single_data.messages
+      expression: ''
+      label: Sum of Messages
+      measure: sum_of_messages
+      type: sum
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    single_value_title: Total unique user drop lead after click ad
+    smart_single_value_size: true
+    defaults_version: 1
+    hidden_pivots: {}
+    listen: {}
+    row: 69
+    col: 12
+    width: 6
+    height: 6
+    tab_name: ''
+  - title: Untitled (Copy 6)
+    name: Untitled (Copy 6)
+    model: c360_client_9234725065
+    explore: user
+    type: single_value
+    fields: [ad_click_submit_funnel_by_ad.click_to_submit_rate]
+    limit: 500
+    column_limit: 50
+    total: true
+    dynamic_fields:
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: media_single_data.reach
+      expression: ''
+      label: Sum of Reach
+      measure: sum_of_reach
+      type: sum
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: media_single_data.messages
+      expression: ''
+      label: Sum of Messages
+      measure: sum_of_messages
+      type: sum
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    single_value_title: Rate user drop lead from ad
+    smart_single_value_size: true
+    defaults_version: 1
+    hidden_pivots: {}
+    listen: {}
+    row: 69
+    col: 18
+    width: 6
+    height: 6
+    tab_name: ''
+  - name: " (6)"
+    type: text
+    title_text: ''
+    body_text: |-
+      <p style="color:#FF9933; font-size:20px; font-weight:bold; text-align:center; margin-bottom:4px;">
+      Chats & Conversations from Ad Spending
+      </p>
+      <hr style="border: 2px solid #FF9933; width: 35%; margin: 0 auto;">
+    row: 67
+    col: 0
+    width: 24
+    height: 2
+    tab_name: ''
+  - name: " (7)"
+    type: text
+    title_text: ''
+    body_text: |-
+      <p style="color:#00BFFF; font-size:20px; font-weight:bold; text-align:center; margin-bottom:4px;">
+      Chats & Conversations from organic
+      </p>
+      <hr style="border: 2px solid #00BFFF; width: 40%; margin: 0 auto;">
+    row: 75
+    col: 0
+    width: 24
+    height: 2
+    tab_name: ''
+  - title: Untitled (Copy 7)
+    name: Untitled (Copy 7)
+    model: c360_client_9234725065
+    explore: user
+    type: single_value
+    fields: [user.total_user]
+    filters:
+      event.event_name: '"user_message"'
+      ad_click_submit_funnel_by_ad.campaign_name: 'NULL'
+      event.source: facebook
+    limit: 500
+    column_limit: 50
+    dynamic_fields:
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: media_single_data.reach
+      expression: ''
+      label: Sum of Reach
+      measure: sum_of_reach
+      type: sum
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    single_value_title: Total unique user message
+    smart_single_value_size: true
+    defaults_version: 1
+    hidden_pivots: {}
+    listen: {}
+    row: 77
+    col: 0
+    width: 8
+    height: 6
+    tab_name: ''
+  - title: Untitled (Copy 8)
+    name: Untitled (Copy 8)
+    model: c360_client_9234725065
+    explore: user
+    type: single_value
+    fields: [event.total_unique_users]
+    filters:
+      event.event_name: '"contact_info_submitted"'
+      ad_click_submit_funnel_by_ad.campaign_name: 'NULL'
+      event.source: facebook
+    limit: 500
+    column_limit: 50
+    dynamic_fields:
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: media_single_data.reach
+      expression: ''
+      label: Sum of Reach
+      measure: sum_of_reach
+      type: sum
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    single_value_title: Total unique user drop lead
+    smart_single_value_size: true
+    defaults_version: 1
+    hidden_pivots: {}
+    listen: {}
+    row: 77
+    col: 8
+    width: 8
+    height: 6
+    tab_name: ''
+  - title: Untitled (Copy 9)
+    name: Untitled (Copy 9)
+    model: c360_client_9234725065
+    explore: user
+    type: single_value
+    fields: [unique_user_chat, unique_user_drop_lead]
+    limit: 500
+    column_limit: 50
+    dynamic_fields:
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: media_single_data.reach
+      expression: ''
+      label: Sum of Reach
+      measure: sum_of_reach
+      type: sum
+    - category: measure
+      expression:
+      label: Unique user chat
+      value_format:
+      value_format_name:
+      based_on: user.user_pseudo_id
+      _kind_hint: measure
+      measure: unique_user_chat
+      type: count_distinct
+      _type_hint: number
+      filters:
+        event.source: facebook
+        event.event_name: '"user_message"'
+        ad_click_submit_funnel_by_ad.campaign_name: 'NULL'
+    - category: measure
+      expression:
+      label: Unique user drop lead
+      value_format:
+      value_format_name:
+      based_on: user.user_pseudo_id
+      _kind_hint: measure
+      measure: unique_user_drop_lead
+      type: count_distinct
+      _type_hint: number
+      filters:
+        event.source: facebook
+        event.event_name: '"contact_info_submitted"'
+        ad_click_submit_funnel_by_ad.campaign_name: 'NULL'
+    - category: table_calculation
+      expression: "${unique_user_drop_lead} / ${unique_user_chat}"
+      label: Rate user drop lead
+      value_format:
+      value_format_name: percent_1
+      _kind_hint: measure
+      table_calculation: rate_user_drop_lead
+      _type_hint: number
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    single_value_title: Rate user drop lead from organic
+    smart_single_value_size: true
+    defaults_version: 1
+    hidden_pivots: {}
+    hidden_fields: [unique_user_drop_lead, unique_user_chat]
+    listen: {}
+    row: 77
+    col: 16
+    width: 8
+    height: 6
+    tab_name: ''
+  - name: " (8)"
+    type: text
+    title_text: ''
+    body_text: |-
+      <p style="color:#007BFF; font-size:20px; font-weight:bold; text-align:center; margin-bottom:4px;">
+      Message Inquiries
+      </p>
+      <hr style="border: 2px solid #007BFF; width: 20%; margin: 0 auto;">
+    row: 83
+    col: 0
+    width: 24
+    height: 2
+    tab_name: ''
+  - title: Most Message
+    name: Most Message
+    model: c360_client_9234725065
+    explore: user
+    type: looker_wordcloud
+    fields: [user.total_user, message_labeling.message]
+    filters:
+      event.event_name: '"user_message"'
+      message_labeling.source: facebook
+      message_labeling.message: "-%สนใจ%,-%สวย%"
+    sorts: [user.total_user desc 0]
+    limit: 20
+    column_limit: 50
+    color_application: undefined
+    defaults_version: 1
+    listen: {}
+    row: 85
+    col: 0
+    width: 8
+    height: 6
+    tab_name: ''
+  - title: Top 5 ad & campaign by message
+    name: Top 5 ad & campaign by message
+    model: c360_client_9234725065
+    explore: user
+    type: looker_grid
+    fields: [user.total_user, ad_click_submit_funnel_by_ad.campaign_name, ad_click_submit_funnel_by_ad.ad_name,
+      ad_click_submit_funnel_by_ad.adset_name]
+    filters:
+      message_labeling.source: facebook
+      event.event_name: '"user_message"'
+      ad_click_submit_funnel_by_ad.campaign_name: "-NULL"
+    sorts: [user.total_user desc 0]
+    limit: 5
+    column_limit: 50
+    show_view_names: false
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    limit_displayed_rows: false
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: '12'
+    rows_font_size: '12'
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    show_sql_query_menu_options: false
+    show_totals: true
+    show_row_totals: true
+    truncate_header: false
+    minimum_column_width: 75
+    series_labels:
+      user.total_user: Total Messagers
+    series_cell_visualizations:
+      user.total_user:
+        is_active: true
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    defaults_version: 1
+    listen: {}
+    row: 85
+    col: 8
+    width: 16
+    height: 6
+    tab_name: ''
+  - name: " (9)"
+    type: text
+    title_text: ''
+    body_text: |-
+      <p style="color:#00B900; font-size:20px; font-weight:bold; margin-bottom:4px;">
+      Finance Overview
+      </p>
+      <hr style="border: 2px solid #00B900; width: 100%; margin-top: 0;">
+    row: 105
+    col: 0
+    width: 24
+    height: 2
+    tab_name: ''
+  - title: Total Revenue (Copy)
+    name: Total Revenue (Copy)
+    model: c360_client_9234725065
+    explore: user
+    type: single_value
+    fields: [course_total_by_receipt.total_price, receipt_source_attribution.source]
+    filters:
+      receipt_source_attribution.source: line
+    sorts: [course_total_by_receipt.total_price desc 0]
+    limit: 500
+    column_limit: 50
+    dynamic_fields:
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: offline_transaction__course.total_price
+      expression: ''
+      label: Sum of Total Price
+      measure: sum_of_total_price
+      type: sum
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    single_value_title: Total Revenue (฿)
+    smart_single_value_size: true
+    defaults_version: 1
+    hidden_pivots: {}
+    listen: {}
+    row: 107
+    col: 0
+    width: 4
+    height: 4
+    tab_name: ''
+  - title: Average revenue per orders (Copy)
+    name: Average revenue per orders (Copy)
+    model: c360_client_9234725065
+    explore: user
+    type: single_value
+    fields: [count_of_receipt_no, sum_of_total_price_2]
+    limit: 500
+    column_limit: 50
+    dynamic_fields:
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: offline_transaction.receipt_no
+      expression: ''
+      label: Count of Receipt No
+      measure: count_of_receipt_no
+      type: count_distinct
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: offline_transaction__course.total_price
+      expression: ''
+      label: Sum of Total Price
+      measure: sum_of_total_price_2
+      type: sum
+    - category: table_calculation
+      expression: "${sum_of_total_price_2} / ${count_of_receipt_no}"
+      label: ARPO FB
+      value_format:
+      value_format_name: decimal_1
+      _kind_hint: measure
+      table_calculation: arpo_fb
+      _type_hint: number
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    single_value_title: Average revenue per orders
+    smart_single_value_size: true
+    defaults_version: 1
+    hidden_pivots: {}
+    hidden_fields: [sum_of_total_price_2, count_of_receipt_no]
+    listen: {}
+    row: 107
+    col: 16
+    width: 4
+    height: 4
+    tab_name: ''
+  - title: Total Orders (Copy)
+    name: Total Orders (Copy)
+    model: c360_client_9234725065
+    explore: user
+    type: single_value
+    fields: [count_of_receipt_no]
+    filters:
+      receipt_source_attribution.source: line
+    limit: 500
+    column_limit: 50
+    dynamic_fields:
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: offline_transaction__course.total_price
+      expression: ''
+      label: Sum of Total Price
+      measure: sum_of_total_price
+      type: sum
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: offline_transaction.receipt_no
+      expression: ''
+      label: Count of Receipt No
+      measure: count_of_receipt_no
+      type: count_distinct
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: offline_transaction__course.receipt_no
+      expression: ''
+      label: Count of Receipt No
+      measure: count_of_receipt_no_2
+      type: count_distinct
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: receipt_source_attribution.receipt_no
+      expression: ''
+      label: Count of Receipt No
+      measure: count_of_receipt_no_3
+      type: count_distinct
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    single_value_title: Total Orders
+    smart_single_value_size: true
+    defaults_version: 1
+    hidden_pivots: {}
+    listen: {}
+    row: 107
+    col: 8
+    width: 4
+    height: 4
+    tab_name: ''
+  - title: Total Lead (Copy)
+    name: Total Lead (Copy)
+    model: c360_client_9234725065
+    explore: user
+    type: single_value
+    fields: [event.total_unique_users]
+    filters:
+      event.source: line
+      event.event_name: '"contact_info_submitted"'
+    limit: 500
+    column_limit: 50
+    dynamic_fields:
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: offline_transaction__course.total_price
+      expression: ''
+      label: Sum of Total Price
+      measure: sum_of_total_price
+      type: sum
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    single_value_title: Total Leads
+    smart_single_value_size: true
+    defaults_version: 1
+    hidden_pivots: {}
+    listen: {}
+    row: 107
+    col: 4
+    width: 4
+    height: 4
+    tab_name: ''
+  - title: Average order per user (Copy)
+    name: Average order per user (Copy)
+    model: c360_client_9234725065
+    explore: user
+    type: single_value
+    fields: [count_of_receipt_no, drop_lead]
+    filters:
+      event.source: line
+    sorts: [drop_lead desc]
+    limit: 500
+    column_limit: 50
+    dynamic_fields:
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: offline_transaction__course.total_price
+      expression: ''
+      label: Sum of Total Price
+      measure: sum_of_total_price
+      type: sum
+    - category: measure
+      expression: ''
+      label: Count of Receipt No
+      based_on: receipt_source_attribution.receipt_no
+      _kind_hint: measure
+      measure: count_of_receipt_no
+      type: count_distinct
+      _type_hint: number
+      filters:
+        receipt_source_attribution.source: line
+    - category: measure
+      expression:
+      label: Drop lead
+      value_format:
+      value_format_name:
+      based_on: event.user_pseudo_id
+      _kind_hint: measure
+      measure: drop_lead
+      type: count_distinct
+      _type_hint: number
+      filters:
+        event.event_name: '"contact_info_submitted"'
+    - category: table_calculation
+      expression: "${count_of_receipt_no} / ${drop_lead}"
+      label: Average Orders per User (AOPU)
+      value_format:
+      value_format_name: decimal_1
+      _kind_hint: measure
+      table_calculation: average_orders_per_user_aopu
+      _type_hint: number
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    single_value_title: Average order per user
+    smart_single_value_size: true
+    defaults_version: 1
+    hidden_fields: [count_of_receipt_no, drop_lead]
+    hidden_pivots: {}
+    listen: {}
+    row: 107
+    col: 12
+    width: 4
+    height: 4
+    tab_name: ''
+  - title: Total Revenue per user (฿) (Copy)
+    name: Total Revenue per user (฿) (Copy)
+    model: c360_client_9234725065
+    explore: user
+    type: single_value
+    fields: [count_of_user_pseudo_id, sum_of_total_price_2]
+    filters:
+      event.source: ''
+    limit: 500
+    column_limit: 50
+    dynamic_fields:
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: offline_transaction__course.user_pseudo_id
+      expression: ''
+      label: Count of User Pseudo ID
+      measure: count_of_user_pseudo_id
+      type: count_distinct
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: offline_transaction__course.total_price
+      expression: ''
+      label: Sum of Total Price
+      measure: sum_of_total_price_2
+      type: sum
+    - category: table_calculation
+      expression: "${sum_of_total_price_2} / ${count_of_user_pseudo_id}"
+      label: ARPU FB
+      value_format:
+      value_format_name: decimal_2
+      _kind_hint: measure
+      table_calculation: arpu_fb
+      _type_hint: number
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    single_value_title: Total Revenue per user (฿)
+    smart_single_value_size: true
+    defaults_version: 1
+    hidden_pivots: {}
+    hidden_fields: [count_of_user_pseudo_id, sum_of_total_price_2]
+    listen: {}
+    row: 107
+    col: 20
+    width: 4
+    height: 4
+    tab_name: ''
+  - name: " (10)"
+    type: text
+    title_text: ''
+    body_text: |-
+      <p style="color:#00B900; font-size:20px; font-weight:bold; margin-bottom:4px;">
+      Conversations Inquiries Interests
+      </p>
+      <hr style="border: 2px solid #00B900; width: 100%; margin-top: 0;">
+    row: 111
+    col: 0
+    width: 24
+    height: 2
+    tab_name: ''
+  - name: " (11)"
+    type: text
+    title_text: ''
+    body_text: |-
+      <p style="color:#00BFFF; font-size:20px; font-weight:bold; text-align:center; margin-bottom:4px;">
+      Chats & Conversations from organic
+      </p>
+      <hr style="border: 2px solid #00BFFF; width: 40%; margin: 0 auto;">
+    row: 113
+    col: 0
+    width: 24
+    height: 2
+    tab_name: ''
+  - title: Untitled (Copy)
+    name: Untitled (Copy)
+    model: c360_client_9234725065
+    explore: user
+    type: single_value
+    fields: [user.total_user]
+    filters:
+      event.event_name: '"user_message"'
+      ad_click_submit_funnel_by_ad.campaign_name: 'NULL'
+      event.source: line
+    limit: 500
+    column_limit: 50
+    dynamic_fields:
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: media_single_data.reach
+      expression: ''
+      label: Sum of Reach
+      measure: sum_of_reach
+      type: sum
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    single_value_title: Total unique user message
+    smart_single_value_size: true
+    defaults_version: 1
+    hidden_pivots: {}
+    listen: {}
+    row: 115
+    col: 0
+    width: 8
+    height: 6
+    tab_name: ''
+  - title: Untitled (Copy 2)
+    name: Untitled (Copy 2)
+    model: c360_client_9234725065
+    explore: user
+    type: single_value
+    fields: [event.total_unique_users]
+    filters:
+      event.event_name: '"contact_info_submitted"'
+      ad_click_submit_funnel_by_ad.campaign_name: 'NULL'
+      event.source: line
+    limit: 500
+    column_limit: 50
+    dynamic_fields:
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: media_single_data.reach
+      expression: ''
+      label: Sum of Reach
+      measure: sum_of_reach
+      type: sum
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    single_value_title: Total unique user drop lead
+    smart_single_value_size: true
+    defaults_version: 1
+    hidden_pivots: {}
+    listen: {}
+    row: 115
+    col: 8
+    width: 8
+    height: 6
+    tab_name: ''
+  - title: Untitled (Copy 3)
+    name: Untitled (Copy 3)
+    model: c360_client_9234725065
+    explore: user
+    type: single_value
+    fields: [unique_user_chat, unique_user_drop_lead]
+    limit: 500
+    column_limit: 50
+    dynamic_fields:
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: media_single_data.reach
+      expression: ''
+      label: Sum of Reach
+      measure: sum_of_reach
+      type: sum
+    - category: measure
+      expression:
+      label: Unique user chat
+      value_format:
+      value_format_name:
+      based_on: user.user_pseudo_id
+      _kind_hint: measure
+      measure: unique_user_chat
+      type: count_distinct
+      _type_hint: number
+      filters:
+        event.source: line
+        event.event_name: '"user_message"'
+        ad_click_submit_funnel_by_ad.campaign_name: 'NULL'
+    - category: measure
+      expression:
+      label: Unique user drop lead
+      value_format:
+      value_format_name:
+      based_on: user.user_pseudo_id
+      _kind_hint: measure
+      measure: unique_user_drop_lead
+      type: count_distinct
+      _type_hint: number
+      filters:
+        event.source: line
+        event.event_name: '"contact_info_submitted"'
+        ad_click_submit_funnel_by_ad.campaign_name: 'NULL'
+    - category: table_calculation
+      expression: "${unique_user_drop_lead} / ${unique_user_chat}"
+      label: Rate user drop lead
+      value_format:
+      value_format_name: percent_1
+      _kind_hint: measure
+      table_calculation: rate_user_drop_lead
+      _type_hint: number
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    single_value_title: Rate user drop lead from organic
+    smart_single_value_size: true
+    defaults_version: 1
+    hidden_pivots: {}
+    hidden_fields: [unique_user_drop_lead, unique_user_chat]
+    listen: {}
+    row: 115
+    col: 16
+    width: 8
+    height: 6
+    tab_name: ''
+  - name: " (12)"
+    type: text
+    title_text: ''
+    body_text: |-
+      <p style="color:#00B900; font-size:20px; font-weight:bold; text-align:center; margin-bottom:4px;">
+      Message Inquiries
+      </p>
+      <hr style="border: 2px solid #00B900; width: 20%; margin: 0 auto;">
+    row: 121
+    col: 0
+    width: 24
+    height: 2
+    tab_name: ''
+  - title: Most Message
+    name: Most Message (2)
+    model: c360_client_9234725065
+    explore: user
+    type: looker_wordcloud
+    fields: [user.total_user, message_labeling.message]
+    filters:
+      event.event_name: '"user_message"'
+      message_labeling.source: line
+    sorts: [user.total_user desc 0]
+    limit: 10
+    column_limit: 50
+    color_application: undefined
+    defaults_version: 1
+    listen: {}
+    row: 123
+    col: 0
+    width: 8
+    height: 7
+    tab_name: ''
+  - title: Message movement in LINE
+    name: Message movement in LINE
+    model: c360_client_9234725065
+    explore: user
+    type: looker_column
+    fields: [user.total_user, message_labeling.event_time_stamp_date, filtered_usertotal_user]
+    fill_fields: [message_labeling.event_time_stamp_date]
+    filters:
+      message_labeling.source: line
+      event.event_name: '"user_message","contact_info_submitted"'
+    sorts: [message_labeling.event_time_stamp_date desc]
+    limit: 500
+    column_limit: 50
+    dynamic_fields:
+    - category: measure
+      label: Filtered user.total_user
+      based_on: user.total_user
+      _kind_hint: measure
+      measure: filtered_usertotal_user
+      type: count_distinct
+      _type_hint: number
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: false
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: circle
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: time
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    y_axes: [{label: '', orientation: left, series: [{axisId: user.total_user, id: user.total_user,
+            name: Total Unique User}], showLabels: false, showValues: true, unpinAxis: false,
+        tickDensity: default, tickDensityCustom: 6, type: linear}, {label: !!null '',
+        orientation: right, series: [{axisId: filtered_usertotal_user, id: filtered_usertotal_user,
+            name: Filtered user.total_user}], showLabels: true, showValues: true,
+        unpinAxis: false, tickDensity: default, tickDensityCustom: 5, type: linear}]
+    x_axis_zoom: true
+    y_axis_zoom: true
+    limit_displayed_rows_values:
+      show_hide: hide
+      first_last: first
+      num_rows: 0
+    series_types:
+      filtered_usertotal_user: line
+    series_colors:
+      user.total_user: "#00B900"
+    series_labels:
+      filtered_usertotal_user: Total unique user
+    reference_lines: []
+    trend_lines: []
+    show_dropoff: false
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: 12
+    rows_font_size: 12
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    defaults_version: 1
+    listen: {}
+    row: 123
+    col: 8
+    width: 16
+    height: 7
+    tab_name: ''
+  - title: Inquiries by Time Period
+    name: Inquiries by Time Period
+    model: c360_client_9234725065
+    explore: user
+    type: looker_column
+    fields: [user.total_user, event.time_tier_custom]
+    filters:
+      event.event_name: '"user_message"'
+      message_labeling.source: facebook
+    sorts: [user.total_user desc]
+    limit: 20
+    column_limit: 50
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    color_application: undefined
+    x_axis_zoom: true
+    y_axis_zoom: true
+    series_colors:
+      user.total_user: "#007BFF"
+    defaults_version: 1
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: 12
+    rows_font_size: 12
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    listen: {}
+    row: 91
+    col: 0
+    width: 24
+    height: 6
+    tab_name: ''
+  - title: Inquiries by Time Period
+    name: Inquiries by Time Period (2)
+    model: c360_client_9234725065
+    explore: user
+    type: looker_column
+    fields: [user.total_user, event.time_tier_custom]
+    filters:
+      event.event_name: '"user_message"'
+      message_labeling.source: line
+    sorts: [user.total_user desc 0]
+    limit: 10
+    column_limit: 50
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: false
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    color_application: undefined
+    x_axis_zoom: true
+    y_axis_zoom: true
+    series_colors:
+      user.total_user: "#00B900"
+    defaults_version: 1
+    listen: {}
+    row: 130
+    col: 0
+    width: 24
+    height: 8
+    tab_name: ''
+  - title: Facebook Customer Journey
+    name: Facebook Customer Journey
+    model: c360_client_9234725065
+    explore: user
+    type: looker_grid
+    fields: [ad_click_submit_funnel_by_ad.Campaign_Group, ad_click_submit_funnel_by_ad.Ad_Group,
+      event.message_group, user.total_user, event.contact_info_submitted, user_activity_rollup.offline_purchase_status]
+    filters:
+      event.source: facebook
+    sorts: [user.total_user desc 0]
+    limit: 500
+    column_limit: 50
+    dynamic_fields:
+    - category: dimension
+      expression: |
+        if(
+          ${event.contact_info_submitted},
+          "Drop lead",
+          "Doesn't drop lead"
+        )
+      label: Contact Info Status
+      value_format:
+      value_format_name:
+      dimension: contact_info_status
+      _kind_hint: dimension
+      _type_hint: string
+    - category: dimension
+      expression: |
+        if(
+          ${user_activity_rollup.has_offline_purchase},
+          "Purchase",
+          "Doesn't Purchase"
+        )
+      label: Purchase Status
+      value_format:
+      value_format_name:
+      dimension: purchase_status
+      _kind_hint: dimension
+      _type_hint: string
+    show_view_names: true
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    limit_displayed_rows: false
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: 12
+    rows_font_size: 12
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    hidden_fields: []
+    hidden_points_if_no: []
+    series_labels: {}
+    defaults_version: 1
+    color_range: ["#dd3333", "#80ce5d", "#f78131", "#369dc1", "#c572d3", "#36c1b3",
+      "#b57052", "#ed69af"]
+    label_type: name
+    show_null_points: true
+    hidden_pivots: {}
+    listen: {}
+    row: 25
+    col: 0
+    width: 24
+    height: 6
+    tab_name: ''
+  - title: LINE Customer Journey
+    name: LINE Customer Journey
+    model: c360_client_9234725065
+    explore: user
+    type: looker_grid
+    fields: [event.message_group, user.total_user, event.contact_info_submitted, user_activity_rollup.offline_purchase_status]
+    filters:
+      event.source: line
+    sorts: [user.total_user desc 0]
+    limit: 500
+    column_limit: 50
+    dynamic_fields:
+    - category: dimension
+      expression: |
+        if(
+          ${event.contact_info_submitted},
+          "Drop lead",
+          "Doesn't drop lead"
+        )
+      label: Contact Info Status
+      value_format:
+      value_format_name:
+      dimension: contact_info_status
+      _kind_hint: dimension
+      _type_hint: string
+    - category: dimension
+      expression: |
+        if(
+          ${user_activity_rollup.has_offline_purchase},
+          "Purchase",
+          "Doesn't Purchase"
+        )
+      label: Purchase Status
+      value_format:
+      value_format_name:
+      dimension: purchase_status
+      _kind_hint: dimension
+      _type_hint: string
+    show_view_names: true
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    limit_displayed_rows: false
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: 12
+    rows_font_size: 12
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    hidden_fields: []
+    hidden_points_if_no: []
+    series_labels: {}
+    defaults_version: 1
+    color_range: ["#dd3333", "#80ce5d", "#f78131", "#369dc1", "#c572d3", "#36c1b3",
+      "#b57052", "#ed69af"]
+    label_type: name
+    show_null_points: true
+    hidden_pivots: {}
+    listen: {}
+    row: 99
+    col: 0
+    width: 24
+    height: 6
+    tab_name: ''
+  - title: Overall Campaign Performance
+    name: Overall Campaign Performance
+    model: c360_client_9234725065
+    explore: user
+    type: looker_grid
+    fields: [sum_of_cost, ad_click_submit_funnel_by_ad.campaign_name, ad_group, ad_click_submit_funnel_by_ad.ad_name,
+      user.total_user, user_activity_rollup.total_paid_online_and_purchase, user_activity_rollup.users_online_and_purchase]
+    filters:
+      ad_click_submit_funnel_by_ad.Ad_Group: "-Unknown Ad"
+    sorts: [sum_of_cost desc 0]
+    limit: 1000
+    column_limit: 50
+    total: true
+    dynamic_fields:
+    - category: dimension
+      expression: |-
+        case(
+          when(is_null(${ad_click_submit_funnel_by_ad.campaign_name}), "Organic"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "จ่ายจบ"), "จ่ายจบ"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "dr."), "doctor"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "พามั่น"), "Emma พามั่น"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "branch"), "สาขา"),
+          "อื่นๆ"
+        )
+      label: AD Group
+      value_format:
+      value_format_name: ''
+      dimension: ad_group
+      _kind_hint: dimension
+      _type_hint: string
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: media_single_data.cost
+      expression: ''
+      label: Sum of Cost
+      measure: sum_of_cost
+      type: sum
+    - category: table_calculation
+      expression: |
+        # if(
+        #   ${user.total_user} = 0,
+        #   null,
+          ${user_activity_rollup.users_online_and_purchase} / ${user.total_user}
+        # )
+      label: message_to_purchase_conv_rate
+      value_format:
+      value_format_name: percent_0
+      _kind_hint: measure
+      table_calculation: message_to_purchase_conv_rate
+      _type_hint: number
+    - category: table_calculation
+      expression: |
+        # if(
+        #   ${sum_of_cost} = 0,
+        #   null,
+          ${user_activity_rollup.total_paid_online_and_purchase} / ${sum_of_cost}
+        # )
+      label: ROAS
+      value_format:
+      value_format_name: decimal_1
+      _kind_hint: measure
+      table_calculation: roas
+      _type_hint: number
+    show_view_names: false
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    limit_displayed_rows: false
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: '12'
+    rows_font_size: '12'
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    show_sql_query_menu_options: false
+    show_totals: true
+    show_row_totals: true
+    truncate_header: false
+    minimum_column_width: 75
+    series_labels:
+      sum_of_cost: Total Spending
+      user_activity_rollup.total_paid_online_and_purchase: Total Revenue
+      ad_group: Campaign Group
+      message_to_purchase_conv_rate: Message to Purchase Conversion Rate
+    series_cell_visualizations:
+      sum_of_cost:
+        is_active: true
+      user_activity_rollup.total_paid_online_and_purchase:
+        is_active: true
+      message_to_purchase_conv_rate:
+        is_active: true
+      roas:
+        is_active: true
+    hidden_fields: [user.total_user, user_activity_rollup.users_online_and_purchase]
+    hidden_points_if_no: []
+    font_size_main: ''
+    orientation: vertical
+    show_title_ad_click_submit_funnel_by_ad.campaign_name: true
+    value_format_ad_click_submit_funnel_by_ad.campaign_name: ''
+    show_title_sum_of_cost: true
+    title_override_sum_of_cost: Cost
+    value_format_sum_of_cost: ''
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    defaults_version: 1
+    value_labels: legend
+    label_type: labPer
+    show_null_points: true
+    interpolation: linear
+    hidden_pivots: {}
+    listen: {}
+    row: 43
+    col: 0
+    width: 24
+    height: 4
+    tab_name: ''
+  - title: Campaign Group Performance
+    name: Campaign Group Performance
+    model: c360_client_9234725065
+    explore: user
+    type: looker_grid
+    fields: [sum_of_cost, ad_group, user.total_user, user_activity_rollup.total_paid_online_and_purchase,
+      user_activity_rollup.users_online_and_purchase]
+    filters:
+      ad_click_submit_funnel_by_ad.Campaign_Group: "-Organic"
+    sorts: [sum_of_cost desc 0]
+    limit: 1000
+    column_limit: 50
+    total: true
+    dynamic_fields:
+    - category: dimension
+      expression: |-
+        case(
+          when(is_null(${ad_click_submit_funnel_by_ad.campaign_name}), "Organic"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "จ่ายจบ"), "จ่ายจบ"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "dr."), "doctor"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "พามั่น"), "Emma พามั่น"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "branch"), "สาขา"),
+          "อื่นๆ"
+        )
+      label: AD Group
+      value_format:
+      value_format_name: ''
+      dimension: ad_group
+      _kind_hint: dimension
+      _type_hint: string
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: media_single_data.cost
+      expression: ''
+      label: Sum of Cost
+      measure: sum_of_cost
+      type: sum
+    - category: table_calculation
+      expression: |
+        # if(
+        #   ${user.total_user} = 0,
+        #   null,
+          ${user_activity_rollup.users_online_and_purchase} / ${user.total_user}
+        # )
+      label: message_to_purchase_conv_rate
+      value_format:
+      value_format_name: percent_0
+      _kind_hint: measure
+      table_calculation: message_to_purchase_conv_rate
+      _type_hint: number
+    - category: table_calculation
+      expression: |
+        # if(
+        #   ${sum_of_cost} = 0,
+        #   null,
+          ${user_activity_rollup.total_paid_online_and_purchase} / ${sum_of_cost}
+        # )
+      label: ROAS
+      value_format:
+      value_format_name: decimal_1
+      _kind_hint: measure
+      table_calculation: roas
+      _type_hint: number
+    show_view_names: false
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    limit_displayed_rows: false
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: '12'
+    rows_font_size: '12'
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    show_sql_query_menu_options: false
+    show_totals: true
+    show_row_totals: true
+    truncate_header: false
+    minimum_column_width: 75
+    series_labels:
+      sum_of_cost: Total Spending
+      user_activity_rollup.total_paid_online_and_purchase: Total Revenue
+      ad_group: Campaign Group
+      message_to_purchase_conv_rate: Message to Purchase Conversion Rate
+    series_cell_visualizations:
+      sum_of_cost:
+        is_active: true
+      user_activity_rollup.total_paid_online_and_purchase:
+        is_active: true
+      message_to_purchase_conv_rate:
+        is_active: true
+      roas:
+        is_active: true
+    hidden_fields: [user.total_user, user_activity_rollup.users_online_and_purchase]
+    hidden_points_if_no: []
+    font_size_main: ''
+    orientation: vertical
+    show_title_ad_click_submit_funnel_by_ad.campaign_name: true
+    value_format_ad_click_submit_funnel_by_ad.campaign_name: ''
+    show_title_sum_of_cost: true
+    title_override_sum_of_cost: Cost
+    value_format_sum_of_cost: ''
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    defaults_version: 1
+    value_labels: legend
+    label_type: labPer
+    show_null_points: true
+    interpolation: linear
+    hidden_pivots: {}
+    listen: {}
+    row: 55
+    col: 0
+    width: 12
+    height: 5
+    tab_name: ''
+  - title: Top Ads Performance
+    name: Top Ads Performance
+    model: c360_client_9234725065
+    explore: user
+    type: looker_wordcloud
+    fields: [user_activity_rollup.total_paid_online_and_purchase, ad_click_submit_funnel_by_ad.ad_name]
+    filters:
+      ad_click_submit_funnel_by_ad.Campaign_Group: "-Organic"
+    sorts: [user_activity_rollup.total_paid_online_and_purchase desc 0]
+    limit: 10
+    column_limit: 50
+    dynamic_fields:
+    - category: dimension
+      expression: |-
+        case(
+          when(is_null(${ad_click_submit_funnel_by_ad.campaign_name}), "Organic"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "จ่ายจบ"), "จ่ายจบ"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "dr."), "doctor"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "พามั่น"), "Emma พามั่น"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "branch"), "สาขา"),
+          "อื่นๆ"
+        )
+      label: AD Group
+      value_format:
+      value_format_name: ''
+      dimension: ad_group
+      _kind_hint: dimension
+      _type_hint: string
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: media_single_data.cost
+      expression: ''
+      label: Sum of Cost
+      measure: sum_of_cost
+      type: sum
+    - category: table_calculation
+      expression: |
+        if(
+          ${user.total_user} = 0,
+          null,
+          ${user_activity_rollup.users_online_and_purchase} / ${user.total_user}
+        )
+      label: message_to_purchase_conv_rate
+      value_format:
+      value_format_name: percent_0
+      _kind_hint: measure
+      table_calculation: message_to_purchase_conv_rate
+      _type_hint: number
+      is_disabled: true
+    - category: table_calculation
+      expression: |
+        if(
+          ${sum_of_cost} = 0,
+          null,
+          ${user_activity_rollup.total_paid_online_and_purchase} / ${sum_of_cost}
+        )
+      label: ROAS
+      value_format:
+      value_format_name: percent_0
+      _kind_hint: measure
+      table_calculation: roas
+      _type_hint: number
+      is_disabled: true
+    color_application: undefined
+    show_sql_query_menu_options: false
+    show_totals: true
+    show_row_totals: true
+    show_view_names: false
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    truncate_header: false
+    size_to_fit: true
+    minimum_column_width: 75
+    series_labels:
+      sum_of_cost: Total Spending
+      user_activity_rollup.total_paid_online_and_purchase: Total Revenue
+      ad_group: Campaign Group
+      message_to_purchase_conv_rate: Message to Purchase Conversion Rate
+    series_cell_visualizations:
+      sum_of_cost:
+        is_active: true
+      user_activity_rollup.total_paid_online_and_purchase:
+        is_active: true
+      message_to_purchase_conv_rate:
+        is_active: true
+      roas:
+        is_active: true
+    table_theme: white
+    limit_displayed_rows: false
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: '12'
+    rows_font_size: '12'
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    hide_totals: false
+    hide_row_totals: false
+    hidden_fields: []
+    hidden_points_if_no: []
+    font_size_main: ''
+    orientation: vertical
+    show_title_ad_click_submit_funnel_by_ad.campaign_name: true
+    value_format_ad_click_submit_funnel_by_ad.campaign_name: ''
+    show_title_sum_of_cost: true
+    title_override_sum_of_cost: Cost
+    value_format_sum_of_cost: ''
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    defaults_version: 1
+    value_labels: legend
+    label_type: labPer
+    show_null_points: true
+    interpolation: linear
+    hidden_pivots: {}
+    listen: {}
+    row: 60
+    col: 12
+    width: 12
+    height: 5
+    tab_name: ''
+  - title: Top Campaign Group Performance
+    name: Top Campaign Group Performance
+    model: c360_client_9234725065
+    explore: user
+    type: looker_wordcloud
+    fields: [ad_group, user_activity_rollup.total_paid_online_and_purchase]
+    filters:
+      ad_click_submit_funnel_by_ad.Campaign_Group: "-Organic"
+    sorts: [user_activity_rollup.total_paid_online_and_purchase desc 0]
+    limit: 1000
+    column_limit: 50
+    dynamic_fields:
+    - category: dimension
+      expression: |-
+        case(
+          when(is_null(${ad_click_submit_funnel_by_ad.campaign_name}), "Organic"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "จ่ายจบ"), "จ่ายจบ"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "dr."), "doctor"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "พามั่น"), "Emma พามั่น"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "branch"), "สาขา"),
+          "อื่นๆ"
+        )
+      label: AD Group
+      value_format:
+      value_format_name: ''
+      dimension: ad_group
+      _kind_hint: dimension
+      _type_hint: string
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: media_single_data.cost
+      expression: ''
+      label: Sum of Cost
+      measure: sum_of_cost
+      type: sum
+    - category: table_calculation
+      expression: |
+        if(
+          ${user.total_user} = 0,
+          null,
+          ${user_activity_rollup.users_online_and_purchase} / ${user.total_user}
+        )
+      label: message_to_purchase_conv_rate
+      value_format:
+      value_format_name: percent_0
+      _kind_hint: measure
+      table_calculation: message_to_purchase_conv_rate
+      _type_hint: number
+      is_disabled: true
+    - category: table_calculation
+      expression: |
+        if(
+          ${sum_of_cost} = 0,
+          null,
+          ${user_activity_rollup.total_paid_online_and_purchase} / ${sum_of_cost}
+        )
+      label: ROAS
+      value_format:
+      value_format_name: percent_0
+      _kind_hint: measure
+      table_calculation: roas
+      _type_hint: number
+      is_disabled: true
+    color_application: undefined
+    show_sql_query_menu_options: false
+    show_totals: true
+    show_row_totals: true
+    show_view_names: false
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    truncate_header: false
+    size_to_fit: true
+    minimum_column_width: 75
+    series_labels:
+      sum_of_cost: Total Spending
+      user_activity_rollup.total_paid_online_and_purchase: Total Revenue
+      ad_group: Campaign Group
+      message_to_purchase_conv_rate: Message to Purchase Conversion Rate
+    series_cell_visualizations:
+      sum_of_cost:
+        is_active: true
+      user_activity_rollup.total_paid_online_and_purchase:
+        is_active: true
+      message_to_purchase_conv_rate:
+        is_active: true
+      roas:
+        is_active: true
+    table_theme: white
+    limit_displayed_rows: false
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: '12'
+    rows_font_size: '12'
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    hide_totals: false
+    hide_row_totals: false
+    hidden_fields: []
+    hidden_points_if_no: []
+    font_size_main: ''
+    orientation: vertical
+    show_title_ad_click_submit_funnel_by_ad.campaign_name: true
+    value_format_ad_click_submit_funnel_by_ad.campaign_name: ''
+    show_title_sum_of_cost: true
+    title_override_sum_of_cost: Cost
+    value_format_sum_of_cost: ''
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    defaults_version: 1
+    value_labels: legend
+    label_type: labPer
+    show_null_points: true
+    interpolation: linear
+    hidden_pivots: {}
+    listen: {}
+    row: 55
+    col: 12
+    width: 12
+    height: 5
+    tab_name: ''
+  - title: Ads Performance
+    name: Ads Performance
+    model: c360_client_9234725065
+    explore: user
+    type: looker_grid
+    fields: [sum_of_cost, user.total_user, user_activity_rollup.total_paid_online_and_purchase,
+      user_activity_rollup.users_online_and_purchase, ad_click_submit_funnel_by_ad.ad_name]
+    filters:
+      ad_click_submit_funnel_by_ad.Campaign_Group: "-Organic"
+    sorts: [sum_of_cost desc 0]
+    limit: 1000
+    column_limit: 50
+    total: true
+    dynamic_fields:
+    - category: dimension
+      expression: |-
+        case(
+          when(is_null(${ad_click_submit_funnel_by_ad.campaign_name}), "Organic"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "จ่ายจบ"), "จ่ายจบ"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "dr."), "doctor"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "พามั่น"), "Emma พามั่น"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "branch"), "สาขา"),
+          "อื่นๆ"
+        )
+      label: AD Group
+      value_format:
+      value_format_name: ''
+      dimension: ad_group
+      _kind_hint: dimension
+      _type_hint: string
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: media_single_data.cost
+      expression: ''
+      label: Sum of Cost
+      measure: sum_of_cost
+      type: sum
+    - category: table_calculation
+      expression: |
+        if(
+          ${user.total_user} = 0,
+          null,
+          ${user_activity_rollup.users_online_and_purchase} / ${user.total_user}
+        )
+      label: message_to_purchase_conv_rate
+      value_format:
+      value_format_name: percent_0
+      _kind_hint: measure
+      table_calculation: message_to_purchase_conv_rate
+      _type_hint: number
+    - category: table_calculation
+      expression: |
+        # if(
+        #   ${sum_of_cost} = 0,
+        #   null,
+          ${user_activity_rollup.total_paid_online_and_purchase} / ${sum_of_cost}
+        # )
+      label: ROAS
+      value_format:
+      value_format_name: decimal_1
+      _kind_hint: measure
+      table_calculation: roas
+      _type_hint: number
+    show_view_names: false
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    limit_displayed_rows: false
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: '12'
+    rows_font_size: '12'
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    show_sql_query_menu_options: false
+    show_totals: true
+    show_row_totals: true
+    truncate_header: false
+    minimum_column_width: 75
+    series_labels:
+      sum_of_cost: Total Spending
+      user_activity_rollup.total_paid_online_and_purchase: Total Revenue
+      ad_group: Campaign Group
+      message_to_purchase_conv_rate: Message to Purchase Conversion Rate
+    series_cell_visualizations:
+      sum_of_cost:
+        is_active: true
+      user_activity_rollup.total_paid_online_and_purchase:
+        is_active: true
+      message_to_purchase_conv_rate:
+        is_active: true
+      roas:
+        is_active: true
+    hidden_fields: [user.total_user, user_activity_rollup.users_online_and_purchase]
+    hidden_points_if_no: []
+    font_size_main: ''
+    orientation: vertical
+    show_title_ad_click_submit_funnel_by_ad.campaign_name: true
+    value_format_ad_click_submit_funnel_by_ad.campaign_name: ''
+    show_title_sum_of_cost: true
+    title_override_sum_of_cost: Cost
+    value_format_sum_of_cost: ''
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    defaults_version: 1
+    value_labels: legend
+    label_type: labPer
+    show_null_points: true
+    interpolation: linear
+    hidden_pivots: {}
+    listen: {}
+    row: 60
+    col: 0
+    width: 12
+    height: 5
+    tab_name: ''
+  - title: Total spend & Revenue movement in facebook
+    name: Total spend & Revenue movement in facebook
+    model: c360_client_9234725065
+    explore: user
+    type: looker_column
+    fields: [offline_transaction.receipt_date_date, sum_of_cost, course_total_by_receipt.total_price]
+    fill_fields: [offline_transaction.receipt_date_date]
+    sorts: [offline_transaction.receipt_date_date desc]
+    limit: 500
+    column_limit: 50
+    dynamic_fields:
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: media_single_data.cost
+      expression: ''
+      label: Sum of Cost
+      measure: sum_of_cost
+      type: sum
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: false
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: normal
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    x_axis_zoom: true
+    y_axis_zoom: true
+    series_colors:
+      course_total_by_receipt.total_price: "#12B5CB"
+      sum_of_cost: "#EA4335"
+    series_labels:
+      course_total_by_receipt.total_price: Total Revenue
+      sum_of_cost: Total Spending
+    show_null_points: true
+    interpolation: linear
+    defaults_version: 1
+    listen: {}
+    row: 47
+    col: 0
+    width: 24
+    height: 8
+    tab_name: ''
+  - title: Overall Campaign Performance core campaign
+    name: Overall Campaign Performance core campaign
+    model: c360_client_9234725065
+    explore: user
+    type: looker_grid
+    fields: [sum_of_cost, ad_click_submit_funnel_by_ad.campaign_name, ad_group, ad_click_submit_funnel_by_ad.ad_name,
+      user.total_user, user_activity_rollup.total_paid_online_and_purchase, user_activity_rollup.users_online_and_purchase]
+    filters:
+      ad_click_submit_funnel_by_ad.Ad_Group: "-Unknown Ad"
+      ad_click_submit_funnel_by_ad.adset_name: "-%Retarge%"
+    sorts: [sum_of_cost desc 0]
+    limit: 1000
+    column_limit: 50
+    total: true
+    dynamic_fields:
+    - category: dimension
+      expression: |-
+        case(
+          when(is_null(${ad_click_submit_funnel_by_ad.campaign_name}), "Organic"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "จ่ายจบ"), "จ่ายจบ"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "dr."), "doctor"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "พามั่น"), "Emma พามั่น"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "branch"), "สาขา"),
+          "อื่นๆ"
+        )
+      label: AD Group
+      value_format:
+      value_format_name: ''
+      dimension: ad_group
+      _kind_hint: dimension
+      _type_hint: string
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: media_single_data.cost
+      expression: ''
+      label: Sum of Cost
+      measure: sum_of_cost
+      type: sum
+    - category: table_calculation
+      expression: |
+        # if(
+        #   ${user.total_user} = 0,
+        #   null,
+          ${user_activity_rollup.users_online_and_purchase} / ${user.total_user}
+        # )
+      label: message_to_purchase_conv_rate
+      value_format:
+      value_format_name: percent_0
+      _kind_hint: measure
+      table_calculation: message_to_purchase_conv_rate
+      _type_hint: number
+    - category: table_calculation
+      expression: |
+        # if(
+        #   ${sum_of_cost} = 0,
+        #   null,
+          ${user_activity_rollup.total_paid_online_and_purchase} / ${sum_of_cost}
+        # )
+      label: ROAS
+      value_format:
+      value_format_name: decimal_1
+      _kind_hint: measure
+      table_calculation: roas
+      _type_hint: number
+    show_view_names: false
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    limit_displayed_rows: false
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: '12'
+    rows_font_size: '12'
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    show_sql_query_menu_options: false
+    show_totals: true
+    show_row_totals: true
+    truncate_header: false
+    minimum_column_width: 75
+    series_labels:
+      sum_of_cost: Total Spending
+      user_activity_rollup.total_paid_online_and_purchase: Total Revenue
+      ad_group: Campaign Group
+      message_to_purchase_conv_rate: Message to Purchase Conversion Rate
+    series_cell_visualizations:
+      sum_of_cost:
+        is_active: true
+      user_activity_rollup.total_paid_online_and_purchase:
+        is_active: true
+      message_to_purchase_conv_rate:
+        is_active: true
+      roas:
+        is_active: true
+    hidden_fields: [user.total_user, user_activity_rollup.users_online_and_purchase]
+    hidden_points_if_no: []
+    font_size_main: ''
+    orientation: vertical
+    show_title_ad_click_submit_funnel_by_ad.campaign_name: true
+    value_format_ad_click_submit_funnel_by_ad.campaign_name: ''
+    show_title_sum_of_cost: true
+    title_override_sum_of_cost: Cost
+    value_format_sum_of_cost: ''
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    defaults_version: 1
+    value_labels: legend
+    label_type: labPer
+    show_null_points: true
+    interpolation: linear
+    hidden_pivots: {}
+    listen: {}
+    row: 138
+    col: 12
+    width: 12
+    height: 7
+    tab_name: ''
+  - title: Overall Campaign Performance retarget
+    name: Overall Campaign Performance retarget
+    model: c360_client_9234725065
+    explore: user
+    type: looker_grid
+    fields: [sum_of_cost, ad_click_submit_funnel_by_ad.campaign_name, ad_group, user.total_user,
+      user_activity_rollup.total_paid_online_and_purchase, user_activity_rollup.users_online_and_purchase,
+      ad_click_submit_funnel_by_ad.adset_name]
+    filters:
+      ad_click_submit_funnel_by_ad.Ad_Group: ''
+      ad_click_submit_funnel_by_ad.adset_name: "%Retar%"
+    sorts: [user_activity_rollup.total_paid_online_and_purchase desc]
+    limit: 1000
+    column_limit: 50
+    total: true
+    dynamic_fields:
+    - category: dimension
+      expression: |-
+        case(
+          when(is_null(${ad_click_submit_funnel_by_ad.campaign_name}), "Organic"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "จ่ายจบ"), "จ่ายจบ"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "dr."), "doctor"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "พามั่น"), "Emma พามั่น"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "branch"), "สาขา"),
+          "อื่นๆ"
+        )
+      label: AD Group
+      value_format:
+      value_format_name: ''
+      dimension: ad_group
+      _kind_hint: dimension
+      _type_hint: string
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: media_single_data.cost
+      expression: ''
+      label: Sum of Cost
+      measure: sum_of_cost
+      type: sum
+    - category: table_calculation
+      expression: |
+        # if(
+        #   ${user.total_user} = 0,
+        #   null,
+          ${user_activity_rollup.users_online_and_purchase} / ${user.total_user}
+        # )
+      label: message_to_purchase_conv_rate
+      value_format:
+      value_format_name: percent_0
+      _kind_hint: measure
+      table_calculation: message_to_purchase_conv_rate
+      _type_hint: number
+    - category: table_calculation
+      expression: |
+        # if(
+        #   ${sum_of_cost} = 0,
+        #   null,
+          ${user_activity_rollup.total_paid_online_and_purchase} / ${sum_of_cost}
+        # )
+      label: ROAS
+      value_format:
+      value_format_name: decimal_1
+      _kind_hint: measure
+      table_calculation: roas
+      _type_hint: number
+    show_view_names: false
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    limit_displayed_rows: false
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: '12'
+    rows_font_size: '12'
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    show_sql_query_menu_options: false
+    show_totals: true
+    show_row_totals: true
+    truncate_header: false
+    minimum_column_width: 75
+    series_labels:
+      sum_of_cost: Total Spending
+      user_activity_rollup.total_paid_online_and_purchase: Total Revenue
+      ad_group: Campaign Group
+      message_to_purchase_conv_rate: Message to Purchase Conversion Rate
+    series_cell_visualizations:
+      sum_of_cost:
+        is_active: true
+      user_activity_rollup.total_paid_online_and_purchase:
+        is_active: true
+      message_to_purchase_conv_rate:
+        is_active: true
+      roas:
+        is_active: true
+    hidden_fields: [user.total_user, user_activity_rollup.users_online_and_purchase]
+    hidden_points_if_no: []
+    font_size_main: ''
+    orientation: vertical
+    show_title_ad_click_submit_funnel_by_ad.campaign_name: true
+    value_format_ad_click_submit_funnel_by_ad.campaign_name: ''
+    show_title_sum_of_cost: true
+    title_override_sum_of_cost: Cost
+    value_format_sum_of_cost: ''
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    defaults_version: 1
+    value_labels: legend
+    label_type: labPer
+    show_null_points: true
+    interpolation: linear
+    hidden_pivots: {}
+    listen: {}
+    row: 138
+    col: 0
+    width: 12
+    height: 7
+    tab_name: ''

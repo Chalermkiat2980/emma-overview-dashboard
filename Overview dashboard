@@ -1,0 +1,2086 @@
+---
+- dashboard: emma_overview_dashboard
+  title: Emma Overview Dashboard
+  preferred_viewer: dashboards-next
+  description: ''
+  preferred_slug: WEqUd5KMXGWftMBNgDOOu5
+  theme_name: ''
+  layout: newspaper
+  tabs:
+  - name: ''
+    label: ''
+  elements:
+  - name: ''
+    type: text
+    title_text: ''
+    body_text: '[{"type":"h1","children":[{"text":"What has happened in the past period?","bold":true}],"align":"center"}]'
+    rich_content_json: '{"format":"slate"}'
+    row: 0
+    col: 0
+    width: 24
+    height: 2
+    tab_name: ''
+  - name: " (Copy)"
+    type: text
+    title_text: " (Copy)"
+    body_text: '[{"children":[{"text":"What is the top-selling product?","bold":true}],"type":"h1","align":"center"}]'
+    rich_content_json: '{"format":"slate"}'
+    row: 50
+    col: 0
+    width: 24
+    height: 2
+    tab_name: ''
+  - name: " (Copy 5)"
+    type: text
+    title_text: " (Copy 5)"
+    body_text: '[{"children":[{"text":"How about revenue?","bold":true}],"type":"h1","align":"center"}]'
+    rich_content_json: '{"format":"slate"}'
+    row: 28
+    col: 0
+    width: 24
+    height: 2
+    tab_name: ''
+  - title: Total Revenue (฿)
+    name: Total Revenue (฿)
+    model: c360_client_9234725065
+    explore: user
+    type: single_value
+    fields: [course_total_by_receipt.total_price]
+    limit: 500
+    column_limit: 50
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    single_value_title: Total Revenue (฿)
+    smart_single_value_size: true
+    defaults_version: 1
+    listen:
+      User Pseudo ID: user.user_pseudo_id
+      Branch Name: offline_transaction.branch_name_receipt
+    row: 4
+    col: 0
+    width: 4
+    height: 5
+    tab_name: ''
+  - title: Average Order Value (฿)
+    name: Average Order Value (฿)
+    model: c360_client_9234725065
+    explore: user
+    type: single_value
+    fields: [count_of_receipt_no, sum_of_total_price]
+    limit: 500
+    column_limit: 50
+    total: true
+    dynamic_fields:
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: offline_transaction__course.total_price
+      expression: ''
+      label: Sum of Total Price
+      measure: sum_of_total_price
+      type: sum
+    - category: table_calculation
+      expression: "${sum_of_total_price} / 4712969.88"
+      label: ROAS
+      value_format:
+      value_format_name: decimal_1
+      _kind_hint: measure
+      table_calculation: roas
+      _type_hint: number
+      is_disabled: true
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: offline_transaction__course.receipt_no
+      expression: ''
+      label: Count of Receipt No
+      measure: count_of_receipt_no
+      type: count_distinct
+    - category: table_calculation
+      expression: "${sum_of_total_price:total} / ${count_of_receipt_no:total}"
+      label: Average order value
+      value_format:
+      value_format_name: decimal_0
+      _kind_hint: measure
+      table_calculation: average_order_value
+      _type_hint: number
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    single_value_title: Average Order Value (฿)
+    smart_single_value_size: true
+    defaults_version: 1
+    hidden_fields: [sum_of_total_price, count_of_receipt_no]
+    hidden_pivots: {}
+    listen:
+      User Pseudo ID: user.user_pseudo_id
+      Branch Name: offline_transaction.branch_name_receipt
+    row: 4
+    col: 16
+    width: 4
+    height: 5
+    tab_name: ''
+  - title: Average Revenue per user (฿)
+    name: Average Revenue per user (฿)
+    model: c360_client_9234725065
+    explore: user
+    type: single_value
+    fields: [sum_of_total_price, count_of_user_pseudo_id]
+    limit: 500
+    column_limit: 50
+    total: true
+    dynamic_fields:
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: offline_transaction__course.total_price
+      expression: ''
+      label: Sum of Total Price
+      measure: sum_of_total_price
+      type: sum
+    - category: table_calculation
+      expression: "${sum_of_total_price} / 4712969.88"
+      label: ROAS
+      value_format:
+      value_format_name: decimal_1
+      _kind_hint: measure
+      table_calculation: roas
+      _type_hint: number
+      is_disabled: true
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: offline_transaction__course.receipt_no
+      expression: ''
+      label: Count of Receipt No
+      measure: count_of_receipt_no
+      type: count_distinct
+    - category: table_calculation
+      expression: "${sum_of_total_price:total} / ${count_of_receipt_no:total}"
+      label: Average order value
+      value_format:
+      value_format_name: decimal_0
+      _kind_hint: measure
+      table_calculation: average_order_value
+      _type_hint: number
+      is_disabled: true
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: offline_transaction.hno
+      expression: ''
+      label: Count of Hno
+      measure: count_of_hno
+      type: count_distinct
+    - category: table_calculation
+      expression: "${sum_of_total_price:total} / ${count_of_user_pseudo_id}"
+      label: Average Revenue per user (฿)
+      value_format:
+      value_format_name: decimal_0
+      _kind_hint: measure
+      table_calculation: average_revenue_per_user
+      _type_hint: number
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: offline_transaction__course.user_pseudo_id
+      expression: ''
+      label: Count of User Pseudo ID
+      measure: count_of_user_pseudo_id
+      type: count_distinct
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    single_value_title: Average Revenue per user (฿)
+    smart_single_value_size: true
+    defaults_version: 1
+    hidden_fields: [sum_of_total_price, count_of_user_pseudo_id]
+    hidden_pivots: {}
+    listen:
+      User Pseudo ID: user.user_pseudo_id
+      Branch Name: offline_transaction.branch_name_receipt
+    row: 4
+    col: 20
+    width: 4
+    height: 5
+    tab_name: ''
+  - title: Lead type
+    name: Lead type
+    model: c360_client_9234725065
+    explore: user
+    type: looker_grid
+    fields: [event.total_user, ad_group]
+    filters:
+      event.event_name: '"contact_info_submitted"'
+    sorts: [event.total_user desc]
+    limit: 500
+    column_limit: 50
+    dynamic_fields:
+    - category: dimension
+      expression: |-
+        # case(
+        #   when(
+        #     contains(
+        #       ${event.referral__ads_context_data__ad_title} IS NULL)
+        #     ,"Review")
+        # ,
+        #   "Organic")
+
+        case(
+          when(is_null(${ad_click_submit_funnel_by_ad.campaign_name}), "Organic"),
+          # when(contains(${event.referral__ads_context_data__ad_title}, "RV"), "Review"),
+          "Paid"
+        )
+      label: AD Group
+      value_format:
+      value_format_name:
+      dimension: ad_group
+      _kind_hint: dimension
+      _type_hint: string
+    show_view_names: false
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    limit_displayed_rows: false
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: '12'
+    rows_font_size: '12'
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    show_sql_query_menu_options: false
+    show_totals: true
+    show_row_totals: true
+    truncate_header: false
+    minimum_column_width: 75
+    series_labels:
+      ad_group: Lead type
+      event.total_user: Unique User
+    series_cell_visualizations:
+      event.total_user:
+        is_active: true
+    custom_color_enabled: true
+    show_single_value_title: true
+    single_value_title: Platform with highest Lead
+    smart_single_value_size: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    defaults_version: 1
+    hidden_fields: []
+    listen:
+      User Pseudo ID: user.user_pseudo_id
+      Branch Name: offline_transaction.branch_name_receipt
+    row: 16
+    col: 0
+    width: 7
+    height: 6
+    tab_name: ''
+  - title: Platform with highest Lead
+    name: Platform with highest Lead
+    model: c360_client_9234725065
+    explore: user
+    type: single_value
+    fields: [event.source, event.total_user, source_type]
+    filters:
+      event.event_name: '"contact_info_submitted"'
+    sorts: [event.total_user desc]
+    limit: 500
+    column_limit: 50
+    dynamic_fields:
+    - category: dimension
+      expression: |-
+        case(
+          when(
+            contains(${event.source},"line"),
+            "LINE"),
+          when(
+            contains(${event.source}, "facebook"),
+            "Facebook"),
+          "Walk-in"
+          )
+      label: Source type
+      value_format:
+      value_format_name:
+      dimension: source_type
+      _kind_hint: dimension
+      _type_hint: string
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    single_value_title: Platform with highest Lead
+    smart_single_value_size: true
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    defaults_version: 1
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    header_text_alignment: left
+    header_font_size: 12
+    rows_font_size: 12
+    hidden_fields: [event.total_user, event.source]
+    listen:
+      User Pseudo ID: user.user_pseudo_id
+      Branch Name: offline_transaction.branch_name_receipt
+    row: 11
+    col: 0
+    width: 5
+    height: 5
+    tab_name: ''
+  - title: Total Lead
+    name: Total Lead
+    model: c360_client_9234725065
+    explore: user
+    type: single_value
+    fields: [event.total_user]
+    filters:
+      event.event_name: '"contact_info_submitted"'
+    limit: 500
+    column_limit: 50
+    dynamic_fields:
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: offline_transaction__course.total_price
+      expression: ''
+      label: Sum of Total Price
+      measure: sum_of_total_price
+      type: sum
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    single_value_title: Total Lead
+    smart_single_value_size: true
+    defaults_version: 1
+    hidden_pivots: {}
+    listen:
+      User Pseudo ID: user.user_pseudo_id
+      Branch Name: offline_transaction.branch_name_receipt
+    row: 4
+    col: 4
+    width: 4
+    height: 5
+    tab_name: ''
+  - title: Top 5 type of most order products
+    name: Top 5 type of most order products
+    model: c360_client_9234725065
+    explore: user
+    type: looker_grid
+    fields: [offline_transaction.count, offline_transaction__course.course_name, offline_transaction__course.type]
+    filters:
+      offline_transaction__course.course_name: "-%C :%,-%B :%"
+    sorts: [offline_transaction.count desc 0]
+    limit: 5
+    column_limit: 50
+    dynamic_fields:
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: offline_transaction__course.total_price
+      expression: ''
+      label: Sum of Total Price
+      measure: sum_of_total_price
+      type: sum
+    show_view_names: false
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    limit_displayed_rows: false
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: '12'
+    rows_font_size: '12'
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    show_sql_query_menu_options: false
+    show_totals: true
+    show_row_totals: true
+    truncate_header: false
+    minimum_column_width: 75
+    series_labels:
+      offline_transaction__course.course_name: Product
+      offline_transaction.count: จำนวนการซื้อ
+    series_cell_visualizations:
+      offline_transaction.count:
+        is_active: true
+    custom_color_enabled: true
+    show_single_value_title: true
+    single_value_title: Total Lead
+    smart_single_value_size: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    defaults_version: 1
+    hidden_pivots: {}
+    listen:
+      User Pseudo ID: user.user_pseudo_id
+      Branch Name: offline_transaction.branch_name_receipt
+    row: 11
+    col: 19
+    width: 5
+    height: 5
+    tab_name: ''
+  - title: New user
+    name: New user
+    model: c360_client_9234725065
+    explore: user
+    type: single_value
+    fields: [event.new_users_calc]
+    filters:
+      event.event_name: '"contact_info_submitted"'
+    limit: 500
+    column_limit: 50
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    single_value_title: New user
+    smart_single_value_size: true
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    defaults_version: 1
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    header_text_alignment: left
+    header_font_size: 12
+    rows_font_size: 12
+    hidden_fields:
+    hidden_pivots: {}
+    listen:
+      User Pseudo ID: user.user_pseudo_id
+      Branch Name: offline_transaction.branch_name_receipt
+    row: 11
+    col: 9
+    width: 5
+    height: 5
+    tab_name: ''
+  - title: Orders
+    name: Orders
+    model: c360_client_9234725065
+    explore: user
+    type: single_value
+    fields: [count_of_receipt_no]
+    limit: 500
+    column_limit: 50
+    dynamic_fields:
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: offline_transaction.receipt_no
+      expression: ''
+      label: Count of Receipt No
+      measure: count_of_receipt_no
+      type: count_distinct
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    single_value_title: Orders
+    smart_single_value_size: true
+    defaults_version: 1
+    hidden_pivots: {}
+    listen:
+      User Pseudo ID: user.user_pseudo_id
+      Branch Name: offline_transaction.branch_name_receipt
+    row: 4
+    col: 8
+    width: 4
+    height: 5
+    tab_name: ''
+  - title: Average Orders per User (AOPU)
+    name: Average Orders per User (AOPU)
+    model: c360_client_9234725065
+    explore: user
+    type: single_value
+    fields: [count_of_receipt_no, count_of_hno]
+    limit: 500
+    column_limit: 50
+    dynamic_fields:
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: offline_transaction.receipt_no
+      expression: ''
+      label: Count of Receipt No
+      measure: count_of_receipt_no
+      type: count_distinct
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: offline_transaction.hno
+      expression: ''
+      label: Count of Hno
+      measure: count_of_hno
+      type: count_distinct
+    - category: table_calculation
+      expression: "${count_of_receipt_no} / ${count_of_hno}"
+      label: Average Orders per User (AOPU)
+      value_format:
+      value_format_name: decimal_1
+      _kind_hint: measure
+      table_calculation: average_orders_per_user_aopu
+      _type_hint: number
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    single_value_title: Average Orders per User
+    smart_single_value_size: true
+    defaults_version: 1
+    hidden_fields: [count_of_receipt_no, count_of_hno]
+    hidden_pivots: {}
+    listen:
+      User Pseudo ID: user.user_pseudo_id
+      Branch Name: offline_transaction.branch_name_receipt
+    row: 4
+    col: 12
+    width: 4
+    height: 5
+    tab_name: ''
+  - name: " (2)"
+    type: text
+    title_text: ''
+    body_text: |
+      <p style="color:#d16a6c; font-size:20px; font-weight:bold; margin-bottom:4px;">
+      Finance Overview
+      </p>
+      <hr style="border: 2px solid #d16a6c; width: 100%; margin-top: 0;">
+    row: 2
+    col: 0
+    width: 24
+    height: 2
+    tab_name: ''
+  - name: " (3)"
+    type: text
+    title_text: ''
+    body_text: |
+      <p style="color:#d16a6c; font-size:20px; font-weight:bold; margin-bottom:4px;">
+      Online Performance
+      </p>
+      <hr style="border: 2px solid #d16a6c; width: 100%; margin-top: 0;">
+    row: 9
+    col: 6
+    width: 18
+    height: 2
+    tab_name: ''
+  - title: Highest Revenue with  course type
+    name: Highest Revenue with  course type
+    model: c360_client_9234725065
+    explore: user
+    type: looker_grid
+    fields: [course_total_by_receipt.total_price, course_type]
+    sorts: [course_total_by_receipt.total_price desc 0]
+    limit: 500
+    column_limit: 50
+    total: true
+    dynamic_fields:
+    - category: dimension
+      expression: "case(\n  when(contains(${offline_transaction__course.type}, \"\
+        SurgeryS\"), \n    \"Surgey S\"\n  ),\n  when(contains(${offline_transaction__course.type},\
+        \ \"SurgeryL\"), \n    \"Surgey L\"\n  ),\n  when(contains(${offline_transaction__course.type},\
+        \ \"Skin\"), \n    \"Skin\"\n  ),\n  \"other\"\n)"
+      label: Course type
+      value_format:
+      value_format_name:
+      dimension: course_type
+      _kind_hint: dimension
+      _type_hint: string
+    show_view_names: false
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    limit_displayed_rows: false
+    enable_conditional_formatting: true
+    header_text_alignment: left
+    header_font_size: '12'
+    rows_font_size: '12'
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    show_sql_query_menu_options: false
+    show_totals: true
+    show_row_totals: true
+    truncate_header: false
+    minimum_column_width: 75
+    series_labels:
+      product_augment_nose_teardrop_nose: Teardrop_nose
+      product_augment_nose_alarpastry: nose_alarpastry
+      product_augment_nose_revision: nose_revision
+      product_augment_nose_soft_open: Soft_open
+      product_augment_nose_ss_safe: SS_safe
+      labeling.category_name: Product Name
+    series_cell_visualizations:
+      course_total_by_receipt.total_price:
+        is_active: true
+        value_display: true
+    limit_displayed_rows_values:
+      show_hide: hide
+      first_last: first
+      num_rows: 0
+    conditional_formatting: [{type: along a scale..., value: !!null '', background_color: "#1A73E8",
+        font_color: !!null '', color_application: {collection_id: 7c56cc21-66e4-41c9-81ce-a60e1c3967b2,
+          palette_id: 4a00499b-c0fe-4b15-a304-4083c07ff4c4, options: {constraints: {
+              min: {type: minimum}, mid: {type: number, value: 0}, max: {type: maximum}},
+            mirror: true, reverse: false, stepped: false}}, bold: false, italic: false,
+        strikethrough: false, fields: !!null ''}]
+    series_value_format:
+      course_total_by_receipt.total_price:
+        format_string: "#,##0.00"
+    value_labels: legend
+    label_type: labPer
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    defaults_version: 1
+    show_null_points: true
+    interpolation: linear
+    hidden_pivots: {}
+    listen:
+      User Pseudo ID: user.user_pseudo_id
+      Branch Name: offline_transaction.branch_name_receipt
+    row: 54
+    col: 0
+    width: 12
+    height: 5
+    tab_name: ''
+  - title: Highest Chat with  product
+    name: Highest Chat with  product
+    model: c360_client_9234725065
+    explore: user
+    type: looker_grid
+    fields: [labeling.category_name, event.total_user]
+    filters:
+      labeling.category_name: "%augm%"
+      event.event_name: '"user_message"'
+    sorts: [event.total_user desc 0]
+    limit: 500
+    column_limit: 50
+    show_view_names: false
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    limit_displayed_rows: false
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: '12'
+    rows_font_size: '12'
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    show_sql_query_menu_options: false
+    show_totals: true
+    show_row_totals: true
+    truncate_header: false
+    minimum_column_width: 75
+    series_labels:
+      labeling.category_name: Product Name
+    series_cell_visualizations:
+      event.total_user:
+        is_active: true
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    defaults_version: 1
+    listen:
+      User Pseudo ID: user.user_pseudo_id
+      Branch Name: offline_transaction.branch_name_receipt
+    row: 54
+    col: 12
+    width: 12
+    height: 5
+    tab_name: ''
+  - title: Total Revenue from Facebook
+    name: Total Revenue from Facebook
+    model: c360_client_9234725065
+    explore: user
+    type: single_value
+    fields: [course_total_by_receipt.total_price]
+    filters:
+      receipt_source_attribution.source: facebook
+    sorts: [course_total_by_receipt.total_price desc 0]
+    limit: 500
+    column_limit: 50
+    total: true
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: true
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    single_value_title: Total Revenue from Facebook
+    smart_single_value_size: true
+    conditional_formatting: [{type: greater than, value: 0, background_color: "#1A73E8",
+        font_color: !!null '', color_application: {collection_id: 7c56cc21-66e4-41c9-81ce-a60e1c3967b2,
+          palette_id: 4a00499b-c0fe-4b15-a304-4083c07ff4c4, options: {constraints: {
+              min: {type: minimum}, mid: {type: number, value: 0}, max: {type: maximum}},
+            mirror: true, reverse: false, stepped: false}}, bold: false, italic: false,
+        strikethrough: false, fields: !!null ''}]
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    defaults_version: 1
+    listen:
+      User Pseudo ID: user.user_pseudo_id
+      Branch Name: offline_transaction.branch_name_receipt
+    row: 30
+    col: 0
+    width: 6
+    height: 4
+    tab_name: ''
+  - title: Total Revenue from Walk-in
+    name: Total Revenue from Walk-in
+    model: c360_client_9234725065
+    explore: user
+    type: single_value
+    fields: [receipt_source_attribution.source, course_total_by_receipt.total_price]
+    filters:
+      receipt_source_attribution.source: "-line,-facebook"
+    sorts: [course_total_by_receipt.total_price desc 0]
+    limit: 500
+    column_limit: 50
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: true
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    single_value_title: Total Revenue from Untracked
+    smart_single_value_size: true
+    conditional_formatting: [{type: greater than, value: 0, background_color: "#e8af53",
+        font_color: !!null '', color_application: {collection_id: 7c56cc21-66e4-41c9-81ce-a60e1c3967b2,
+          palette_id: 4a00499b-c0fe-4b15-a304-4083c07ff4c4, options: {constraints: {
+              min: {type: minimum}, mid: {type: number, value: 0}, max: {type: maximum}},
+            mirror: true, reverse: false, stepped: false}}, bold: false, italic: false,
+        strikethrough: false, fields: !!null ''}]
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    defaults_version: 1
+    listen:
+      User Pseudo ID: user.user_pseudo_id
+      Branch Name: offline_transaction.branch_name_receipt
+    row: 38
+    col: 0
+    width: 6
+    height: 4
+    tab_name: ''
+  - title: Total Revenue from LINE
+    name: Total Revenue from LINE
+    model: c360_client_9234725065
+    explore: user
+    type: single_value
+    fields: [receipt_source_attribution.source, course_total_by_receipt.total_price]
+    filters:
+      receipt_source_attribution.source: line
+    sorts: [course_total_by_receipt.total_price desc 0]
+    limit: 500
+    column_limit: 50
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: true
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    single_value_title: Total Revenue from LINE
+    smart_single_value_size: true
+    conditional_formatting: [{type: greater than, value: 0, background_color: "#00B900",
+        font_color: !!null '', color_application: {collection_id: 7c56cc21-66e4-41c9-81ce-a60e1c3967b2,
+          palette_id: 4a00499b-c0fe-4b15-a304-4083c07ff4c4, options: {constraints: {
+              min: {type: minimum}, mid: {type: number, value: 0}, max: {type: maximum}},
+            mirror: true, reverse: false, stepped: false}}, bold: false, italic: false,
+        strikethrough: false, fields: !!null ''}]
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    defaults_version: 1
+    listen:
+      User Pseudo ID: user.user_pseudo_id
+      Branch Name: offline_transaction.branch_name_receipt
+    row: 34
+    col: 0
+    width: 6
+    height: 4
+    tab_name: ''
+  - title: Untitled
+    name: Untitled
+    model: c360_client_9234725065
+    explore: user
+    type: single_value
+    fields: [count_of_receipt_no_2, user_chat]
+    limit: 500
+    column_limit: 50
+    dynamic_fields:
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: offline_transaction.receipt_no
+      expression: ''
+      label: Count of Receipt No
+      measure: count_of_receipt_no_2
+      type: count_distinct
+    - category: measure
+      expression:
+      label: User chat
+      value_format:
+      value_format_name:
+      based_on: user.total_user
+      _kind_hint: measure
+      measure: user_chat
+      type: count_distinct
+      _type_hint: number
+      filters:
+        event.event_name: '"user_message"'
+    - category: table_calculation
+      expression: "${count_of_receipt_no_2} / ${user_chat}"
+      label: order / chat
+      value_format:
+      value_format_name: percent_0
+      _kind_hint: measure
+      table_calculation: order_chat
+      _type_hint: number
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    single_value_title: Orders / Chat Users
+    smart_single_value_size: true
+    defaults_version: 1
+    hidden_fields: [count_of_receipt_no_2, user_chat]
+    hidden_pivots: {}
+    listen:
+      User Pseudo ID: user.user_pseudo_id
+      Branch Name: offline_transaction.branch_name_receipt
+    row: 11
+    col: 5
+    width: 4
+    height: 5
+    tab_name: ''
+  - title: User Journey online to offline sankey
+    name: User Journey online to offline sankey
+    model: c360_client_9234725065
+    explore: user
+    type: looker_column
+    fields: [user.user_pseudo_id, ad_click_submit_funnel_by_ad.campaign_name, event.event_name,
+      offline_transaction.branch_name_receipt, offline_transaction__course.type, offline_transaction__course.course_name,
+      course_total_by_receipt.total_price]
+    filters:
+      course_total_by_receipt.total_price: ">0"
+      user.user_pseudo_id: b0f0af62-321a-5a84-8616-77fddd36c66b
+    sorts: [course_total_by_receipt.total_price desc]
+    limit: 500
+    column_limit: 50
+    total: true
+    dynamic_fields:
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: media_single_data.cost
+      expression: ''
+      label: Sum of Cost
+      measure: sum_of_cost
+      type: sum
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    x_axis_zoom: true
+    y_axis_zoom: true
+    series_labels:
+      sum_of_cost: Cost spending
+    advanced_vis_config: |-
+      {
+        chart: {
+          type: 'sankey'
+        },
+        series: [{
+          name: 'Total Price'
+        }]
+      }
+    hidden_fields: []
+    hidden_points_if_no: []
+    color_range: ["#dd3333", "#80ce5d", "#f78131", "#369dc1", "#c572d3", "#36c1b3",
+      "#b57052", "#ed69af"]
+    label_type: name
+    show_null_points: true
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: '12'
+    rows_font_size: '12'
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    show_sql_query_menu_options: false
+    show_totals: true
+    show_row_totals: true
+    truncate_header: false
+    minimum_column_width: 75
+    series_cell_visualizations:
+      sum_of_cost:
+        is_active: false
+    defaults_version: 1
+    hidden_pivots: {}
+    listen: {}
+    row: 63
+    col: 0
+    width: 24
+    height: 6
+    tab_name: ''
+  - title: Most Ad type engage
+    name: Most Ad type engage
+    model: c360_client_9234725065
+    explore: user
+    type: looker_pie
+    fields: [media_single_data.clicks_total, media_single_data.post_engagement_total,
+      media_single_data.video_view_total, media_single_data.views_total, media_single_data.link_clicks_total,
+      ad_click_submit_funnel_by_ad.Ad_Group]
+    sorts: [engage_post desc]
+    limit: 500
+    column_limit: 50
+    dynamic_fields:
+    - category: dimension
+      expression: |-
+        case(
+        when(contains(${media_single_data.ad_name}, "review_video"), "review video"),
+        when(contains(${media_single_data.ad_name}, "video"), "content video"),
+        when(contains(${media_single_data.ad_name}, "album"), "image content"),
+        "อื่นๆ")
+      label: AD Group
+      value_format:
+      value_format_name:
+      dimension: ad_group
+      _kind_hint: dimension
+      _type_hint: string
+    - category: table_calculation
+      expression: "${media_single_data.post_engagement_total} +${media_single_data.clicks_total}\
+        \ +${media_single_data.link_clicks_total} +${media_single_data.video_view_total}\
+        \ +${media_single_data.views_total}"
+      label: Engage post
+      value_format:
+      value_format_name: decimal_0
+      _kind_hint: measure
+      table_calculation: engage_post
+      _type_hint: number
+    value_labels: legend
+    label_type: labPer
+    defaults_version: 1
+    hidden_fields: [media_single_data.clicks_total, media_single_data.post_engagement_total,
+      media_single_data.video_view_total, media_single_data.views_total, media_single_data.link_clicks_total]
+    hidden_pivots: {}
+    listen:
+      User Pseudo ID: user.user_pseudo_id
+      Branch Name: offline_transaction.branch_name_receipt
+    row: 16
+    col: 15
+    width: 9
+    height: 6
+    tab_name: ''
+  - title: Sentiment Positive
+    name: Sentiment Positive
+    model: c360_client_9234725065
+    explore: user
+    type: looker_wordcloud
+    fields: [positive_sentiment, user.total_user]
+    filters:
+      labeling.category_name: "%positive%"
+      positive_sentiment: "-%สวัสดี%,-%สะดวก%"
+    sorts: [user.total_user desc 0]
+    limit: 500
+    column_limit: 50
+    dynamic_fields:
+    - category: dimension
+      expression: |-
+        case(
+          when(is_null(${media_single_data.campaign_name}), "Organic"),
+          when(contains(${media_single_data.campaign_name}, "จ่ายจบ"), "จ่ายจบ"),
+          when(contains(${media_single_data.campaign_name}, "dr."), "doctor"),
+          when(contains(${media_single_data.campaign_name}, "พามั่น"), "Emma พามั่น"),
+          when(contains(${media_single_data.campaign_name}, "branch"), "สาขา"),
+          "อื่นๆ"
+        )
+      label: AD Group
+      value_format:
+      value_format_name:
+      dimension: ad_group
+      _kind_hint: dimension
+      _type_hint: string
+    - category: table_calculation
+      expression: "${media_single_data.post_engagement_total} +${media_single_data.clicks_total}\
+        \ +${media_single_data.link_clicks_total} +${media_single_data.video_view_total}\
+        \ +${media_single_data.views_total}"
+      label: Engage post
+      value_format:
+      value_format_name: decimal_0
+      _kind_hint: measure
+      table_calculation: engage_post
+      _type_hint: number
+      is_disabled: true
+    - category: dimension
+      expression: |-
+        case(
+          when(contains(${message_labeling.message},"สวย"    ),"สวย"
+          ),
+          when(
+            contains(${message_labeling.message},"สวัสดี"),"สวัสดี"
+          ),
+          when(
+            contains(${message_labeling.message},"สะดวก"),"สะดวก"
+          ),
+          when(
+            contains(${message_labeling.message},"แห้งดี"),"แห้งดี"
+          ),
+          when(
+            contains(${message_labeling.message},"ดี"),"ดี"
+          ),
+          when(
+            contains(${message_labeling.message},"ไม่เจ็บ"),"ไม่เจ็บ"
+          ),
+          when(
+            contains(${message_labeling.message},"ชอบ"),"ชอบ"
+          ),
+          when(
+            contains(${message_labeling.message},"เยี่ยม"),"เยี่ยม"
+          ),
+          when(
+            contains(${message_labeling.message},"สุดยอด"),"สุดยอด"
+          ),
+          when(
+            contains(${message_labeling.message},"มือเบา"),"มือเบา"
+          ),
+          when(
+            contains(${message_labeling.message},"ละมุน"),"ละมุน"
+          ),
+          when(
+            contains(${message_labeling.message},"โอเค"),"โอเค"
+          ),
+          when(
+            contains(${message_labeling.message},"ประทับใจ"),"ประทับใจ"
+          ),
+          when(
+            contains(${message_labeling.message},"น่ารัก"),"น่ารัก"
+          ),
+          when(
+            contains(${message_labeling.message},"ปัง"),"ปัง"
+          ),
+          when(
+            contains(${message_labeling.message},"เริ่ด"),"เริ่ด"
+          ),
+          "อื่นๆ"
+        )
+      label: Positive sentiment
+      value_format:
+      value_format_name:
+      dimension: positive_sentiment
+      _kind_hint: dimension
+      _type_hint: string
+    color_application: undefined
+    value_labels: legend
+    label_type: labPer
+    defaults_version: 1
+    hidden_fields: []
+    hidden_pivots: {}
+    listen:
+      User Pseudo ID: user.user_pseudo_id
+      Branch Name: offline_transaction.branch_name_receipt
+    row: 22
+    col: 0
+    width: 7
+    height: 6
+    tab_name: ''
+  - title: Most Campaign type engage
+    name: Most Campaign type engage
+    model: c360_client_9234725065
+    explore: user
+    type: looker_pie
+    fields: [media_single_data.clicks_total, media_single_data.post_engagement_total,
+      media_single_data.video_view_total, media_single_data.views_total, media_single_data.link_clicks_total,
+      ad_click_submit_funnel_by_ad.Campaign_Group]
+    sorts: [engage_post desc]
+    limit: 500
+    column_limit: 50
+    dynamic_fields:
+    - category: dimension
+      expression: |-
+        case(
+          when(is_null(${media_single_data.campaign_name}), "Organic"),
+          when(contains(${media_single_data.campaign_name}, "จ่ายจบ"), "จ่ายจบ"),
+          when(contains(${media_single_data.campaign_name}, "dr."), "doctor"),
+          when(contains(${media_single_data.campaign_name}, "พามั่น"), "Emma พามั่น"),
+          when(contains(${media_single_data.campaign_name}, "branch"), "สาขา"),
+          "อื่นๆ"
+        )
+      label: AD Group
+      value_format:
+      value_format_name:
+      dimension: ad_group
+      _kind_hint: dimension
+      _type_hint: string
+    - category: table_calculation
+      expression: "${media_single_data.post_engagement_total} +${media_single_data.clicks_total}\
+        \ +${media_single_data.link_clicks_total} +${media_single_data.video_view_total}\
+        \ +${media_single_data.views_total}"
+      label: Engage post
+      value_format:
+      value_format_name: decimal_0
+      _kind_hint: measure
+      table_calculation: engage_post
+      _type_hint: number
+    value_labels: legend
+    label_type: labPer
+    defaults_version: 1
+    hidden_fields: [media_single_data.clicks_total, media_single_data.post_engagement_total,
+      media_single_data.video_view_total, media_single_data.views_total, media_single_data.link_clicks_total]
+    hidden_pivots: {}
+    listen:
+      User Pseudo ID: user.user_pseudo_id
+      Branch Name: offline_transaction.branch_name_receipt
+    row: 16
+    col: 7
+    width: 8
+    height: 6
+    tab_name: ''
+  - type: button
+    name: button_491
+    rich_content_json: '{"text":"Online performance Dashboard","description":"","newTab":true,"alignment":"center","size":"medium","style":"FILLED","color":"#e66f6f","href":"https://ydmlooker.cloud.looker.com/dashboards/285"}'
+    row: 9
+    col: 0
+    width: 6
+    height: 2
+    tab_name: ''
+  - type: button
+    name: button_492
+    rich_content_json: '{"text":"Nose Surgey Dashboard","description":"","newTab":true,"alignment":"center","size":"medium","style":"FILLED","color":"#e66f6f","href":"https://ydmlooker.cloud.looker.com/dashboards/287"}'
+    row: 52
+    col: 0
+    width: 5
+    height: 2
+    tab_name: ''
+  - type: button
+    name: button_493
+    rich_content_json: '{"text":"Customer Overview Dashboard","description":"","newTab":true,"alignment":"center","size":"medium","style":"FILLED","color":"#e66f6f","href":"https://ydmlooker.cloud.looker.com/dashboards/308"}'
+    row: 61
+    col: 0
+    width: 6
+    height: 2
+    tab_name: ''
+  - name: " (4)"
+    type: text
+    title_text: ''
+    body_text: |
+      <p style="color:#d16a6c; font-size:20px; font-weight:bold; margin-bottom:4px;">
+      Nose product Performance
+      </p>
+      <hr style="border: 2px solid #d16a6c; width: 100%; margin-top: 0;">
+    row: 52
+    col: 5
+    width: 19
+    height: 2
+    tab_name: ''
+  - name: " (5)"
+    type: text
+    title_text: ''
+    body_text: |
+      <p style="color:#d16a6c; font-size:20px; font-weight:bold; margin-bottom:4px;">
+      Customer Overview
+      </p>
+      <hr style="border: 2px solid #d16a6c; width: 100%; margin-top: 0;">
+    row: 61
+    col: 6
+    width: 18
+    height: 2
+    tab_name: ''
+  - name: " (Copy 2)"
+    type: text
+    title_text: " (Copy 2)"
+    body_text: '[{"children":[{"text":"Do we know about customer overview?","bold":true}],"type":"h1","align":"center"}]'
+    rich_content_json: '{"format":"slate"}'
+    row: 59
+    col: 0
+    width: 24
+    height: 2
+    tab_name: ''
+  - title: Concern category
+    name: Concern category
+    model: c360_client_9234725065
+    explore: user
+    type: looker_wordcloud
+    fields: [user.total_user, concern_message_group]
+    filters:
+      labeling.category_name: "%concern%"
+      message_labeling.message: "-%ได้ไหมคะ%,-%ได้ไหมค่ะ%,-%ได้ไหม%,-%ได้ไหมครับ%,-%ร\
+        าคา%,-%แพ้%"
+    sorts: [user.total_user desc 0]
+    limit: 500
+    column_limit: 50
+    dynamic_fields:
+    - category: dimension
+      expression: |-
+        case(
+          when(is_null(${media_single_data.campaign_name}), "Organic"),
+          when(contains(${media_single_data.campaign_name}, "จ่ายจบ"), "จ่ายจบ"),
+          when(contains(${media_single_data.campaign_name}, "dr."), "doctor"),
+          when(contains(${media_single_data.campaign_name}, "พามั่น"), "Emma พามั่น"),
+          when(contains(${media_single_data.campaign_name}, "branch"), "สาขา"),
+          "อื่นๆ"
+        )
+      label: AD Group
+      value_format:
+      value_format_name:
+      dimension: ad_group
+      _kind_hint: dimension
+      _type_hint: string
+    - category: table_calculation
+      expression: "${media_single_data.post_engagement_total} +${media_single_data.clicks_total}\
+        \ +${media_single_data.link_clicks_total} +${media_single_data.video_view_total}\
+        \ +${media_single_data.views_total}"
+      label: Engage post
+      value_format:
+      value_format_name: decimal_0
+      _kind_hint: measure
+      table_calculation: engage_post
+      _type_hint: number
+      is_disabled: true
+    - category: dimension
+      expression: "case(\n  when(\n    contains(${message_labeling.message},\"ราคา\
+        \"),\"ราคา\"\n  ),\n    when(\n    contains(${message_labeling.message},\"\
+        ค่าใช้จ่าย\"),\"ราคา\"\n  ),\n    when(\n    contains(${message_labeling.message},\"\
+        แนะนำหน่อย\"),\"เตรียมตัวยังไง\"\n  ),\n      when(\n    contains(${message_labeling.message},\"\
+        แนะนำ\"),\"เตรียมตัวยังไง\"\n  ),\n    when(\n    contains(${message_labeling.message},\"\
+        รีวิว\"),\"ยังไม่มั่นใจ\"\n  ),\n    when(\n    contains(${message_labeling.message},\"\
+        ผ่อน\"),\"วิธีการจ่าย\"\n  ),\n    when(\n    contains(${message_labeling.message},\"\
+        รอยช้ำ\"),\"รอยช้ำ\"\n  ),\n    when(\n    contains(${message_labeling.message},\"\
+        ได้ไหม\"),\"ยังไม่มั่นใจ\"\n  ),\n    when(\n    contains(${message_labeling.message},\"\
+        อันตราย\"),\"ผลข้างเคียง\"\n  ),\n    when(\n    contains(${message_labeling.message},\"\
+        เจ็บ\"),\"ผลข้างเคียง\"\n  ),\n    when(\n    contains(${message_labeling.message},\"\
+        จ่าย\"),\"วิธีการจ่าย\"\n  ),\n    when(\n    contains(${message_labeling.message},\"\
+        บัตรเครดิต\"),\"วิธีการจ่าย\"\n  ),\n    when(\n    contains(${message_labeling.message},\"\
+        กิน\"),\"หลังการทำ\"\n  ),\n    when(\n    contains(${message_labeling.message},\"\
+        ส่วนลด\"),\"ราคา\"\n  ),\n   when(\n    contains(${message_labeling.message},\"\
+        ยาสลบ\"),\"วิธีการทำ\"\n  ),\n   when(\n    contains(${message_labeling.message},\"\
+        เอียง\"),\"ผลหลังการทำ\"\n  ),\n   when(\n    contains(${message_labeling.message},\"\
+        เนื้อน้อย\"),\"ยังไม่มั่นใจ\"\n  ),\n   when(\n    contains(${message_labeling.message},\"\
+        ยาชา\"),\"วิธีการทำ\"\n  ),\n     when(\n    contains(${message_labeling.message},\"\
+        ผลข้างเคียง\"),\"ผลข้างเคียง\"\n  ),\n  \n\"อื่นๆ\"  \n)"
+      label: Concern message group
+      value_format:
+      value_format_name:
+      dimension: concern_message_group
+      _kind_hint: dimension
+      _type_hint: string
+    color_application:
+      collection_id: 7c79334a-9912-4ca1-be6a-35756782ae09
+      palette_id: de0bdb92-9455-489c-afa7-f0e0fdc76078
+      options:
+        steps: 5
+    rotation: true
+    value_labels: legend
+    label_type: labPer
+    defaults_version: 1
+    hidden_fields:
+    hidden_pivots: {}
+    show_view_names: false
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    limit_displayed_rows: false
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: 12
+    rows_font_size: 12
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    listen:
+      User Pseudo ID: user.user_pseudo_id
+      Branch Name: offline_transaction.branch_name_receipt
+    row: 22
+    col: 7
+    width: 9
+    height: 6
+    tab_name: ''
+  - title: Product group
+    name: Product group
+    model: c360_client_9234725065
+    explore: user
+    type: looker_wordcloud
+    fields: [user.total_user, product_group]
+    filters:
+      labeling.category_name: "%product%"
+      product_group: ''
+    sorts: [user.total_user desc]
+    limit: 500
+    column_limit: 50
+    dynamic_fields:
+    - category: dimension
+      expression: |-
+        case(
+          when(is_null(${media_single_data.campaign_name}), "Organic"),
+          when(contains(${media_single_data.campaign_name}, "จ่ายจบ"), "จ่ายจบ"),
+          when(contains(${media_single_data.campaign_name}, "dr."), "doctor"),
+          when(contains(${media_single_data.campaign_name}, "พามั่น"), "Emma พามั่น"),
+          when(contains(${media_single_data.campaign_name}, "branch"), "สาขา"),
+          "อื่นๆ"
+        )
+      label: AD Group
+      value_format:
+      value_format_name:
+      dimension: ad_group
+      _kind_hint: dimension
+      _type_hint: string
+    - category: table_calculation
+      expression: "${media_single_data.post_engagement_total} +${media_single_data.clicks_total}\
+        \ +${media_single_data.link_clicks_total} +${media_single_data.video_view_total}\
+        \ +${media_single_data.views_total}"
+      label: Engage post
+      value_format:
+      value_format_name: decimal_0
+      _kind_hint: measure
+      table_calculation: engage_post
+      _type_hint: number
+      is_disabled: true
+    - category: dimension
+      expression: "case(\n  when(contains(${message_labeling.message},\"Teardrop\"\
+        \    ),\"Teardrop nose\"\n  ),\n  when(contains(${message_labeling.message},\"\
+        หมอ\"    ),\"รีวิว จมูกจากหมอหลายๆท่าน\"\n  ),  \n  when(contains(${message_labeling.message},\"\
+        ปาก\"    ),\"รีวิว ปากกระจับ\"\n  ),\n  when(contains(${message_labeling.message},\"\
+        ตา\"    ),\"รีวิว ตาสองชั้น\"\n  ),\n  when(contains(${message_labeling.message},\"\
+        จมูก\"    ),\"สนใจทำจมูก/แก้จมูก\"\n  ),\n  when(contains(${message_labeling.message},\"\
+        ติดต่อ\"    ),\"ขอข้อมูลติดต่อ\"\n  ),\n  when(contains(${message_labeling.message},\"\
+        คาง\"    ),\"รีวิว เสริมคาง\"\n  ),\n  when(contains(${message_labeling.message},\"\
+        ตัดปีก\"    ),\"สนใจทำจมูก/แก้จมูก\"\n  ),\n  when(contains(${message_labeling.message},\"\
+        หน้าอก\"    ),\"รีวิว เสริมหน้าอก\"\n  ),\n  when(contains(${message_labeling.message},\"\
+        โปร\"    ),\"สนใจโปร\"\n  ),\n  \"อื่นๆ\"\n)"
+      label: Product group
+      value_format:
+      value_format_name:
+      dimension: product_group
+      _kind_hint: dimension
+      _type_hint: string
+    color_application: undefined
+    value_labels: legend
+    label_type: labPer
+    defaults_version: 1
+    hidden_fields: []
+    hidden_pivots: {}
+    show_view_names: false
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    limit_displayed_rows: false
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: 12
+    rows_font_size: 12
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    listen:
+      User Pseudo ID: user.user_pseudo_id
+      Branch Name: offline_transaction.branch_name_receipt
+    row: 22
+    col: 16
+    width: 8
+    height: 6
+    tab_name: ''
+  - title: Revenue & Spending movement
+    name: Revenue & Spending movement
+    model: c360_client_9234725065
+    explore: user
+    type: looker_column
+    fields: [sum_of_cost, course_total_by_receipt.total_price, source_type, offline_transaction.receipt_date_date]
+    pivots: [source_type]
+    fill_fields: [offline_transaction.receipt_date_date]
+    sorts: [source_type, course_total_by_receipt.total_price desc 0]
+    limit: 500
+    column_limit: 50
+    dynamic_fields:
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: media_single_data.cost
+      expression: ''
+      label: Sum of Cost
+      measure: sum_of_cost
+      type: sum
+    - category: dimension
+      expression: |-
+        case(
+          when(contains(${event.source},"line"
+            ),"LINE"
+          ),
+          when(contains(${event.source},"facebook"
+            ),"Facebook"
+          ),
+          "Walk-in"
+          )
+      label: Source type
+      value_format:
+      value_format_name:
+      dimension: source_type
+      _kind_hint: dimension
+      _type_hint: string
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: false
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: normal
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: time
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    y_axes: [{label: '', orientation: left, series: [{axisId: Facebook - sum_of_cost,
+            id: Facebook - sum_of_cost, name: Cost Spending}, {axisId: Facebook -
+              course_total_by_receipt.total_price, id: Facebook - course_total_by_receipt.total_price,
+            name: Revenue from Facebook}, {axisId: LINE - sum_of_cost, id: LINE -
+              sum_of_cost, name: Cost spending}, {axisId: LINE - course_total_by_receipt.total_price,
+            id: LINE - course_total_by_receipt.total_price, name: Revenue from LINE},
+          {axisId: Walk-in - sum_of_cost, id: Walk-in - sum_of_cost, name: Walk-in
+              - Sum of Cost}, {axisId: Walk-in - course_total_by_receipt.total_price,
+            id: Walk-in - course_total_by_receipt.total_price, name: Revenue from
+              untracked}], showLabels: true, showValues: true, unpinAxis: false, tickDensity: default,
+        tickDensityCustom: 5, type: linear}]
+    x_axis_zoom: true
+    y_axis_zoom: false
+    font_size: '14'
+    series_colors:
+      sum_of_cost: "#EA4335"
+      course_total_by_receipt.total_price: "#0fb21d"
+      Facebook - sum_of_cost: "#EA4335"
+      Facebook - course_total_by_receipt.total_price: "#1A73E8"
+      LINE - course_total_by_receipt.total_price: "#00B900"
+      Walk-in - course_total_by_receipt.total_price: "#e8af53"
+    series_labels:
+      sum_of_cost: Cost spending
+      course_total_by_receipt.total_price: Revenue
+      Facebook - sum_of_cost: Cost Spending
+      Facebook - course_total_by_receipt.total_price: Revenue from Facebook
+      LINE - sum_of_cost: Cost spending
+      LINE - course_total_by_receipt.total_price: Revenue from LINE
+      Walk-in - course_total_by_receipt.total_price: Revenue from untracked
+    defaults_version: 1
+    hidden_pivots: {}
+    listen:
+      User Pseudo ID: user.user_pseudo_id
+    row: 30
+    col: 6
+    width: 18
+    height: 12
+    tab_name: ''
+  - name: " (Copy 3)"
+    type: text
+    title_text: " (Copy 3)"
+    body_text: '[{"children":[{"text":"AI Assistance","bold":true}],"type":"h1","align":"center"}]'
+    rich_content_json: '{"format":"slate"}'
+    row: 69
+    col: 0
+    width: 24
+    height: 2
+    tab_name: ''
+  - name: " (6)"
+    type: text
+    title_text: ''
+    body_text: |-
+      <p style="color:#007BFF; font-size:20px; font-weight:bold; margin-bottom:4px;">
+      Campaign Performance
+      </p>
+      <hr style="border: 2px solid #007BFF; width: 100%; margin-top: 0;">
+    row: 42
+    col: 0
+    width: 24
+    height: 2
+    tab_name: ''
+  - title: Top Spending & Revenue by Campaign
+    name: Top Spending & Revenue by Campaign
+    model: c360_client_9234725065
+    explore: user
+    type: looker_grid
+    fields: [ad_click_submit_funnel_by_ad.campaign_name, sum_of_cost, course_total_by_receipt.total_price]
+    filters:
+      receipt_source_attribution.source: facebook
+    sorts: [sum_of_cost desc 0]
+    limit: 500
+    column_limit: 50
+    total: true
+    dynamic_fields:
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: media_single_data.cost
+      expression: ''
+      label: Sum of Cost
+      measure: sum_of_cost
+      type: sum
+    - category: measure
+      expression:
+      label: FB revenue
+      value_format:
+      value_format_name:
+      based_on: course_total_by_receipt.total_price
+      _kind_hint: measure
+      measure: fb_revenue
+      type: sum_distinct
+      _type_hint: number
+      filters:
+        event.source: facebook
+    - category: table_calculation
+      expression: "${fb_revenue}/${sum_of_cost}"
+      label: ROAS FB
+      value_format:
+      value_format_name: decimal_1
+      _kind_hint: measure
+      table_calculation: roas_fb
+      _type_hint: number
+      is_disabled: true
+    show_view_names: false
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    limit_displayed_rows: false
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: '12'
+    rows_font_size: '12'
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    show_sql_query_menu_options: false
+    show_totals: true
+    show_row_totals: true
+    truncate_header: false
+    minimum_column_width: 75
+    series_labels:
+      sum_of_cost: Total Spending
+      user_activity_rollup.total_paid_online_and_purchase: Total Revenue
+    series_cell_visualizations:
+      sum_of_cost:
+        is_active: true
+        palette:
+          palette_id: c65a64ce-7f46-476b-a320-41345941e5b1
+          collection_id: 7c56cc21-66e4-41c9-81ce-a60e1c3967b2
+    custom_color_enabled: true
+    show_single_value_title: true
+    single_value_title: Total Ads spending FB
+    smart_single_value_size: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    defaults_version: 1
+    hidden_fields: []
+    hidden_pivots: {}
+    listen:
+      User Pseudo ID: user.user_pseudo_id
+    row: 44
+    col: 16
+    width: 8
+    height: 6
+    tab_name: ''
+  - title: New user (Copy)
+    name: New user (Copy)
+    model: c360_client_9234725065
+    explore: user
+    type: single_value
+    fields: [event.returning_users]
+    filters:
+      event.event_name: '"contact_info_submitted"'
+    limit: 500
+    column_limit: 50
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    single_value_title: Returning user
+    smart_single_value_size: true
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    defaults_version: 1
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    header_text_alignment: left
+    header_font_size: 12
+    rows_font_size: 12
+    hidden_fields:
+    hidden_pivots: {}
+    listen:
+      User Pseudo ID: user.user_pseudo_id
+      Branch Name: offline_transaction.branch_name_receipt
+    row: 11
+    col: 14
+    width: 5
+    height: 5
+    tab_name: ''
+  - title: Untitled
+    name: Untitled (2)
+    model: c360_client_9234725065
+    explore: media_single_data
+    type: single_value
+    fields: [sum_of_cost]
+    limit: 500
+    column_limit: 50
+    dynamic_fields:
+    - _kind_hint: measure
+      _type_hint: number
+      based_on: media_single_data.cost
+      expression: ''
+      label: Sum of Cost
+      measure: sum_of_cost
+      type: sum
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    single_value_title: Total Ads spending FB
+    smart_single_value_size: false
+    defaults_version: 1
+    listen: {}
+    row: 44
+    col: 0
+    width: 8
+    height: 6
+    tab_name: ''
+  - title: Untitled
+    name: Untitled (3)
+    model: c360_client_9234725065
+    explore: event
+    type: single_value
+    fields: [sum_of_cost, sum_of_total_price]
+    limit: 500
+    column_limit: 50
+    dynamic_fields:
+    - category: measure
+      label: Sum of Cost
+      based_on: offline_transaction__course.sum_net_total
+      _kind_hint: measure
+      measure: sum_of_cost
+      type: count_distinct
+      _type_hint: number
+      filters:
+        event.source: facebook
+    - category: measure
+      expression: ''
+      label: Sum of Total Price
+      based_on: offline_transaction__course.total_price
+      _kind_hint: measure
+      measure: sum_of_total_price
+      type: sum
+      _type_hint: number
+      filters:
+        event.source: facebook
+    - category: table_calculation
+      expression: "${sum_of_total_price}/${sum_of_cost}"
+      label: ROAS FB
+      value_format:
+      value_format_name: decimal_2
+      _kind_hint: measure
+      table_calculation: roas_fb
+      _type_hint: number
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    single_value_title: ROAS FB
+    smart_single_value_size: false
+    defaults_version: 1
+    hidden_fields: [sum_of_total_price, sum_of_cost]
+    hidden_pivots: {}
+    listen: {}
+    row: 44
+    col: 8
+    width: 8
+    height: 6
+    tab_name: ''
+  filters:
+  - name: User Pseudo ID
+    title: User Pseudo ID
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: tag_list
+      display: popover
+    model: c360_client_9234725065
+    explore: user
+    listens_to_filters: []
+    field: user.user_pseudo_id
+  - name: Branch Name
+    title: Branch Name
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: checkboxes
+      display: popover
+    model: c360_client_9234725065
+    explore: user
+    listens_to_filters: []
+    field: offline_transaction.branch_name_receipt

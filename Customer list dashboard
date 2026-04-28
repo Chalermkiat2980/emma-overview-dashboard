@@ -1,0 +1,3050 @@
+---
+- dashboard: customer_list_dashboard
+  title: Customer List Dashboard
+  crossfilter_enabled: true
+  description: ''
+  preferred_slug: WkJ2XrgtsUORjvXRMavuDx
+  theme_name: ''
+  layout: newspaper
+  tabs:
+  - name: ''
+    label: ''
+  elements:
+  - title: Customer Stage
+    name: Customer Stage
+    model: c360_client_9234725065
+    explore: user
+    type: looker_column
+    fields: [event.funnel_stage, user.total_user]
+    sorts: [user.total_user desc]
+    limit: 500
+    column_limit: 50
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: false
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: true
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    x_axis_zoom: true
+    y_axis_zoom: true
+    defaults_version: 1
+    listen:
+      Funnel Stage: event.funnel_stage
+    row: 5
+    col: 0
+    width: 24
+    height: 7
+    tab_name: ''
+  - name: ''
+    type: text
+    title_text: ''
+    body_text: |-
+      <p style="color:#d16a6c; font-size:20px; font-weight:bold; margin-bottom:4px;">
+      What we know about them
+      </p>
+      <hr style="border: 2px solid #d16a6c; width: 100%; margin-top: 0;">
+    row: 51
+    col: 0
+    width: 24
+    height: 2
+    tab_name: ''
+  - title: Where are they from ? (First Campaign)
+    name: Where are they from ? (First Campaign)
+    model: c360_client_9234725065
+    explore: user
+    type: looker_grid
+    fields: [user_ad_click_history.first_campaign_name, ad_click_submit_funnel_by_ad.Campaign_Group,
+      user_ad_click_history.first_ad_name, event.users_clicked_ad, event.users_message,
+      user_activity_rollup.users_online_and_purchase, user_activity_rollup.total_paid_online_and_purchase]
+    sorts: [user_activity_rollup.total_paid_online_and_purchase desc]
+    limit: 500
+    column_limit: 50
+    dynamic_fields:
+    - category: dimension
+      expression: |-
+        case(
+        when(contains(${ad_click_submit_funnel_by_ad.ad_name}, "review_video"), "Review video"),
+        when(contains(${ad_click_submit_funnel_by_ad.ad_name}, "video"), "Content video"),
+        when(contains(${ad_click_submit_funnel_by_ad.ad_name}, "album"), "Image content"),
+        "Others")
+      label: AD Group
+      value_format:
+      value_format_name:
+      dimension: ad_group
+      _kind_hint: dimension
+      _type_hint: string
+    - category: dimension
+      expression: |-
+        case(
+          when(is_null(${ad_click_submit_funnel_by_ad.campaign_name}), "Organic"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "จ่ายจบ"), "จ่ายจบ"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "dr."), "Doctor"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "พามั่น"), "Emma พามั่น"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "branch"), "สาขา"),
+          "Others"
+        )
+      label: Campaign Group
+      value_format:
+      value_format_name:
+      dimension: campaign_group
+      _kind_hint: dimension
+      _type_hint: string
+    show_view_names: false
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    limit_displayed_rows: false
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: '12'
+    rows_font_size: '12'
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    show_sql_query_menu_options: false
+    show_totals: true
+    show_row_totals: true
+    truncate_header: false
+    minimum_column_width: 75
+    series_labels:
+      ad_click_submit_funnel_by_ad.campaign_name: Campaign Name
+      event.user_intent_segment_click_ad: User segment by click ad count
+      event.user_intent_segment: User segment by message count
+      ad_click_submit_funnel_by_ad.Campaign_Group: Campaign Group
+      ad_click_submit_funnel_by_ad.ad_name: Ad Name
+      event.users_clicked_ad: Total Engaged Users
+      event.users_message: Total Messagers
+      user_activity_rollup.total_paid_online_and_purchase: Total Revenue
+      user_activity_rollup.users_online_and_purchase: Total Purchasers
+    series_cell_visualizations:
+      event.users_clicked_ad:
+        is_active: true
+      user_activity_rollup.users_online_and_purchase:
+        is_active: true
+      user_activity_rollup.total_paid_online_and_purchase:
+        is_active: true
+      event.users_message:
+        is_active: true
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    defaults_version: 1
+    hidden_pivots: {}
+    listen:
+      Funnel Stage: event.funnel_stage
+      Has Offline Purchase: user_activity_rollup.has_offline_purchase
+      Total Amount of Messages: event.user_intent_segment
+      Total Amount of Click Ads: event.user_ad_click_segment
+      Service of Interest: labeling.category_name
+      Platform: event.Souce_type
+      Engaged Campaigns: ad_click_submit_funnel_by_ad.campaign_name
+      Messaging Topics: event.message_group
+      Purchase History: offline_transaction__course.course_name
+      First Clinic Visit Date: offline_transaction.first_visit_time
+      Last Clinic Visit Date: offline_transaction.last_visit_time
+      Visited Branch: offline_transaction.branch_name_receipt
+      Created At Date: user.created_at_date
+    row: 39
+    col: 0
+    width: 24
+    height: 6
+    tab_name: ''
+  - title: Untitled
+    name: Untitled
+    model: c360_client_9234725065
+    explore: user
+    type: single_value
+    fields: [user.total_user]
+    sorts: [user.total_user desc 0]
+    limit: 500
+    column_limit: 50
+    total: true
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: true
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    single_value_title: User Pseudo ID
+    smart_single_value_size: true
+    conditional_formatting: [{type: equal to, value: 0, background_color: "#f78da7",
+        font_color: !!null '', color_application: {collection_id: 7c56cc21-66e4-41c9-81ce-a60e1c3967b2,
+          palette_id: 56d0c358-10a0-4fd6-aa0b-b117bef527ab}, bold: false, italic: false,
+        strikethrough: false, fields: !!null ''}]
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    defaults_version: 1
+    hidden_pivots: {}
+    listen:
+      Funnel Stage: event.funnel_stage
+      Has Offline Purchase: user_activity_rollup.has_offline_purchase
+      Total Amount of Messages: event.user_intent_segment
+      Total Amount of Click Ads: event.user_ad_click_segment
+      Service of Interest: labeling.category_name
+      Platform: event.Souce_type
+      Engaged Campaigns: ad_click_submit_funnel_by_ad.campaign_name
+      Messaging Topics: event.message_group
+      Purchase History: offline_transaction__course.course_name
+      First Clinic Visit Date: offline_transaction.first_visit_time
+      Last Clinic Visit Date: offline_transaction.last_visit_time
+      Visited Branch: offline_transaction.branch_name_receipt
+      Created At Date: user.created_at_date
+    row: 25
+    col: 5
+    width: 14
+    height: 6
+    tab_name: ''
+  - title: message user group
+    name: message user group
+    model: c360_client_9234725065
+    explore: user
+    type: single_value
+    fields: [user.total_user]
+    sorts: [user.total_user desc 0]
+    limit: 500
+    column_limit: 50
+    total: true
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: true
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    single_value_title: User Pseudo ID
+    smart_single_value_size: true
+    conditional_formatting: [{type: equal to, value: 0, background_color: "#f78da7",
+        font_color: !!null '', color_application: {collection_id: 7c56cc21-66e4-41c9-81ce-a60e1c3967b2,
+          palette_id: 56d0c358-10a0-4fd6-aa0b-b117bef527ab}, bold: false, italic: false,
+        strikethrough: false, fields: !!null ''}]
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    defaults_version: 1
+    hidden_pivots: {}
+    listen:
+      Funnel Stage: event.funnel_stage
+      Has Offline Purchase: user_activity_rollup.has_offline_purchase
+      Total Amount of Messages: event.user_intent_segment
+      Total Amount of Click Ads: event.user_ad_click_segment
+      Service of Interest: labeling.category_name
+      Platform: event.Souce_type
+      Engaged Campaigns: ad_click_submit_funnel_by_ad.campaign_name
+      Messaging Topics: event.message_group
+      Purchase History: offline_transaction__course.course_name
+      First Clinic Visit Date: offline_transaction.first_visit_time
+      Last Clinic Visit Date: offline_transaction.last_visit_time
+      Visited Branch: offline_transaction.branch_name_receipt
+      Created At Date: user.created_at_date
+    row: 53
+    col: 0
+    width: 5
+    height: 7
+    tab_name: ''
+  - title: When do they usually active ?
+    name: When do they usually active ?
+    model: c360_client_9234725065
+    explore: user
+    type: looker_bar
+    fields: [user.total_user, event.time_tier_custom]
+    sorts: [user.total_user desc 0]
+    limit: 500
+    column_limit: 50
+    total: true
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: true
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    y_axes: [{label: '', orientation: bottom, series: [{axisId: user.total_user, id: user.total_user,
+            name: Total Unique User}], showLabels: true, showValues: true, unpinAxis: false,
+        tickDensity: default, tickDensityCustom: 5, type: linear}]
+    x_axis_label: Time Tier
+    x_axis_zoom: true
+    y_axis_zoom: true
+    limit_displayed_rows_values:
+      show_hide: hide
+      first_last: first
+      num_rows: 0
+    hide_legend: false
+    font_size: '14'
+    series_colors:
+      user.total_user: "#d16a6c"
+    label_color: ["#cf2e2e"]
+    show_dropoff: false
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: true
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    single_value_title: Total Unique User
+    smart_single_value_size: true
+    conditional_formatting: [{type: greater than, value: 0, background_color: "#f78da7",
+        font_color: !!null '', color_application: {collection_id: 7c56cc21-66e4-41c9-81ce-a60e1c3967b2,
+          palette_id: 56d0c358-10a0-4fd6-aa0b-b117bef527ab}, bold: false, italic: false,
+        strikethrough: false, fields: !!null ''}]
+    defaults_version: 1
+    hidden_pivots: {}
+    listen:
+      Funnel Stage: event.funnel_stage
+      Has Offline Purchase: user_activity_rollup.has_offline_purchase
+      Total Amount of Messages: event.user_intent_segment
+      Total Amount of Click Ads: event.user_ad_click_segment
+      Service of Interest: labeling.category_name
+      Platform: event.Souce_type
+      Engaged Campaigns: ad_click_submit_funnel_by_ad.campaign_name
+      Messaging Topics: event.message_group
+      Purchase History: offline_transaction__course.course_name
+      First Clinic Visit Date: offline_transaction.first_visit_time
+      Last Clinic Visit Date: offline_transaction.last_visit_time
+      Visited Branch: offline_transaction.branch_name_receipt
+      Created At Date: user.created_at_date
+    row: 53
+    col: 5
+    width: 19
+    height: 7
+    tab_name: ''
+  - title: What they are talking about ?
+    name: What they are talking about ?
+    model: c360_client_9234725065
+    explore: user
+    type: looker_grid
+    fields: [user.total_user, event.message_group]
+    filters:
+      event.event_name: '"user_message","contact_info_submitted"'
+    sorts: [user.total_user desc]
+    limit: 500
+    column_limit: 50
+    total: true
+    dynamic_fields:
+    - category: dimension
+      expression: |-
+        # case(
+        #   when(
+        #     contains(
+        #       ${event__event_property.value},"โปรโมชั่น")
+        #     ,"เคยสอบถามเกี่ยวกับโปรโมชัน"),
+        #   "อื่นๆ")
+        case(
+          when(
+            contains(
+              ${event__event_property.value},"โปรโมชั่น")
+            ,"สอบถามโปรโมชัน")
+        ,
+          when( contains(${event__event_property.value}
+            ,"โปรโมชัน"),
+          "สอบถามโปรโมชัน")
+        ,
+            when( contains(${event__event_property.value}
+            ,"โปร"),
+          "สอบถามโปรโมชัน")
+        ,
+            when( contains(${event__event_property.value}
+            ,"สาขา"),
+          "สอบถามเกี่ยวกับสาขา")
+        ,
+            when( contains(${event__event_property.value}
+            ,"ที่ไหน"),
+          "สอบถามเกี่ยวกับสาขา")
+        ,
+          when( contains(${event__event_property.value}
+            ,"ราคา"),
+          "สอบถามราคา")
+        ,
+          when( contains(${event__event_property.value}
+            ,"ส่วนลด"),
+          "สอบถามส่วนลด")
+        ,
+          when( contains(${event__event_property.value}
+            ,"เลื่อน"),
+          "ขอเลื่อนวันนัด")
+        ,
+            when( contains(${event__event_property.value}
+            ,"ยกเลิก"),
+          "ยกเลิกการจอง")
+        ,
+            when( contains(${event__event_property.value}
+            ,"ขอดูรีวิว"),
+          "ขอรีวิว")
+        ,
+            when( contains(${event__event_property.value}
+            ,"รีวิว"),
+          "ขอรีวิว")
+        ,
+            when( contains(${event__event_property.value}
+            ,"ค่าใช้จ่าย"),
+          "สอบถามราคา")
+        ,
+            when( contains(${event__event_property.value}
+            ,"จมูก"),
+          "สนใจเรื่องจมูก")
+        ,
+            when( contains(${event__event_property.value}
+            ,"หมอ"),
+          "สอบถามเรื่องหมอ")
+        ,
+            when( contains(${event__event_property.value}
+            ,"เวลา"),
+          "สอบถามเวลา")
+        ,
+        when( contains(${event__event_property.value}
+            ,"โมง"),
+          "สอบถามเวลา")
+        ,
+        when( contains(${event__event_property.value}
+            ,"เสริมคาง"),
+          "สนใจเรื่องคาง")
+        ,
+        when( contains(${event__event_property.value}
+            ,"เสริม"),
+          "สนใจในบริการและสินค้า")
+        ,
+        when( contains(${event__event_property.value}
+            ,"คิว"),
+          "สอบถามเรื่องคิว")
+        ,
+        when( contains(${event__event_property.value}
+            ,"อโศก"),
+          "สอบถามเกี่ยวกับสาขา")
+        ,
+        when( contains(${event__event_property.value}
+            ,"บวม"),
+          "กังวลผลข้างเคียงหลังทำ")
+        ,
+        when( contains(${event__event_property.value}
+            ,"เจ็บ"),
+          "กังวลผลข้างเคียงหลังทำ")
+        ,
+        when( contains(${event__event_property.value}
+            ,"เลื่อน"),
+          "เลื่อนคิว")
+        ,
+        when( contains(${event__event_property.value}
+            ,"ทำนาน"),
+          "กังวลเวลาที่ใช้ในการทำ")
+        ,
+          "พูดคุยทั่วไป")
+      label: Message Group
+      value_format:
+      value_format_name:
+      dimension: message_group
+      _kind_hint: dimension
+      _type_hint: string
+    - category: dimension
+      expression: |-
+        case(
+          when(
+            contains(${event.source},"line"),
+            "LINE"),
+          when(
+            contains(${event.source}, "facebook"),
+            "Facebook"),
+          "Untracked"
+          )
+      label: Source type
+      value_format:
+      value_format_name:
+      dimension: source_type
+      _kind_hint: dimension
+      _type_hint: string
+    show_view_names: false
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    limit_displayed_rows: false
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: '12'
+    rows_font_size: '12'
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    show_sql_query_menu_options: false
+    show_totals: true
+    show_row_totals: true
+    truncate_header: false
+    minimum_column_width: 75
+    series_labels:
+      event__event_property.value: Message
+    defaults_version: 1
+    hidden_pivots: {}
+    hidden_fields: []
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    color_application: undefined
+    listen:
+      Funnel Stage: event.funnel_stage
+      Has Offline Purchase: user_activity_rollup.has_offline_purchase
+      Total Amount of Messages: event.user_intent_segment
+      Total Amount of Click Ads: event.user_ad_click_segment
+      Service of Interest: labeling.category_name
+      Platform: event.Souce_type
+      Engaged Campaigns: ad_click_submit_funnel_by_ad.campaign_name
+      Messaging Topics: event.message_group
+      Purchase History: offline_transaction__course.course_name
+      First Clinic Visit Date: offline_transaction.first_visit_time
+      Last Clinic Visit Date: offline_transaction.last_visit_time
+      Visited Branch: offline_transaction.branch_name_receipt
+      Created At Date: user.created_at_date
+    row: 60
+    col: 0
+    width: 12
+    height: 7
+    tab_name: ''
+  - title: Topic of Interests
+    name: Topic of Interests
+    model: c360_client_9234725065
+    explore: user
+    type: looker_wordcloud
+    fields: [user.total_user, event.message_group]
+    filters:
+      event.event_name: '"user_message","contact_info_submitted"'
+    sorts: [user.total_user desc]
+    limit: 500
+    column_limit: 50
+    total: true
+    dynamic_fields:
+    - category: dimension
+      expression: |-
+        # case(
+        #   when(
+        #     contains(
+        #       ${event__event_property.value},"โปรโมชั่น")
+        #     ,"เคยสอบถามเกี่ยวกับโปรโมชัน"),
+        #   "อื่นๆ")
+        case(
+          when(
+            contains(
+              ${event__event_property.value},"โปรโมชั่น")
+            ,"สอบถามโปรโมชัน")
+        ,
+          when( contains(${event__event_property.value}
+            ,"โปรโมชัน"),
+          "สอบถามโปรโมชัน")
+        ,
+            when( contains(${event__event_property.value}
+            ,"โปร"),
+          "สอบถามโปรโมชัน")
+        ,
+            when( contains(${event__event_property.value}
+            ,"สาขา"),
+          "สอบถามเกี่ยวกับสาขา")
+        ,
+            when( contains(${event__event_property.value}
+            ,"ที่ไหน"),
+          "สอบถามเกี่ยวกับสาขา")
+        ,
+          when( contains(${event__event_property.value}
+            ,"ราคา"),
+          "สอบถามราคา")
+        ,
+          when( contains(${event__event_property.value}
+            ,"ส่วนลด"),
+          "สอบถามส่วนลด")
+        ,
+          when( contains(${event__event_property.value}
+            ,"เลื่อน"),
+          "ขอเลื่อนวันนัด")
+        ,
+            when( contains(${event__event_property.value}
+            ,"ยกเลิก"),
+          "ยกเลิกการจอง")
+        ,
+            when( contains(${event__event_property.value}
+            ,"ขอดูรีวิว"),
+          "ขอรีวิว")
+        ,
+            when( contains(${event__event_property.value}
+            ,"รีวิว"),
+          "ขอรีวิว")
+        ,
+            when( contains(${event__event_property.value}
+            ,"ค่าใช้จ่าย"),
+          "สอบถามราคา")
+        ,
+            when( contains(${event__event_property.value}
+            ,"จมูก"),
+          "สนใจเรื่องจมูก")
+        ,
+            when( contains(${event__event_property.value}
+            ,"หมอ"),
+          "สอบถามเรื่องหมอ")
+        ,
+            when( contains(${event__event_property.value}
+            ,"เวลา"),
+          "สอบถามเวลา")
+        ,
+        when( contains(${event__event_property.value}
+            ,"โมง"),
+          "สอบถามเวลา")
+        ,
+        when( contains(${event__event_property.value}
+            ,"เสริมคาง"),
+          "สนใจเรื่องคาง")
+        ,
+        when( contains(${event__event_property.value}
+            ,"เสริม"),
+          "สนใจในบริการและสินค้า")
+        ,
+        when( contains(${event__event_property.value}
+            ,"คิว"),
+          "สอบถามเรื่องคิว")
+        ,
+        when( contains(${event__event_property.value}
+            ,"อโศก"),
+          "สอบถามเกี่ยวกับสาขา")
+        ,
+        when( contains(${event__event_property.value}
+            ,"บวม"),
+          "กังวลผลข้างเคียงหลังทำ")
+        ,
+        when( contains(${event__event_property.value}
+            ,"เจ็บ"),
+          "กังวลผลข้างเคียงหลังทำ")
+        ,
+        when( contains(${event__event_property.value}
+            ,"เลื่อน"),
+          "เลื่อนคิว")
+        ,
+        when( contains(${event__event_property.value}
+            ,"ทำนาน"),
+          "กังวลเวลาที่ใช้ในการทำ")
+        ,
+          "พูดคุยทั่วไป")
+      label: Message Group
+      value_format:
+      value_format_name:
+      dimension: message_group
+      _kind_hint: dimension
+      _type_hint: string
+    - category: dimension
+      expression: |-
+        case(
+          when(
+            contains(${event.source},"line"),
+            "LINE"),
+          when(
+            contains(${event.source}, "facebook"),
+            "Facebook"),
+          "Untracked"
+          )
+      label: Source type
+      value_format:
+      value_format_name:
+      dimension: source_type
+      _kind_hint: dimension
+      _type_hint: string
+    color_application: undefined
+    show_view_names: false
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    limit_displayed_rows: false
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: '12'
+    rows_font_size: '12'
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    show_sql_query_menu_options: false
+    show_totals: true
+    show_row_totals: true
+    truncate_header: false
+    minimum_column_width: 75
+    series_labels:
+      event__event_property.value: Message
+    defaults_version: 1
+    hidden_pivots: {}
+    hidden_fields: []
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    listen:
+      Funnel Stage: event.funnel_stage
+      Has Offline Purchase: user_activity_rollup.has_offline_purchase
+      Total Amount of Messages: event.user_intent_segment
+      Total Amount of Click Ads: event.user_ad_click_segment
+      Service of Interest: labeling.category_name
+      Platform: event.Souce_type
+      Engaged Campaigns: ad_click_submit_funnel_by_ad.campaign_name
+      Messaging Topics: event.message_group
+      Purchase History: offline_transaction__course.course_name
+      First Clinic Visit Date: offline_transaction.first_visit_time
+      Last Clinic Visit Date: offline_transaction.last_visit_time
+      Visited Branch: offline_transaction.branch_name_receipt
+      Created At Date: user.created_at_date
+    row: 60
+    col: 12
+    width: 12
+    height: 7
+    tab_name: ''
+  - title: List of messages
+    name: List of messages
+    model: c360_client_9234725065
+    explore: user
+    type: looker_grid
+    fields: [message_group, event__event_property.value]
+    filters:
+      event.event_name: '"user_message","contact_info_submitted"'
+      event__event_property.value: "-%กรณีเคสแก้%,-%แอดมินขออนุญาต%,-%แอดมินขอทราบ\
+        %,-%วัน/เดือน%,-%เปิดบิลลง%,-%นับถอยหลั%,-%ขออนุญาติสอบถามข้อมูล%,-%คุณลูก\
+        ค้าอายุเท่าไหร่%,-%🫶%,-%🙏🙏🙏%,-%🙏🏻%,-%🫠%,-%🩷%,-%🥺%,-%🫡%,-%🥹🥹%,-%🥹\
+        %,-%🥰%,-%วัณโรคไหมคะ :%,-%อายุเท่าไหร่คะ%,-%🙏%,-%🙇🏻‍♂️%,-%จองคิวปรึกษา\
+        คุณหมอ%,-%😊%,-%🙇🏻‍♀️%,-%🥲🥲🥲🥲%,-%🫩🥲🥲🥲%,-%🙇🏻%,-%🙇🏼‍♀️%,-%😽%,-%😲\
+        %,-%😱%,-%😻%,-%😹%,-%😴%,-%🥲🥲%,-%🥲%,-%😭%,-%😡%,-%😛%,-%😚%,-%😘%,-%🤣\
+        %,-%😆%,-%😅😅%,-%😍%,-%😌😌%,-%😌%,-%😇😇%,-%🙂🤝%,-%🙂‍↕️🙂‍↕️🙂‍↕️%,-%🙂\
+        %,-%😂%,-%😁😁😁%,-%😁%,-%ชื่อ-นามสกุล%,-%😅%,-%👍%,-%🧋%,-%🦸‍♂️%,-%🦶🦶\
+        %,-%🙇‍♀️%,-%🙃😺%,-%🙀%,-%😢%,-%😃%,-%😀%,-%🤍%,-%🖕%,-%📌%,-%🤗%,-%😿%,-%😰\
+        %,-%😄%,-%😓%,-%😎%,-%😇☺️%,-%😄😄😄%,-%🔥%,-%แอดมินรบกวนขอข้อมูลเบื้องต้น\
+        %,-%คุณลูกค้า%,-%จองคิวนัดคุณหมอ%,-%👌%,-%👋🏼%,-%👋🏻%,-%👋%,-%👉🏻%,-%🐶\
+        %,-%🐋%,-%🤭%,-%😙%,-%😔%,-%🙈%,-%โอนมัดจำจอง%,-%คัดลอก%,-%💗%,-%💖%,-%♥️\
+        %,-%ชื่อ-สกุล%,-%💕%,-%❤️%,-%❤%,-%☺️%,-%☕️%,-%มีการตั้งครรภ์%"
+    sorts: [message_group]
+    limit: 500
+    column_limit: 50
+    total: true
+    dynamic_fields:
+    - category: dimension
+      expression: |-
+        # case(
+        #   when(
+        #     contains(
+        #       ${event__event_property.value},"โปรโมชั่น")
+        #     ,"เคยสอบถามเกี่ยวกับโปรโมชัน"),
+        #   "อื่นๆ")
+        case(
+          when(
+            contains(
+              ${event__event_property.value},"โปรโมชั่น")
+            ,"สอบถามโปรโมชัน")
+        ,
+          when( contains(${event__event_property.value}
+            ,"โปรโมชัน"),
+          "สอบถามโปรโมชัน")
+        ,
+            when( contains(${event__event_property.value}
+            ,"โปร"),
+          "สอบถามโปรโมชัน")
+        ,
+            when( contains(${event__event_property.value}
+            ,"สาขา"),
+          "สอบถามเกี่ยวกับสาขา")
+        ,
+            when( contains(${event__event_property.value}
+            ,"ที่ไหน"),
+          "สอบถามเกี่ยวกับสาขา")
+        ,
+          when( contains(${event__event_property.value}
+            ,"ราคา"),
+          "สอบถามราคา")
+        ,
+          when( contains(${event__event_property.value}
+            ,"ส่วนลด"),
+          "สอบถามส่วนลด")
+        ,
+          when( contains(${event__event_property.value}
+            ,"เลื่อน"),
+          "ขอเลื่อนวันนัด")
+        ,
+            when( contains(${event__event_property.value}
+            ,"ยกเลิก"),
+          "ยกเลิกการจอง")
+        ,
+            when( contains(${event__event_property.value}
+            ,"ขอดูรีวิว"),
+          "ขอรีวิว")
+        ,
+            when( contains(${event__event_property.value}
+            ,"รีวิว"),
+          "ขอรีวิว")
+        ,
+            when( contains(${event__event_property.value}
+            ,"ค่าใช้จ่าย"),
+          "สอบถามราคา")
+        ,
+            when( contains(${event__event_property.value}
+            ,"จมูก"),
+          "สนใจเรื่องจมูก")
+        ,
+            when( contains(${event__event_property.value}
+            ,"หมอ"),
+          "สอบถามเรื่องหมอ")
+        ,
+            when( contains(${event__event_property.value}
+            ,"เวลา"),
+          "สอบถามเวลา")
+        ,
+        when( contains(${event__event_property.value}
+            ,"โมง"),
+          "สอบถามเวลา")
+        ,
+        when( contains(${event__event_property.value}
+            ,"เสริมคาง"),
+          "สนใจเรื่องคาง")
+        ,
+        when( contains(${event__event_property.value}
+            ,"เสริม"),
+          "สนใจในบริการและสินค้า")
+        ,
+        when( contains(${event__event_property.value}
+            ,"คิว"),
+          "สอบถามเรื่องคิว")
+        ,
+        when( contains(${event__event_property.value}
+            ,"อโศก"),
+          "สอบถามเกี่ยวกับสาขา")
+        ,
+        when( contains(${event__event_property.value}
+            ,"บวม"),
+          "กังวลผลข้างเคียงหลังทำ")
+        ,
+        when( contains(${event__event_property.value}
+            ,"เจ็บ"),
+          "กังวลผลข้างเคียงหลังทำ")
+        ,
+        when( contains(${event__event_property.value}
+            ,"เลื่อน"),
+          "เลื่อนคิว")
+        ,
+        when( contains(${event__event_property.value}
+            ,"ทำนาน"),
+          "กังวลเวลาที่ใช้ในการทำ")
+        ,
+          "พูดคุยทั่วไป")
+      label: Message Group
+      value_format:
+      value_format_name:
+      dimension: message_group
+      _kind_hint: dimension
+      _type_hint: string
+    - category: dimension
+      expression: |-
+        case(
+          when(
+            contains(${event.source},"line"),
+            "LINE"),
+          when(
+            contains(${event.source}, "facebook"),
+            "Facebook"),
+          "Untracked"
+          )
+      label: Source type
+      value_format:
+      value_format_name:
+      dimension: source_type
+      _kind_hint: dimension
+      _type_hint: string
+    show_view_names: false
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    limit_displayed_rows: false
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: '12'
+    rows_font_size: '12'
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    show_sql_query_menu_options: false
+    show_totals: true
+    show_row_totals: true
+    truncate_header: false
+    minimum_column_width: 75
+    series_labels:
+      event__event_property.value: Message
+    defaults_version: 1
+    hidden_pivots: {}
+    hidden_fields: []
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    color_application: undefined
+    listen:
+      Funnel Stage: event.funnel_stage
+      Has Offline Purchase: user_activity_rollup.has_offline_purchase
+      Total Amount of Messages: event.user_intent_segment
+      Total Amount of Click Ads: event.user_ad_click_segment
+      Service of Interest: labeling.category_name
+      Platform: event.Souce_type
+      Engaged Campaigns: ad_click_submit_funnel_by_ad.campaign_name
+      Messaging Topics: event.message_group
+      Purchase History: offline_transaction__course.course_name
+      First Clinic Visit Date: offline_transaction.first_visit_time
+      Last Clinic Visit Date: offline_transaction.last_visit_time
+      Visited Branch: offline_transaction.branch_name_receipt
+      Created At Date: user.created_at_date
+    row: 67
+    col: 0
+    width: 24
+    height: 4
+    tab_name: ''
+  - title: Customer Journey
+    name: Customer Journey
+    model: c360_client_9234725065
+    explore: user
+    type: looker_grid
+    fields: [ad_click_submit_funnel_by_ad.Campaign_Group, ad_click_submit_funnel_by_ad.Ad_Group,
+      event.message_group, event.contact_info_submitted, user.total_user, user_activity_rollup.offline_purchase_status]
+    filters:
+      event.event_name: '"user_message","contact_info_submitted"'
+    sorts: [user.total_user desc]
+    limit: 500
+    column_limit: 50
+    total: true
+    dynamic_fields:
+    - category: dimension
+      expression: |-
+        # case(
+        #   when(
+        #     contains(
+        #       ${event__event_property.value},"โปรโมชั่น")
+        #     ,"เคยสอบถามเกี่ยวกับโปรโมชัน"),
+        #   "อื่นๆ")
+        case(
+          when(
+            contains(
+              ${event__event_property.value},"โปรโมชั่น")
+            ,"สอบถามโปรโมชัน")
+        ,
+          when( contains(${event__event_property.value}
+            ,"โปรโมชัน"),
+          "สอบถามโปรโมชัน")
+        ,
+            when( contains(${event__event_property.value}
+            ,"โปร"),
+          "สอบถามโปรโมชัน")
+        ,
+            when( contains(${event__event_property.value}
+            ,"สาขา"),
+          "สอบถามเกี่ยวกับสาขา")
+        ,
+            when( contains(${event__event_property.value}
+            ,"ที่ไหน"),
+          "สอบถามเกี่ยวกับสาขา")
+        ,
+          when( contains(${event__event_property.value}
+            ,"ราคา"),
+          "สอบถามราคา")
+        ,
+          when( contains(${event__event_property.value}
+            ,"ส่วนลด"),
+          "สอบถามส่วนลด")
+        ,
+          when( contains(${event__event_property.value}
+            ,"เลื่อน"),
+          "ขอเลื่อนวันนัด")
+        ,
+            when( contains(${event__event_property.value}
+            ,"ยกเลิก"),
+          "ยกเลิกการจอง")
+        ,
+            when( contains(${event__event_property.value}
+            ,"ขอดูรีวิว"),
+          "ขอรีวิว")
+        ,
+            when( contains(${event__event_property.value}
+            ,"รีวิว"),
+          "ขอรีวิว")
+        ,
+            when( contains(${event__event_property.value}
+            ,"ค่าใช้จ่าย"),
+          "สอบถามราคา")
+        ,
+            when( contains(${event__event_property.value}
+            ,"จมูก"),
+          "สนใจเรื่องจมูก")
+        ,
+            when( contains(${event__event_property.value}
+            ,"หมอ"),
+          "สอบถามเรื่องหมอ")
+        ,
+            when( contains(${event__event_property.value}
+            ,"เวลา"),
+          "สอบถามเวลา")
+        ,
+        when( contains(${event__event_property.value}
+            ,"โมง"),
+          "สอบถามเวลา")
+        ,
+        when( contains(${event__event_property.value}
+            ,"เสริมคาง"),
+          "สนใจเรื่องคาง")
+        ,
+        when( contains(${event__event_property.value}
+            ,"เสริม"),
+          "สนใจในบริการและสินค้า")
+        ,
+        when( contains(${event__event_property.value}
+            ,"คิว"),
+          "สอบถามเรื่องคิว")
+        ,
+        when( contains(${event__event_property.value}
+            ,"อโศก"),
+          "สอบถามเกี่ยวกับสาขา")
+        ,
+        when( contains(${event__event_property.value}
+            ,"บวม"),
+          "กังวลผลข้างเคียงหลังทำ")
+        ,
+        when( contains(${event__event_property.value}
+            ,"เจ็บ"),
+          "กังวลผลข้างเคียงหลังทำ")
+        ,
+        when( contains(${event__event_property.value}
+            ,"เลื่อน"),
+          "เลื่อนคิว")
+        ,
+        when( contains(${event__event_property.value}
+            ,"ทำนาน"),
+          "กังวลเวลาที่ใช้ในการทำ")
+        ,
+          "พูดคุยทั่วไป")
+      label: Message Group
+      value_format:
+      value_format_name:
+      dimension: message_group
+      _kind_hint: dimension
+      _type_hint: string
+    - category: dimension
+      expression: |-
+        case(
+          when(
+            contains(${event.source},"line"),
+            "LINE"),
+          when(
+            contains(${event.source}, "facebook"),
+            "Facebook"),
+          "Untracked"
+          )
+      label: Source type
+      value_format:
+      value_format_name:
+      dimension: source_type
+      _kind_hint: dimension
+      _type_hint: string
+    - category: dimension
+      expression: |-
+        case(
+          when(is_null(${ad_click_submit_funnel_by_ad.campaign_name}), "Organic"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "จ่ายจบ"), "จ่ายจบ"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "dr."), "Doctor"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "พามั่น"), "Emma พามั่น"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "branch"), "สาขา"),
+          "Others"
+        )
+      label: Campaign type
+      value_format:
+      value_format_name:
+      dimension: campaign_type
+      _kind_hint: dimension
+      _type_hint: string
+    - category: dimension
+      expression: |
+        if(
+          ${event.contact_info_submitted},
+          "Drop lead",
+          "Doesn't drop lead"
+        )
+      label: Contact Info Status
+      value_format:
+      value_format_name:
+      dimension: contact_info_status
+      _kind_hint: dimension
+      _type_hint: string
+    - category: dimension
+      expression: |
+        if(
+          ${user_activity_rollup.has_offline_purchase},
+          "Purchase",
+          "Doesn't Purchase"
+        )
+      label: Offline Purchase Status
+      value_format:
+      value_format_name:
+      dimension: offline_purchase_status
+      _kind_hint: dimension
+      _type_hint: string
+    show_view_names: false
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    limit_displayed_rows: false
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: '12'
+    rows_font_size: '12'
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    hidden_fields: []
+    hidden_points_if_no: []
+    series_labels:
+      event__event_property.value: Message
+    show_sql_query_menu_options: false
+    show_totals: true
+    show_row_totals: true
+    truncate_header: false
+    minimum_column_width: 75
+    defaults_version: 1
+    hidden_pivots: {}
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    color_application: undefined
+    color_range: ["#dd3333", "#80ce5d", "#f78131", "#369dc1", "#c572d3", "#36c1b3",
+      "#b57052", "#ed69af"]
+    label_type: name
+    show_null_points: true
+    listen:
+      Funnel Stage: event.funnel_stage
+      Has Offline Purchase: user_activity_rollup.has_offline_purchase
+      Total Amount of Messages: event.user_intent_segment
+      Total Amount of Click Ads: event.user_ad_click_segment
+      Service of Interest: labeling.category_name
+      Platform: event.Souce_type
+      Engaged Campaigns: ad_click_submit_funnel_by_ad.campaign_name
+      Messaging Topics: event.message_group
+      Purchase History: offline_transaction__course.course_name
+      First Clinic Visit Date: offline_transaction.first_visit_time
+      Last Clinic Visit Date: offline_transaction.last_visit_time
+      Visited Branch: offline_transaction.branch_name_receipt
+      Created At Date: user.created_at_date
+    row: 12
+    col: 0
+    width: 24
+    height: 7
+    tab_name: ''
+  - title: Best Performance Campaign Group
+    name: Best Performance Campaign Group
+    model: c360_client_9234725065
+    explore: user
+    type: looker_wordcloud
+    fields: [ad_click_submit_funnel_by_ad.Campaign_Group, user.total_user]
+    sorts: [user.total_user desc 0]
+    limit: 500
+    column_limit: 50
+    dynamic_fields:
+    - category: dimension
+      expression: |-
+        case(
+        when(contains(${ad_click_submit_funnel_by_ad.ad_name}, "review_video"), "Review video"),
+        when(contains(${ad_click_submit_funnel_by_ad.ad_name}, "video"), "Content video"),
+        when(contains(${ad_click_submit_funnel_by_ad.ad_name}, "album"), "Image content"),
+        "Others")
+      label: AD Group
+      value_format:
+      value_format_name:
+      dimension: ad_group
+      _kind_hint: dimension
+      _type_hint: string
+    - category: dimension
+      expression: |-
+        case(
+          when(is_null(${ad_click_submit_funnel_by_ad.campaign_name}), "Organic"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "จ่ายจบ"), "จ่ายจบ"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "dr."), "Doctor"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "พามั่น"), "Emma พามั่น"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "branch"), "สาขา"),
+          "Others"
+        )
+      label: Campaign Group
+      value_format:
+      value_format_name:
+      dimension: campaign_group
+      _kind_hint: dimension
+      _type_hint: string
+    color_application: undefined
+    show_sql_query_menu_options: false
+    show_totals: true
+    show_row_totals: true
+    show_view_names: false
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    truncate_header: false
+    size_to_fit: true
+    minimum_column_width: 75
+    series_labels:
+      ad_click_submit_funnel_by_ad.campaign_name: Last Campaign Engage
+      event.user_intent_segment_click_ad: User segment by click ad count
+      event.user_intent_segment: User segment by message count
+    series_cell_visualizations:
+      event.users_clicked_ad:
+        is_active: false
+        palette:
+          palette_id: 56d0c358-10a0-4fd6-aa0b-b117bef527ab
+          collection_id: 7c56cc21-66e4-41c9-81ce-a60e1c3967b2
+        value_display: true
+      event.users_message:
+        is_active: false
+        palette:
+          palette_id: 56d0c358-10a0-4fd6-aa0b-b117bef527ab
+          collection_id: 7c56cc21-66e4-41c9-81ce-a60e1c3967b2
+    table_theme: white
+    limit_displayed_rows: false
+    enable_conditional_formatting: true
+    header_text_alignment: left
+    header_font_size: '12'
+    rows_font_size: '12'
+    conditional_formatting: [{type: along a scale..., value: !!null '', background_color: "#1A73E8",
+        font_color: !!null '', color_application: {collection_id: 7c56cc21-66e4-41c9-81ce-a60e1c3967b2,
+          palette_id: 56d0c358-10a0-4fd6-aa0b-b117bef527ab, options: {steps: 5, constraints: {
+              min: {type: minimum}, mid: {type: number, value: 0}, max: {type: maximum}},
+            mirror: true, reverse: false, stepped: false}}, bold: false, italic: false,
+        strikethrough: false, fields: []}, {type: along a scale..., value: !!null '',
+        background_color: "#1A73E8", font_color: !!null '', color_application: {collection_id: 7c56cc21-66e4-41c9-81ce-a60e1c3967b2,
+          palette_id: 4a00499b-c0fe-4b15-a304-4083c07ff4c4, options: {constraints: {
+              min: {type: minimum}, mid: {type: number, value: 0}, max: {type: maximum}},
+            mirror: true, reverse: false, stepped: false}}, bold: false, italic: false,
+        strikethrough: false, fields: []}]
+    conditional_formatting_include_totals: true
+    conditional_formatting_include_nulls: false
+    hide_totals: false
+    hide_row_totals: false
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    defaults_version: 1
+    hidden_pivots: {}
+    listen:
+      Funnel Stage: event.funnel_stage
+      Has Offline Purchase: user_activity_rollup.has_offline_purchase
+      Total Amount of Messages: event.user_intent_segment
+      Total Amount of Click Ads: event.user_ad_click_segment
+      Service of Interest: labeling.category_name
+      Platform: event.Souce_type
+      Engaged Campaigns: ad_click_submit_funnel_by_ad.campaign_name
+      Messaging Topics: event.message_group
+      Purchase History: offline_transaction__course.course_name
+      First Clinic Visit Date: offline_transaction.first_visit_time
+      Last Clinic Visit Date: offline_transaction.last_visit_time
+      Visited Branch: offline_transaction.branch_name_receipt
+      Created At Date: user.created_at_date
+    row: 71
+    col: 12
+    width: 12
+    height: 4
+    tab_name: ''
+  - title: Where are they from ?
+    name: Where are they from ?
+    model: c360_client_9234725065
+    explore: user
+    type: looker_pie
+    fields: [user.total_user, event.Souce_type]
+    filters:
+      event.Souce_type: ''
+    sorts: [user.total_user desc 0]
+    limit: 500
+    column_limit: 50
+    total: true
+    value_labels: legend
+    label_type: labPer
+    series_colors:
+      LINE: "#00B900"
+      Untracked: "#e8af53"
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: true
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    single_value_title: Total IDs
+    smart_single_value_size: true
+    conditional_formatting: [{type: equal to, value: 0, background_color: "#f78da7",
+        font_color: !!null '', color_application: {collection_id: 7c56cc21-66e4-41c9-81ce-a60e1c3967b2,
+          palette_id: 56d0c358-10a0-4fd6-aa0b-b117bef527ab}, bold: false, italic: false,
+        strikethrough: false, fields: !!null ''}]
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    defaults_version: 1
+    hidden_pivots: {}
+    listen:
+      Funnel Stage: event.funnel_stage
+      Has Offline Purchase: user_activity_rollup.has_offline_purchase
+      Total Amount of Messages: event.user_intent_segment
+      Total Amount of Click Ads: event.user_ad_click_segment
+      Service of Interest: labeling.category_name
+      Platform: event.Souce_type
+      Engaged Campaigns: ad_click_submit_funnel_by_ad.campaign_name
+      Messaging Topics: event.message_group
+      Purchase History: offline_transaction__course.course_name
+      First Clinic Visit Date: offline_transaction.first_visit_time
+      Last Clinic Visit Date: offline_transaction.last_visit_time
+      Visited Branch: offline_transaction.branch_name_receipt
+      Created At Date: user.created_at_date
+    row: 25
+    col: 0
+    width: 5
+    height: 6
+    tab_name: ''
+  - title: Do they make a purchase ?
+    name: Do they make a purchase ?
+    model: c360_client_9234725065
+    explore: user
+    type: looker_pie
+    fields: [user.total_user, user_activity_rollup.has_offline_purchase]
+    fill_fields: [user_activity_rollup.has_offline_purchase]
+    filters:
+      event.Souce_type: "-Untracked"
+    sorts: [user.total_user desc 0]
+    limit: 500
+    column_limit: 50
+    total: true
+    value_labels: legend
+    label_type: labPer
+    series_colors:
+      'Yes': "#00B900"
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: true
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    single_value_title: Total IDs
+    smart_single_value_size: true
+    conditional_formatting: [{type: equal to, value: 0, background_color: "#f78da7",
+        font_color: !!null '', color_application: {collection_id: 7c56cc21-66e4-41c9-81ce-a60e1c3967b2,
+          palette_id: 56d0c358-10a0-4fd6-aa0b-b117bef527ab}, bold: false, italic: false,
+        strikethrough: false, fields: !!null ''}]
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    defaults_version: 1
+    hidden_pivots: {}
+    listen:
+      Funnel Stage: event.funnel_stage
+      Has Offline Purchase: user_activity_rollup.has_offline_purchase
+      Total Amount of Messages: event.user_intent_segment
+      Total Amount of Click Ads: event.user_ad_click_segment
+      Service of Interest: labeling.category_name
+      Platform: event.Souce_type
+      Engaged Campaigns: ad_click_submit_funnel_by_ad.campaign_name
+      Messaging Topics: event.message_group
+      Purchase History: offline_transaction__course.course_name
+      First Clinic Visit Date: offline_transaction.first_visit_time
+      Last Clinic Visit Date: offline_transaction.last_visit_time
+      Visited Branch: offline_transaction.branch_name_receipt
+      Created At Date: user.created_at_date
+    row: 25
+    col: 19
+    width: 5
+    height: 6
+    tab_name: ''
+  - title: Which campaign group perform the best ?
+    name: Which campaign group perform the best ?
+    model: c360_client_9234725065
+    explore: user
+    type: looker_grid
+    fields: [ad_click_submit_funnel_by_ad.Campaign_Group, event.users_clicked_ad,
+      event.users_message, user_activity_rollup.users_online_and_purchase, user_activity_rollup.total_paid_online_and_purchase]
+    sorts: [user_activity_rollup.total_paid_online_and_purchase desc]
+    limit: 500
+    column_limit: 50
+    dynamic_fields:
+    - category: dimension
+      expression: |-
+        case(
+        when(contains(${ad_click_submit_funnel_by_ad.ad_name}, "review_video"), "Review video"),
+        when(contains(${ad_click_submit_funnel_by_ad.ad_name}, "video"), "Content video"),
+        when(contains(${ad_click_submit_funnel_by_ad.ad_name}, "album"), "Image content"),
+        "Others")
+      label: AD Group
+      value_format:
+      value_format_name:
+      dimension: ad_group
+      _kind_hint: dimension
+      _type_hint: string
+    - category: dimension
+      expression: |-
+        case(
+          when(is_null(${ad_click_submit_funnel_by_ad.campaign_name}), "Organic"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "จ่ายจบ"), "จ่ายจบ"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "dr."), "Doctor"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "พามั่น"), "Emma พามั่น"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "branch"), "สาขา"),
+          "Others"
+        )
+      label: Campaign Group
+      value_format:
+      value_format_name:
+      dimension: campaign_group
+      _kind_hint: dimension
+      _type_hint: string
+    show_view_names: false
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    limit_displayed_rows: false
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: '12'
+    rows_font_size: '12'
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    show_sql_query_menu_options: false
+    show_totals: true
+    show_row_totals: true
+    truncate_header: false
+    minimum_column_width: 75
+    series_labels:
+      ad_click_submit_funnel_by_ad.campaign_name: Campaign Name
+      event.user_intent_segment_click_ad: User segment by click ad count
+      event.user_intent_segment: User segment by message count
+      ad_click_submit_funnel_by_ad.Campaign_Group: Campaign Group
+      ad_click_submit_funnel_by_ad.ad_name: Ad Name
+      event.users_clicked_ad: Total Engaged Users
+      event.users_message: Total Messagers
+      user_activity_rollup.total_paid_online_and_purchase: Total Revenue
+      user_activity_rollup.users_online_and_purchase: Total Purchasers
+    series_cell_visualizations:
+      event.users_clicked_ad:
+        is_active: true
+      user_activity_rollup.users_online_and_purchase:
+        is_active: true
+      user_activity_rollup.total_paid_online_and_purchase:
+        is_active: true
+      event.users_message:
+        is_active: true
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    defaults_version: 1
+    hidden_pivots: {}
+    listen:
+      Funnel Stage: event.funnel_stage
+      Has Offline Purchase: user_activity_rollup.has_offline_purchase
+      Total Amount of Messages: event.user_intent_segment
+      Total Amount of Click Ads: event.user_ad_click_segment
+      Service of Interest: labeling.category_name
+      Platform: event.Souce_type
+      Engaged Campaigns: ad_click_submit_funnel_by_ad.campaign_name
+      Messaging Topics: event.message_group
+      Purchase History: offline_transaction__course.course_name
+      First Clinic Visit Date: offline_transaction.first_visit_time
+      Last Clinic Visit Date: offline_transaction.last_visit_time
+      Visited Branch: offline_transaction.branch_name_receipt
+      Created At Date: user.created_at_date
+    row: 71
+    col: 0
+    width: 12
+    height: 4
+    tab_name: ''
+  - title: Which ads perform the best ?
+    name: Which ads perform the best ?
+    model: c360_client_9234725065
+    explore: user
+    type: looker_grid
+    fields: [event.users_clicked_ad, event.users_message, user_activity_rollup.users_online_and_purchase,
+      user_activity_rollup.total_paid_online_and_purchase, ad_click_submit_funnel_by_ad.ad_name]
+    sorts: [user_activity_rollup.total_paid_online_and_purchase desc]
+    limit: 500
+    column_limit: 50
+    dynamic_fields:
+    - category: dimension
+      expression: |-
+        case(
+        when(contains(${ad_click_submit_funnel_by_ad.ad_name}, "review_video"), "Review video"),
+        when(contains(${ad_click_submit_funnel_by_ad.ad_name}, "video"), "Content video"),
+        when(contains(${ad_click_submit_funnel_by_ad.ad_name}, "album"), "Image content"),
+        "Others")
+      label: AD Group
+      value_format:
+      value_format_name:
+      dimension: ad_group
+      _kind_hint: dimension
+      _type_hint: string
+    - category: dimension
+      expression: |-
+        case(
+          when(is_null(${ad_click_submit_funnel_by_ad.campaign_name}), "Organic"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "จ่ายจบ"), "จ่ายจบ"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "dr."), "Doctor"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "พามั่น"), "Emma พามั่น"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "branch"), "สาขา"),
+          "Others"
+        )
+      label: Campaign Group
+      value_format:
+      value_format_name:
+      dimension: campaign_group
+      _kind_hint: dimension
+      _type_hint: string
+    show_view_names: false
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    limit_displayed_rows: false
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: '12'
+    rows_font_size: '12'
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    show_sql_query_menu_options: false
+    show_totals: true
+    show_row_totals: true
+    truncate_header: false
+    minimum_column_width: 75
+    series_labels:
+      ad_click_submit_funnel_by_ad.campaign_name: Campaign Name
+      event.user_intent_segment_click_ad: User segment by click ad count
+      event.user_intent_segment: User segment by message count
+      ad_click_submit_funnel_by_ad.Campaign_Group: Campaign Group
+      ad_click_submit_funnel_by_ad.ad_name: Ad Name
+      event.users_clicked_ad: Total Engaged Users
+      event.users_message: Total Messagers
+      user_activity_rollup.total_paid_online_and_purchase: Total Revenue
+      user_activity_rollup.users_online_and_purchase: Total Purchasers
+    series_cell_visualizations:
+      event.users_clicked_ad:
+        is_active: true
+      user_activity_rollup.users_online_and_purchase:
+        is_active: true
+      user_activity_rollup.total_paid_online_and_purchase:
+        is_active: true
+      event.users_message:
+        is_active: true
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    defaults_version: 1
+    hidden_pivots: {}
+    listen:
+      Funnel Stage: event.funnel_stage
+      Has Offline Purchase: user_activity_rollup.has_offline_purchase
+      Total Amount of Messages: event.user_intent_segment
+      Total Amount of Click Ads: event.user_ad_click_segment
+      Service of Interest: labeling.category_name
+      Platform: event.Souce_type
+      Engaged Campaigns: ad_click_submit_funnel_by_ad.campaign_name
+      Messaging Topics: event.message_group
+      Purchase History: offline_transaction__course.course_name
+      First Clinic Visit Date: offline_transaction.first_visit_time
+      Last Clinic Visit Date: offline_transaction.last_visit_time
+      Visited Branch: offline_transaction.branch_name_receipt
+      Created At Date: user.created_at_date
+    row: 75
+    col: 0
+    width: 12
+    height: 4
+    tab_name: ''
+  - title: Best Performance Ads
+    name: Best Performance Ads
+    model: c360_client_9234725065
+    explore: user
+    type: looker_wordcloud
+    fields: [ad_click_submit_funnel_by_ad.ad_name, user.total_user]
+    sorts: [user.total_user desc 0]
+    limit: 10
+    column_limit: 50
+    dynamic_fields:
+    - category: dimension
+      expression: |-
+        case(
+        when(contains(${ad_click_submit_funnel_by_ad.ad_name}, "review_video"), "Review video"),
+        when(contains(${ad_click_submit_funnel_by_ad.ad_name}, "video"), "Content video"),
+        when(contains(${ad_click_submit_funnel_by_ad.ad_name}, "album"), "Image content"),
+        "Others")
+      label: AD Group
+      value_format:
+      value_format_name:
+      dimension: ad_group
+      _kind_hint: dimension
+      _type_hint: string
+    - category: dimension
+      expression: |-
+        case(
+          when(is_null(${ad_click_submit_funnel_by_ad.campaign_name}), "Organic"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "จ่ายจบ"), "จ่ายจบ"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "dr."), "Doctor"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "พามั่น"), "Emma พามั่น"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "branch"), "สาขา"),
+          "Others"
+        )
+      label: Campaign Group
+      value_format:
+      value_format_name:
+      dimension: campaign_group
+      _kind_hint: dimension
+      _type_hint: string
+    color_application: undefined
+    show_sql_query_menu_options: false
+    show_totals: true
+    show_row_totals: true
+    show_view_names: false
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    truncate_header: false
+    size_to_fit: true
+    minimum_column_width: 75
+    series_labels:
+      ad_click_submit_funnel_by_ad.campaign_name: Last Campaign Engage
+      event.user_intent_segment_click_ad: User segment by click ad count
+      event.user_intent_segment: User segment by message count
+    series_cell_visualizations:
+      event.users_clicked_ad:
+        is_active: false
+        palette:
+          palette_id: 56d0c358-10a0-4fd6-aa0b-b117bef527ab
+          collection_id: 7c56cc21-66e4-41c9-81ce-a60e1c3967b2
+        value_display: true
+      event.users_message:
+        is_active: false
+        palette:
+          palette_id: 56d0c358-10a0-4fd6-aa0b-b117bef527ab
+          collection_id: 7c56cc21-66e4-41c9-81ce-a60e1c3967b2
+    table_theme: white
+    limit_displayed_rows: false
+    enable_conditional_formatting: true
+    header_text_alignment: left
+    header_font_size: '12'
+    rows_font_size: '12'
+    conditional_formatting: [{type: along a scale..., value: !!null '', background_color: "#1A73E8",
+        font_color: !!null '', color_application: {collection_id: 7c56cc21-66e4-41c9-81ce-a60e1c3967b2,
+          palette_id: 56d0c358-10a0-4fd6-aa0b-b117bef527ab, options: {steps: 5, constraints: {
+              min: {type: minimum}, mid: {type: number, value: 0}, max: {type: maximum}},
+            mirror: true, reverse: false, stepped: false}}, bold: false, italic: false,
+        strikethrough: false, fields: []}, {type: along a scale..., value: !!null '',
+        background_color: "#1A73E8", font_color: !!null '', color_application: {collection_id: 7c56cc21-66e4-41c9-81ce-a60e1c3967b2,
+          palette_id: 4a00499b-c0fe-4b15-a304-4083c07ff4c4, options: {constraints: {
+              min: {type: minimum}, mid: {type: number, value: 0}, max: {type: maximum}},
+            mirror: true, reverse: false, stepped: false}}, bold: false, italic: false,
+        strikethrough: false, fields: []}]
+    conditional_formatting_include_totals: true
+    conditional_formatting_include_nulls: false
+    hide_totals: false
+    hide_row_totals: false
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    defaults_version: 1
+    hidden_pivots: {}
+    listen:
+      Funnel Stage: event.funnel_stage
+      Has Offline Purchase: user_activity_rollup.has_offline_purchase
+      Total Amount of Messages: event.user_intent_segment
+      Total Amount of Click Ads: event.user_ad_click_segment
+      Service of Interest: labeling.category_name
+      Platform: event.Souce_type
+      Engaged Campaigns: ad_click_submit_funnel_by_ad.campaign_name
+      Messaging Topics: event.message_group
+      Purchase History: offline_transaction__course.course_name
+      First Clinic Visit Date: offline_transaction.first_visit_time
+      Last Clinic Visit Date: offline_transaction.last_visit_time
+      Visited Branch: offline_transaction.branch_name_receipt
+      Created At Date: user.created_at_date
+    row: 75
+    col: 12
+    width: 12
+    height: 4
+    tab_name: ''
+  - name: " (2)"
+    type: text
+    title_text: ''
+    body_text: '[{"type":"p","children":[{"text":"Appendix: Filters Description","bold":true,"color":"hsl(0,
+      0%, 44%)"}],"id":"bo6z9","align":"center"},{"type":"p","id":"n7wqf","children":[{"bold":true,"color":"hsl(0,
+      0%, 44%)","text":"                           Funnel Amount of Message —> "},{"text":"The
+      total number of messages exchanged by users at each stage of the marketing funnel.         ","color":"hsl(0,
+      0%, 44%)"},{"text":"Has Offline Purchase —> ","bold":true,"color":"hsl(0, 0%,
+      44%)"},{"text":"Indicates whether the user has completed an offline purchase
+      at the clinic.","color":"hsl(0, 0%, 44%)"}]},{"type":"p","id":"9k6g7","children":[{"text":"                           Total
+      Amount of Messages —> ","bold":true,"color":"hsl(0, 0%, 44%)"},{"text":"The
+      cumulative number of messages sent and received by the user.                                                  ","color":"hsl(0,
+      0%, 44%)"},{"text":"Total Number of Ads Clicks —>","bold":true,"color":"hsl(0,
+      0%, 44%)"},{"text":" The total number of times the user clicked on advertisements.","color":"hsl(0,
+      0%, 44%)"}]},{"type":"p","children":[{"text":"                           Service
+      of Interest —> ","bold":true,"color":"hsl(0, 0%, 44%)"},{"text":"The specific
+      service(s) that the user has shown interest in.                                                                                  ","color":"hsl(0,
+      0%, 44%)"},{"text":"Platform —> ","bold":true,"color":"hsl(0, 0%, 44%)"},{"text":"The
+      platform(s) through which the user engaged with the clinic (e.g., Facebook,
+      LINE).","color":"hsl(0, 0%, 44%)"}],"id":"c1h8u"},{"type":"p","children":[{"text":"                           Engage
+      Campaigns —> ","bold":true,"color":"hsl(0, 0%, 44%)"},{"text":"Marketing campaigns
+      that the user interacted with or engaged in.                                                                    ","color":"hsl(0,
+      0%, 44%)"},{"text":"Messaging Topics —>","bold":true,"color":"hsl(0, 0%, 44%)"},{"text":"
+      The main topics or subjects discussed in user messages.","color":"hsl(0, 0%,
+      44%)"}],"id":"wkmpj"},{"type":"p","children":[{"text":"                           Purchase
+      Histor —> ","bold":true,"color":"hsl(0, 0%, 44%)"},{"text":"Record of services
+      or products that the user has previously purchased.                                                                ","color":"hsl(0,
+      0%, 44%)"},{"text":"First Clinic Visit Date —>","bold":true,"color":"hsl(0,
+      0%, 44%)"},{"text":" The date when the user first visited the clinic.","color":"hsl(0,
+      0%, 44%)"}],"id":"p565g"},{"type":"p","children":[{"text":"                           Last
+      Clinic Visit Date —>","bold":true,"color":"hsl(0, 0%, 44%)"},{"text":" The most
+      recent date the user visited the clinic.                                                                                                 ","color":"hsl(0,
+      0%, 44%)"},{"text":"Visited Branch —>","bold":true,"color":"hsl(0, 0%, 44%)"},{"text":"
+      The specific clinic branch(es) the user has visited.","color":"hsl(0, 0%, 44%)"}],"id":"4o016"}]'
+    rich_content_json: '{"format":"slate"}'
+    row: 80
+    col: 0
+    width: 24
+    height: 5
+    tab_name: ''
+  - name: " (3)"
+    type: text
+    title_text: ''
+    body_text: '[{"children":[{"text":"Customer List Dashboard","bold":true}],"type":"h1","align":"center"},{"type":"p","id":"0r1qw","children":[{"text":"","bold":true}]},{"type":"p","id":"dbxkw","children":[{"bold":true,"text":"👍🏻
+      Engagement —> "},{"text":"users who have basic interactions with the clinic,
+      including likes, comments, shares, or other post engagements. "}],"align":"center"},{"type":"p","id":"uoc8o","children":[{"text":"🤔
+      Consideration —> ","bold":true},{"text":"users who have add LINE, made conversation,
+      chatted with an admin, or clicked from message ads post. "}],"align":"center"},{"type":"p","id":"f2jlj","children":[{"text":"📝
+      Drop Lead —> ","bold":true},{"text":"users who submitted phone numbers, shared
+      contact details, or completed a booking."}],"align":"center"},{"type":"p","id":"xo4by","children":[{"bold":true,"text":"💰Purchase
+      —> "},{"text":"Users who visited the clinic and made a purchase."}],"align":"center"}]'
+    rich_content_json: '{"format":"slate"}'
+    row: 0
+    col: 0
+    width: 24
+    height: 5
+    tab_name: ''
+  - name: " (4)"
+    type: text
+    title_text: ''
+    body_text: |-
+      <div class="card" style="
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        padding: 0px;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      ">
+        <h2 style="
+          margin: 0 0 12px;
+          font-size: 18px;
+          color: #FFF; /* Samsung Blue */
+          border-bottom: 3px dashed #808080;
+          padding-bottom: 0px;
+        "></h2>
+
+        <p style="
+          font-size: 14px;
+          color: #FFF;
+          line-height: 1.5;
+        ">
+        </p>
+      </div>
+    row: 79
+    col: 0
+    width: 24
+    height: 1
+    tab_name: ''
+  - title: Messaging Conversion by Content Types
+    name: Messaging Conversion by Content Types
+    model: c360_client_9234725065
+    explore: user
+    type: looker_grid
+    fields: [user.total_user, ad_click_submit_funnel_by_ad.messaged_after_click, ad_click_submit_funnel_by_ad.Ad_Group]
+    pivots: [ad_click_submit_funnel_by_ad.messaged_after_click]
+    fill_fields: [ad_click_submit_funnel_by_ad.messaged_after_click]
+    filters:
+      ad_click_submit_funnel_by_ad.campaign_name: "-NULL"
+    sorts: [ad_click_submit_funnel_by_ad.messaged_after_click, messaging_rate desc
+        1]
+    limit: 500
+    column_limit: 50
+    total: true
+    dynamic_fields:
+    - _kind_hint: measure
+      _type_hint: number
+      args:
+      - user.total_user
+      based_on: user.total_user
+      calculation_type: percent_of_previous
+      category: table_calculation
+      label: Percent of previous - [EMMA CLINIC] User Total Unique User
+      source_field: user.total_user
+      table_calculation: percent_of_previous_emma_clinic_user_total_unique_user
+      value_format:
+      value_format_name: percent_0
+      is_disabled: true
+    - category: table_calculation
+      label: Messaging Rate
+      value_format:
+      value_format_name: percent_2
+      calculation_type: percent_of_row
+      table_calculation: messaging_rate
+      args:
+      - user.total_user
+      _kind_hint: measure
+      _type_hint: number
+    show_view_names: false
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: unstyled
+    limit_displayed_rows: false
+    enable_conditional_formatting: true
+    header_text_alignment: center
+    header_font_size: '12'
+    rows_font_size: '12'
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: true
+    show_sql_query_menu_options: false
+    column_order: ["$$$_row_numbers_$$$", ad_click_submit_funnel_by_ad.Campaign_Group,
+      user.total_user]
+    show_totals: false
+    show_row_totals: true
+    truncate_header: false
+    minimum_column_width: 75
+    series_labels:
+      ad_click_submit_funnel_by_ad.Ad_Group: Content Type
+      ad_click_submit_funnel_by_ad.messaged_after_click: Messaging Conversion
+    series_cell_visualizations:
+      user.total_user:
+        is_active: false
+    series_text_format:
+      ad_click_submit_funnel_by_ad.messaged_after_click:
+        align: center
+      user.total_user:
+        align: center
+      messaging_rate:
+        align: center
+    conditional_formatting: [{type: along a scale..., value: !!null '', background_color: "#1A73E8",
+        font_color: !!null '', color_application: {collection_id: 7c56cc21-66e4-41c9-81ce-a60e1c3967b2,
+          palette_id: 56d0c358-10a0-4fd6-aa0b-b117bef527ab}, bold: false, italic: false,
+        strikethrough: false, fields: [messaging_rate]}]
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    show_null_points: true
+    interpolation: linear
+    defaults_version: 1
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    hidden_pivots:
+      'No':
+        measure_names:
+        - messaging_rate
+    listen:
+      Funnel Stage: event.funnel_stage
+      Has Offline Purchase: user_activity_rollup.has_offline_purchase
+      Total Amount of Messages: event.user_intent_segment
+      Total Amount of Click Ads: event.user_ad_click_segment
+      Service of Interest: labeling.category_name
+      Platform: event.Souce_type
+      Engaged Campaigns: ad_click_submit_funnel_by_ad.campaign_name
+      Messaging Topics: event.message_group
+      Purchase History: offline_transaction__course.course_name
+      First Clinic Visit Date: offline_transaction.first_visit_time
+      Last Clinic Visit Date: offline_transaction.last_visit_time
+      Visited Branch: offline_transaction.branch_name_receipt
+      Created At Date: user.created_at_date
+    row: 19
+    col: 0
+    width: 12
+    height: 6
+    tab_name: ''
+  - title: Contact Info Submission by Message Group
+    name: Contact Info Submission by Message Group
+    model: c360_client_9234725065
+    explore: user
+    type: looker_grid
+    fields: [user.total_user, event.message_group, event.contact_info_submitted]
+    pivots: [event.contact_info_submitted]
+    filters:
+      ad_click_submit_funnel_by_ad.campaign_name: "-NULL"
+    sorts: [event.contact_info_submitted, percent_of_row desc 0]
+    limit: 500
+    column_limit: 50
+    total: true
+    dynamic_fields:
+    - category: table_calculation
+      expression: Total ${user.total_user}/
+      label: Conversion%
+      value_format:
+      value_format_name:
+      _kind_hint: dimension
+      table_calculation: conversion
+      _type_hint:
+      is_disabled: true
+    - _kind_hint: measure
+      _type_hint: number
+      args:
+      - user.total_user
+      based_on: user.total_user
+      calculation_type: percent_of_previous
+      category: table_calculation
+      label: Percent of previous - [EMMA CLINIC] User Total Unique User
+      source_field: user.total_user
+      table_calculation: percent_of_previous_emma_clinic_user_total_unique_user
+      value_format:
+      value_format_name: percent_0
+      is_disabled: true
+    - category: table_calculation
+      label: Percent of row
+      value_format:
+      value_format_name: percent_2
+      calculation_type: percent_of_row
+      table_calculation: percent_of_row
+      args:
+      - user.total_user
+      _kind_hint: measure
+      _type_hint: number
+    show_view_names: false
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: unstyled
+    limit_displayed_rows: false
+    enable_conditional_formatting: true
+    header_text_alignment: center
+    header_font_size: '12'
+    rows_font_size: '12'
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    show_sql_query_menu_options: false
+    column_order: ["$$$_row_numbers_$$$", event.message_group, Untracked_user.total_user,
+      Untracked_percent_of_row, Drop lead_user.total_user, Drop lead_percent_of_row]
+    show_totals: false
+    show_row_totals: true
+    truncate_header: false
+    minimum_column_width: 75
+    series_labels:
+      percent_of_row: Conversion Rate
+      event.contact_info_submitted: Contact Info Submission
+      event.message_group: Message Group
+    series_cell_visualizations:
+      user.total_user:
+        is_active: false
+    series_text_format:
+      percent_of_row:
+        align: center
+      event.message_group:
+        align: left
+      user.total_user:
+        align: center
+    conditional_formatting: [{type: along a scale..., value: !!null '', background_color: "#1A73E8",
+        font_color: !!null '', color_application: {collection_id: 7c56cc21-66e4-41c9-81ce-a60e1c3967b2,
+          palette_id: 56d0c358-10a0-4fd6-aa0b-b117bef527ab, options: {steps: 5}},
+        bold: false, italic: false, strikethrough: false, fields: [percent_of_row]}]
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    show_null_points: true
+    interpolation: linear
+    defaults_version: 1
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    hidden_fields:
+    hidden_pivots:
+      Untracked:
+        measure_names:
+        - percent_of_row
+    listen:
+      Funnel Stage: event.funnel_stage
+      Has Offline Purchase: user_activity_rollup.has_offline_purchase
+      Total Amount of Messages: event.user_intent_segment
+      Total Amount of Click Ads: event.user_ad_click_segment
+      Service of Interest: labeling.category_name
+      Platform: event.Souce_type
+      Engaged Campaigns: ad_click_submit_funnel_by_ad.campaign_name
+      Messaging Topics: event.message_group
+      Purchase History: offline_transaction__course.course_name
+      First Clinic Visit Date: offline_transaction.first_visit_time
+      Last Clinic Visit Date: offline_transaction.last_visit_time
+      Visited Branch: offline_transaction.branch_name_receipt
+      Created At Date: user.created_at_date
+    row: 19
+    col: 12
+    width: 12
+    height: 6
+    tab_name: ''
+  - title: List of User First & Last Active
+    name: List of User First & Last Active
+    model: c360_client_9234725065
+    explore: user
+    type: looker_grid
+    fields: [user_activity_rollup.user_id_link, user_ad_click_history.first_ad_id,
+      user_ad_click_history.first_campaign_name, user_ad_click_history.first_ad_click_time_time,
+      user_ad_click_history.latest_ad_id, user_ad_click_history.latest_campaign_name,
+      user_ad_click_history.latest_ad_click_time_time, user_ad_click_history.days_between_first_and_latest,
+      course_total_by_receipt.total_price]
+    sorts: [user_ad_click_history.days_between_first_and_latest desc]
+    limit: 500
+    column_limit: 50
+    total: true
+    show_view_names: false
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    limit_displayed_rows: false
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: '12'
+    rows_font_size: '12'
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    show_sql_query_menu_options: false
+    show_totals: true
+    show_row_totals: true
+    truncate_header: false
+    minimum_column_width: 75
+    series_labels:
+      user_ad_click_history.first_campaign_name: First Campaign Engage
+      user_ad_click_history.first_ad_click_time_time: First Click
+      user_ad_click_history.latest_campaign_name: Last Campaign Engage
+      user_ad_click_history.latest_ad_click_time_time: Last Click
+      user_ad_click_history.days_between_first_and_latest: Days Between First & Last
+        Click
+      course_total_by_receipt.total_price: Total Spend
+    series_cell_visualizations:
+      user.total_user:
+        is_active: true
+      course_total_by_receipt.total_price:
+        is_active: true
+    defaults_version: 1
+    hidden_fields: [user_ad_click_history.first_ad_id, user_ad_click_history.latest_ad_id]
+    hidden_pivots: {}
+    column_order: ["$$$_row_numbers_$$$", user_activity_rollup.user_id_link, user_ad_click_history.first_campaign_name,
+      user_ad_click_history.first_ad_click_time_time, user_ad_click_history.latest_campaign_name,
+      user_ad_click_history.latest_ad_click_time_time, user_ad_click_history.days_between_first_and_latest,
+      course_total_by_receipt.total_price]
+    listen:
+      Funnel Stage: event.funnel_stage
+      Has Offline Purchase: user_activity_rollup.has_offline_purchase
+      Total Amount of Messages: event.user_intent_segment
+      Total Amount of Click Ads: event.user_ad_click_segment
+      Service of Interest: labeling.category_name
+      Platform: event.Souce_type
+      Engaged Campaigns: ad_click_submit_funnel_by_ad.campaign_name
+      Messaging Topics: event.message_group
+      Purchase History: offline_transaction__course.course_name
+      First Clinic Visit Date: offline_transaction.first_visit_time
+      Last Clinic Visit Date: offline_transaction.last_visit_time
+      Visited Branch: offline_transaction.branch_name_receipt
+      Created At Date: user.created_at_date
+    row: 31
+    col: 0
+    width: 24
+    height: 8
+    tab_name: ''
+  - title: 'Where are they from ? (Last Campaign) '
+    name: 'Where are they from ? (Last Campaign) '
+    model: c360_client_9234725065
+    explore: user
+    type: looker_grid
+    fields: [user_ad_click_history.latest_campaign_name, ad_click_submit_funnel_by_ad.Campaign_Group,
+      user_ad_click_history.latest_ad_name, event.users_clicked_ad, event.users_message,
+      user_activity_rollup.users_online_and_purchase, user_activity_rollup.total_paid_online_and_purchase]
+    sorts: [user_activity_rollup.total_paid_online_and_purchase desc]
+    limit: 500
+    column_limit: 50
+    dynamic_fields:
+    - category: dimension
+      expression: |-
+        case(
+        when(contains(${ad_click_submit_funnel_by_ad.ad_name}, "review_video"), "Review video"),
+        when(contains(${ad_click_submit_funnel_by_ad.ad_name}, "video"), "Content video"),
+        when(contains(${ad_click_submit_funnel_by_ad.ad_name}, "album"), "Image content"),
+        "Others")
+      label: AD Group
+      value_format:
+      value_format_name:
+      dimension: ad_group
+      _kind_hint: dimension
+      _type_hint: string
+    - category: dimension
+      expression: |-
+        case(
+          when(is_null(${ad_click_submit_funnel_by_ad.campaign_name}), "Organic"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "จ่ายจบ"), "จ่ายจบ"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "dr."), "Doctor"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "พามั่น"), "Emma พามั่น"),
+          when(contains(${ad_click_submit_funnel_by_ad.campaign_name}, "branch"), "สาขา"),
+          "Others"
+        )
+      label: Campaign Group
+      value_format:
+      value_format_name:
+      dimension: campaign_group
+      _kind_hint: dimension
+      _type_hint: string
+    show_view_names: false
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    limit_displayed_rows: false
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: '12'
+    rows_font_size: '12'
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    show_sql_query_menu_options: false
+    show_totals: true
+    show_row_totals: true
+    truncate_header: false
+    minimum_column_width: 75
+    series_labels:
+      ad_click_submit_funnel_by_ad.campaign_name: Campaign Name
+      event.user_intent_segment_click_ad: User segment by click ad count
+      event.user_intent_segment: User segment by message count
+      ad_click_submit_funnel_by_ad.Campaign_Group: Campaign Group
+      ad_click_submit_funnel_by_ad.ad_name: Ad Name
+      event.users_clicked_ad: Total Engaged Users
+      event.users_message: Total Messagers
+      user_activity_rollup.total_paid_online_and_purchase: Total Revenue
+      user_activity_rollup.users_online_and_purchase: Total Purchasers
+    series_cell_visualizations:
+      event.users_clicked_ad:
+        is_active: true
+      user_activity_rollup.users_online_and_purchase:
+        is_active: true
+      user_activity_rollup.total_paid_online_and_purchase:
+        is_active: true
+      event.users_message:
+        is_active: true
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    defaults_version: 1
+    hidden_pivots: {}
+    listen:
+      Funnel Stage: event.funnel_stage
+      Has Offline Purchase: user_activity_rollup.has_offline_purchase
+      Total Amount of Messages: event.user_intent_segment
+      Total Amount of Click Ads: event.user_ad_click_segment
+      Service of Interest: labeling.category_name
+      Platform: event.Souce_type
+      Engaged Campaigns: ad_click_submit_funnel_by_ad.campaign_name
+      Messaging Topics: event.message_group
+      Purchase History: offline_transaction__course.course_name
+      First Clinic Visit Date: offline_transaction.first_visit_time
+      Last Clinic Visit Date: offline_transaction.last_visit_time
+      Visited Branch: offline_transaction.branch_name_receipt
+      Created At Date: user.created_at_date
+    row: 45
+    col: 0
+    width: 24
+    height: 6
+    tab_name: ''
+  - name: " (5)"
+    type: text
+    title_text: ''
+    body_text: |-
+      <p style="color:#d16a6c; font-size:20px; font-weight:bold; margin-bottom:4px;">
+      More Insight that we know
+      </p>
+      <hr style="border: 2px solid #d16a6c; width: 100%; margin-top: 0;">
+    row: 85
+    col: 0
+    width: 24
+    height: 2
+    tab_name: ''
+  - title: User purchasse cross product
+    name: User purchasse cross product
+    model: c360_client_9234725065
+    explore: user
+    type: looker_grid
+    fields: [user_activity_rollup.user_id_link, user.user_pseudo_id, event.nose_plus_face_treatment,
+      user.total_user, course_total_by_receipt.total_price]
+    filters:
+      event.nose_plus_face_treatment: 'Yes'
+      user.user_pseudo_id: ''
+    sorts: [course_total_by_receipt.total_price desc]
+    limit: 500
+    column_limit: 50
+    total: true
+    show_view_names: false
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    limit_displayed_rows: false
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: 12
+    rows_font_size: 12
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    defaults_version: 1
+    hidden_pivots: {}
+    hidden_fields:
+    hidden_points_if_no:
+    color_application: undefined
+    listen: {}
+    row: 87
+    col: 0
+    width: 13
+    height: 6
+    tab_name: ''
+  - title: Time Between From first engage to Booking
+    name: Time Between From first engage to Booking
+    model: c360_client_9234725065
+    explore: user
+    type: looker_grid
+    fields: [event.time_since_group, user.total_user]
+    filters:
+      user_activity_rollup.has_offline_purchase: 'Yes'
+      user_activity_rollup.has_online_event: 'Yes'
+      user.user_pseudo_id: "-NULL"
+    sorts: [user.total_user desc]
+    limit: 500
+    column_limit: 50
+    total: true
+    show_view_names: false
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    limit_displayed_rows: false
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: 12
+    rows_font_size: 12
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    defaults_version: 1
+    hidden_pivots: {}
+    listen: {}
+    row: 87
+    col: 13
+    width: 11
+    height: 6
+    tab_name: ''
+  - title: Time between drop lead until visited
+    name: Time between drop lead until visited
+    model: c360_client_9234725065
+    explore: user
+    type: looker_grid
+    fields: [user.total_user, event.time_tier_custom_drop_lead]
+    filters:
+      event.event_name: '"contact_info_submitted"'
+    sorts: [user.total_user desc 0]
+    limit: 500
+    column_limit: 50
+    total: true
+    show_view_names: false
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    limit_displayed_rows: false
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: 12
+    rows_font_size: 12
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    defaults_version: 1
+    hidden_pivots: {}
+    hidden_fields:
+    hidden_points_if_no:
+    color_application: undefined
+    listen: {}
+    row: 93
+    col: 0
+    width: 12
+    height: 5
+    tab_name: ''
+  - title: User interest in nose and purchase
+    name: User interest in nose and purchase
+    model: c360_client_9234725065
+    explore: user
+    type: looker_grid
+    fields: [user.total_user, total_unique_user_purchase_nose]
+    filters:
+      event__event_property.value: "%จมูก%"
+      course_total_by_receipt.total_price: ''
+    limit: 500
+    column_limit: 50
+    total: true
+    dynamic_fields:
+    - category: measure
+      expression:
+      label: Total unique user purchase nose
+      value_format:
+      value_format_name:
+      based_on: user.total_user
+      _kind_hint: measure
+      measure: total_unique_user_purchase_nose
+      type: count_distinct
+      _type_hint: number
+      filters:
+        event__event_property.value: "%จมูก%"
+        user_activity_rollup.has_offline_purchase: 'Yes'
+    - category: table_calculation
+      expression: "${total_unique_user_purchase_nose:total} / ${user.total_user:total}"
+      label: Purchase nose user
+      value_format:
+      value_format_name: percent_0
+      _kind_hint: measure
+      table_calculation: purchase_nose_user
+      _type_hint: number
+    show_view_names: false
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    limit_displayed_rows: false
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: '12'
+    rows_font_size: '12'
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    color_application: undefined
+    show_sql_query_menu_options: false
+    show_totals: true
+    show_row_totals: true
+    truncate_header: false
+    minimum_column_width: 75
+    series_labels:
+      user.total_user: Total user interest in nose
+      total_unique_user_purchase_nose: Nose Purchaser
+      purchase_nose_user: Percent nose purchaser
+    series_cell_visualizations:
+      user.total_user:
+        is_active: true
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    defaults_version: 1
+    hidden_pivots: {}
+    hidden_fields:
+    hidden_points_if_no:
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    listen: {}
+    row: 93
+    col: 12
+    width: 12
+    height: 5
+    tab_name: ''
+  filters:
+  - name: Funnel Stage
+    title: Funnel Stage
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: button_group
+      display: inline
+      options:
+      - Engagement
+      - Consideration
+      - Drop Lead
+      - Purchase
+    model: c360_client_9234725065
+    explore: user
+    listens_to_filters: []
+    field: event.funnel_stage
+  - name: Has Offline Purchase
+    title: Has Offline Purchase
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: checkboxes
+      display: inline
+    model: c360_client_9234725065
+    explore: user
+    listens_to_filters: []
+    field: user_activity_rollup.has_offline_purchase
+  - name: Total Amount of Messages
+    title: Total Amount of Messages
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: checkboxes
+      display: inline
+    model: c360_client_9234725065
+    explore: user
+    listens_to_filters: []
+    field: event.user_intent_segment
+  - name: Total Amount of Click Ads
+    title: Total Amount of Click Ads
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: checkboxes
+      display: inline
+    model: c360_client_9234725065
+    explore: user
+    listens_to_filters: []
+    field: event.user_ad_click_segment
+  - name: Service of Interest
+    title: Service of Interest
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: dropdown_menu
+      display: inline
+      options:
+      - product_augment_nose_alarpastry
+      - product_augment_nose_revision
+      - product_augment_nose_soft_open
+      - product_augment_nose_ss_safe
+      - product_augment_nose_teardrop_nose
+    model: c360_client_9234725065
+    explore: user
+    listens_to_filters: []
+    field: labeling.category_name
+  - name: Platform
+    title: Platform
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: button_group
+      display: inline
+    model: c360_client_9234725065
+    explore: user
+    listens_to_filters: []
+    field: event.Souce_type
+  - name: Engaged Campaigns
+    title: Engaged Campaigns
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: tag_list
+      display: popover
+    model: c360_client_9234725065
+    explore: user
+    listens_to_filters: []
+    field: ad_click_submit_funnel_by_ad.campaign_name
+  - name: Messaging Topics
+    title: Messaging Topics
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: tag_list
+      display: popover
+      options:
+      - สอบถามโปรโมชัน
+      - สอบถามเกี่ยวกับสาขา
+      - สอบถามราคา
+      - สอบถามส่วนลด
+      - ขอเลื่อนวันนัด
+      - ยกเลิกการจอง
+      - ขอรีวิว
+      - สนใจเรื่องจมูก
+      - สอบถามเรื่องหมอ
+      - สอบถามเวลา
+      - สนใจเรื่องคาง
+      - สนใจในบริการและสินค้า
+      - สอบถามเรื่องคิว
+      - กังวลผลข้างเคียงหลังทำ
+      - เลื่อนคิว
+      - กังวลเวลาที่ใช้ในการทำ
+      - พูดคุยทั่วไป
+    model: c360_client_9234725065
+    explore: user
+    listens_to_filters: []
+    field: event.message_group
+  - name: Purchase History
+    title: Purchase History
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: dropdown_menu
+      display: inline
+    model: c360_client_9234725065
+    explore: user
+    listens_to_filters: []
+    field: offline_transaction__course.course_name
+  - name: First Clinic Visit Date
+    title: First Clinic Visit Date
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: advanced
+      display: popover
+      options: []
+    model: c360_client_9234725065
+    explore: user
+    listens_to_filters: []
+    field: offline_transaction.first_visit_time
+  - name: Last Clinic Visit Date
+    title: Last Clinic Visit Date
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: advanced
+      display: popover
+      options: []
+    model: c360_client_9234725065
+    explore: user
+    listens_to_filters: []
+    field: offline_transaction.last_visit_time
+  - name: Visited Branch
+    title: Visited Branch
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: checkboxes
+      display: popover
+    model: c360_client_9234725065
+    explore: user
+    listens_to_filters: []
+    field: offline_transaction.branch_name_receipt
+  - name: Created At Date
+    title: Created At Date
+    type: field_filter
+    default_value: this year
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: relative_timeframes
+      display: inline
+      options: []
+    model: c360_client_9234725065
+    explore: user
+    listens_to_filters: []
+    field: user.created_at_date
